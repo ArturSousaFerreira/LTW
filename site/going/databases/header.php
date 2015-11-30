@@ -16,5 +16,5 @@
   </head>
   <body>
     <header>
-      <h1><a href="index.php">My Blog</a></h1>
+      <h1><a href="index.php">Going</a></h1>
     </header>

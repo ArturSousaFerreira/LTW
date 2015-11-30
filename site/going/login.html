@@ -17,45 +17,41 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/going.css" type="text/css">
-
+	<link rel="stylesheet" href="css/extra.css" type="text/css">
 
 </head>
 
 <body id="page-top">
 
-    <nav id="mainNav" class="navbar-fixed-top">
-                <a class="navbar-brand" href="index.html">GOING</a>
-				<ul class="nav navbar-nav navbar-right">
+    <nav class="mainNav">
+                <a class="navbarGoing" href="#page-top">GOING</a>
+				<ul class="navbarGoing-right">
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="#about">About</a>
+                    </li>
+					 <li>
+                        <a href="login.html">Login</a>
                     </li>
                 </ul>
     </nav>
 
     <header>
-        <div class="header-content">
-            <div class="login-content-inner">
-                <div class="login">
-					<h1>Login</h1>
-					<form method="post" action="index.html">
-						<p><input type="text" name="login" value="" placeholder="Username or Email"></p>
-						<p><input type="password" name="password" value="" placeholder="Password"></p>
-						<p class="remember_me">
-							<label>
-								<input type="checkbox" name="remember_me" id="remember_me">
-									Remember me on this computer
-							</label>
-						</p>
-						<p class="btn btn-primary btn-xl"><input type="submit" name="commit" value="Login"></p>
-					</form>
-				</div>
-				<div class="login-help">
-					<p>New account? <a href="newaccount.html">Click here to regist!</a></p>
-				</div>
-			</div>
-        </div>
+        <form id='login' action='databases/signin.php' method='post' accept-charset='UTF-8'>
+			<fieldset >
+				<legend>Login</legend>
+					<input type='hidden' name='submitted' id='submitted' value='1'/>
+ 
+					<label for='username' >UserName*:</label>
+					<input type='text' name='username' id='username'  maxlength="50" />
+ 
+					<label for='password' >Password*:</label>
+					<input type='password' name='password' id='password' maxlength="50" />
+ 
+					<input type='submit' name='Submit' value='Submit' />
+ 
+			</fieldset>	
+		</form>
     </header>
-
 </body>
 
 </html>

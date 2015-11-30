@@ -1,6 +1,6 @@
 <?
-  include_once('database/connection.php'); 
-  include_once('database/post.php');
+  include_once('connection.php'); 
+  include_once('post.php');
 
   try {
     $posts = getAllPosts($dbh);
@@ -8,7 +8,7 @@
     die($e->getMessage());
   }
 
-  include ('templates/header.php');
-  include ('templates/posts.php');
-  include ('templates/footer.php');
+  include ('header.php');
+  include ('posts.php');
+  include ('footer.php');
 ?>
