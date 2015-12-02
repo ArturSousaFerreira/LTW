@@ -1,14 +1,8 @@
-<?
-  include_once('connection.php'); 
-  include_once('post.php');
+<?php
+session_start();
 
-  try {
-    $posts = getAllPosts($dbh);
-  } catch (PDOException $e) {
-    die($e->getMessage());
-  }
+include_once("connection.php");
 
-  include ('header.php');
-  include ('posts.php');
-  include ('footer.php');
+include_once("templates/header.php");
+include_once("templates/footer.php");
 ?>

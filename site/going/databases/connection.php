@@ -1,10 +1,4 @@
 <?php
-global $dbh;
-  try {
-     $dbh = new PDO('sqlite:going.db');
-     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
-     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  } catch (PDOException $e) {
-     die($e->getMessage());
-  }
+$db = new PDO('sqlite:database.db');
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 ?>

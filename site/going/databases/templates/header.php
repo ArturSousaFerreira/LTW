@@ -16,39 +16,45 @@
     <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/going.css" type="text/css">
-	<link rel="stylesheet" href="css/extra.css" type="text/css">
+    <link rel="stylesheet" href="../css/going.css" type="text/css">
+	<link rel="stylesheet" href="../css/extra.css" type="text/css">
 
 </head>
 
 <body id="page-top">
 
     <nav class="mainNav">
+                 <?php if (isset($_SESSION['username'])) { ?>
                 <a class="navbarGoing" href="#page-top">GOING</a>
 				<ul class="navbarGoing-right">
-				<li>
-                        <a href="../index.php">Home</a>
+					<li>
+                        <a href="../../index.php">Home</a>
                     </li>
+					<li>
+                    <a href="show_user.php?username=<?=$_SESSION['username']?>"><?=$_SESSION['username']?></a>
+					</li>
+					<li>
+                    <a href="action_logout.php">Logout</a>
+					</li>
+					
+					
                 </ul>
+            <?php } else { ?>
+                <a class="navbarGoing" href="#page-top">GOING</a>
+				<ul class="navbarGoing-right">
+					<li>
+                        <a href="../../index.php">Home</a>
+                    </li>
+					<li>
+                        <a href="register.php">Register</a>
+                    </li>
+					
+                </ul>
+				
+            <?php } ?>
+				
+				
     </nav>
-
-    <header>
-        <form id='login' action='databases/index.php' method='post' accept-charset='UTF-8'>
-			<fieldset >
-				<legend>Login</legend>
-					<input type='hidden' name='submitted' id='submitted' value='1'/>
- 
-					<label for='username' >UserName*:</label>
-					<input type='text' name='username' id='username'  maxlength="50" />
- 
-					<label for='password' >Password*:</label>
-					<input type='password' name='password' id='password' maxlength="50" />
- 
-					<input type='submit' name='Submit' value='Submit' />
- 
-			</fieldset>	
-		</form>
-    </header>
-</body>
-
-</html>
+	
+	        
+       
