@@ -1,0 +1,46 @@
+header {
+  padding-top:200px;
+
+}
+
+.login {
+  margin: auto;
+  width:310px;
+  border:1px #CCC solid;
+  padding:70px;
+  background-color:white;
+}
+
+input {
+  background: white;
+  border:1px #CCC solid;
+  padding:8px;
+}
+
+#footer_login{
+	background-color:rgba(100,100,100,0.5);
+	width:350px;
+	margin:auto;
+	padding-bottom: 15px;
+}
+
+#footer_register{
+	background-color:rgba(100,100,100,0.5);
+	width:500px;
+	margin:auto;
+	padding-bottom: 15px;
+}
+
+#footer_register > ul, #footer_login > ul{
+	list-style-type:none;
+	padding:0;
+	color:white;
+}
+
+#footer_register > h1, #footer_login > h1{
+	color:white;
+}
+
+#last_input{
+	margin-bottom:5px;
+}
