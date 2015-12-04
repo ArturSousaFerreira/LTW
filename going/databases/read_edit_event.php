@@ -23,7 +23,7 @@ $comments = getComments($id);
 	
 <div id="footer_detail_event">
 
-<h1>Event info</h2>
+<h2>Event info</h2>
     <ul>
         <li>pilas by:
               <form action="action_edit_event.php" method="post">

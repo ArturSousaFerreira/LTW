@@ -8,7 +8,8 @@ id INTEGER PRIMARY KEY AUTOINCREMENT,
 date DATETIME,
 description VARCHAR,
 type VARCHAR,
-creator VARCHAR REFERENCES users(username)
+creator VARCHAR REFERENCES users(username),
+image VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS event_comments (
