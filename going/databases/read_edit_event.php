@@ -23,24 +23,23 @@ $comments = getComments($id);
 	
 <div id="footer_detail_event">
 
-<h2>Event info</h2>
+    <h2>Event info</h2>
     <ul>
-        <li>pilas by:
-              <form action="action_edit_event.php" method="post">
-			  
-		<input type="hidden" name="id" value="<?=$id?>">
-		
-        <select name="type" id="type"></select>
-        <br>
-        <input type="datetime" name="date" id="date" placeholder="<?=$event['date']?>">
-        <br>
-        <input type="textarea" name="description" placeholder="<?=$event['description']?>">
-        <br>
-        <input type="submit" value="Save">
-        <input type="submit" name="cancel_btn" value="Cancel">
-    </form>
+        <form action="action_edit_event.php" method="post" enctype="multipart/form-data">
 
-<div class="nav_buttons">
+            <select name="type" id="type"></select>
+            <br>
+            <input type="datetime" name="date" id="date" placeholder="<?= $event['date'] ?>">
+            <br>
+            <input type="textarea" name="description" placeholder="<?= $event['description'] ?>">
+            <br>
+            <input type="file" name="image" id="image" placeholder="<?= $event['image'] ?>">
+            <br>
+            <input type="submit" value="Save">
+            <input type="submit" name="cancel_btn" value="Cancel">
+        </form>
+
+        <div class="nav_buttons">
         <?php if ($logged) { ?>
             <?php if (!isRegisteredInEvent($id, $_SESSION['username'])) {?>
                 

@@ -17,11 +17,11 @@ $.ajax("event_types.php", {
 });
 
 function createEventForm(form) {
-    if (form.date.value == '' || form.description.value == '' || form.fileToUpload.value == '') {
+    if (form.date.value == '' || form.description.value == '') {
         alert("Please fill all the fields");
         return false;
     }
-	
+
     var create_btn = document.createElement("input");
     create_btn.name = "create_btn";
     create_btn.type = "hidden";
@@ -30,4 +30,5 @@ function createEventForm(form) {
     form.submit();
     return true;
 }
+
 

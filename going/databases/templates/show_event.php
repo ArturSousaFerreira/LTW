@@ -1,7 +1,7 @@
 <header>
 <div id="footer_detail_event">
 
-<h1>Event info</h2>
+<h2>Event info</h2>
     <ul>
         <li>Created by:
             <a href="show_user.php?username=<?=$event['creator']?>"> <?=$event['creator'] ?></a>
@@ -9,6 +9,7 @@
         <li>Type: <?=$event['type'] ?></li>
         <li>Date: <?=$event['date'] ?></li>
         <li>Description: <?=$event['description'] ?></li>
+        <li>Image:<br> <img src=<?=$event['image']?> width="200px" height="200px" ></li>
     </ul>
 
     <h3>Registered</h3>
