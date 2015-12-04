@@ -11,13 +11,13 @@ else $referer = 'index.php';
 if (isset($_POST['login_btn'])) {
     if (checkCredentials($_POST['username'], $_POST['password'])) {
         $_SESSION['username'] = $_POST['username'];
-       $_SESSION['message'] = 'Login successful';
+		$_SESSION['counter_login'] = 0;
     }
     else if (isRegistered($_POST['username'])) {
-		 $_SESSION['message'] = 'Wrong password!';
+		 $_SESSION['counter_login'] = -1;
     }
     else
-		 $_SESSION['message'] = 'User is not registered!';
+		 $_SESSION['counter_login'] = -2;
 		
     header('Location: ' . $referer);
 }

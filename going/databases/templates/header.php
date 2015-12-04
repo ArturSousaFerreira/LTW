@@ -34,7 +34,10 @@
                         <a href="contact.php">Contact</a>
                     </li>
 					<li>
-                    <a href="event.php">Events</a>
+                    <a href="list_events.php">Events</a>
+					</li>
+					<li>
+                    <a href="my_events.php">MyEvents</a>
 					</li>
 					<li id ="acount">
                     <a><?=$_SESSION['username']?></a>
@@ -54,6 +57,9 @@
 					<li>
                         <a href="contact.php">Contact</a>
                     </li>
+					<li>
+                    <a href="list_events.php">Events</a>
+					</li>
 					<li>
                         <a href="login.php">Login</a>
                     </li>
