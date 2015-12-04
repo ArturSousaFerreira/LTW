@@ -112,10 +112,10 @@ function checkImage($image)
 {
     if (isset($image)) {
         $errors = array();
-        $file_name = $image['name'];
         $file_size = $image['size'];
         $file_tmp = $image['tmp_name'];
         $file_ext = strtolower(end(explode('.', $image['name'])));
+        $file_name = uniqid(rand(), true) . '.' . $file_ext;
         $extensions = array("jpeg", "jpg", "png");
         if (in_array($file_ext, $extensions) === false) {
             $errors[] = "File must be jpeg or png.";
@@ -129,7 +129,7 @@ function checkImage($image)
         if (empty($errors) == true) {
             $pathToImage = "../img/uploads/" . $file_name;
             move_uploaded_file($file_tmp, $pathToImage);
-            return true;
+            return $pathToImage;
         } else {
             print_r($errors);
             return false;
@@ -139,8 +139,7 @@ function checkImage($image)
 }
 
 function editEvent($id, $date, $description, $type, $image) {
-    $pathToImage = "../img/uploads/" . $image['name'];
-    if (checkImage($image)) {
+    if (($pathToImage = checkImage($image)) != false) {
         global $db;
         $a = $db->prepare('UPDATE events SET date = ?, description = ?, type = ?, image = ? WHERE events.id = ?');
         $a->execute(array($date, $description, $type, $id, $pathToImage ));
@@ -150,8 +149,7 @@ function editEvent($id, $date, $description, $type, $image) {
 }
 
 function createEvent($date, $description, $type, $creator, $image) {
-    $pathToImage = "../img/uploads/" . $image['name'];
-    if (checkImage($image)) {
+    if (($pathToImage = checkImage($image)) != false) {
         global $db;
         $a = $db->prepare('INSERT INTO events VALUES(null, ?, ?, ?, ?, ?)');
         $a->execute(array($date, $description, $type, $creator, $pathToImage));
