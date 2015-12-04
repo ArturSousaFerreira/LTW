@@ -1,7 +1,7 @@
 <header>
 
 
-    <h2 class="about-heading">Creat Events!</h2>
+    <h2 class="about-heading">Creat Event!</h2>
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -13,7 +13,7 @@
 
         <select name="type" id="type"></select>
         <br>
-        <input type="datetime" name="date" id="date">
+        <input type="datetime" name="date" id="date" placeholder="date">
         <br>
         <input type="textarea" name="description" placeholder="description">
         <br>
