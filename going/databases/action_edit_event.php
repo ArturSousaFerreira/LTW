@@ -1,11 +1,8 @@
 <?php
 include_once('events.php');
+include_once('read_edit_event.php');
 
-if(isset($_POST['cancel_btn'])){
-header('Location: ' . './show_event.php?id=' . $_POST['id']);	
-}
-else editEvent($_POST['id'], $_POST['date'], $_POST['description'], $_POST['type'], $_POST['fileToUpload']);
+editEvent($_POST['id'], $_POST['date'], $_POST['description'], $_POST['type']);
 
-header('Location: ' . './show_event.php?id=' . $_POST['id']);
 //header('Location: ' . $_COOKIE['redirect']);
 ?>

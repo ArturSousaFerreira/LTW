@@ -17,8 +17,7 @@ include_once("templates/show_event.php");
 ?>
 
 <!-- Comment form -->
-<?php if ($logged) { ?>
-    <?php if (isRegisteredInEvent($id, $_SESSION['username']) || ($_SESSION['username'] == $event['creator'])) { ?>
+<?php if ($logged && (isRegisteredInEvent($id, $_SESSION['username']) || ($_SESSION['username'] == $event['creator']))) { ?>
         <form action="action_comment.php" method="post">
             <input type="hidden" name="id" value="<?= $id ?>">
             <input type="hidden" name="author" value="<?= $_SESSION['username'] ?>">
@@ -26,9 +25,7 @@ include_once("templates/show_event.php");
             <br>
             <input type="submit" name="comment_btn" value="Comment">
         </form>
-    <?php } ?>
-<?php }
-else { ?>
+<?php } else { ?>
     <p>Register in the event to comment</p>
 <?php } ?>
 
