@@ -104,7 +104,6 @@ float:left;
 header {
     position: relative;
     width: 100%;
-    min-height: auto;
     text-align: center;
     color: #222;
     background-image: url(../img/calendar.jpg);

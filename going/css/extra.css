@@ -12,9 +12,24 @@ header {
 }
 
 input {
-  background: white;
-  border:1px #CCC solid;
-  padding:8px;
+	background: white;
+	border: 1px #CCC solid;
+	width: 180px;
+	padding: 8px;
+}
+
+input[type=submit] {
+	width: 80px;
+	margin: 10px;
+}
+
+.ui-datepicker {
+	width: 200px;
+	background: white;
+}
+
+.ui-datepicker table {
+	width: 100%;
 }
 
 #footer_login{

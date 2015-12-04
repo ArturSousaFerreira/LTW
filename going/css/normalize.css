@@ -16,7 +16,6 @@ figcaption,
 figure,
 footer,
 header,
-hgroup,
 nav,
 section,
 summary {
@@ -376,7 +375,7 @@ table {
 }
 
 /* social icons */
-/
+
 .social {
   margin-bottom: 0; 
 }
