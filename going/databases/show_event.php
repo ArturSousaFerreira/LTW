@@ -26,9 +26,10 @@ include_once("templates/show_event.php");
             <br>
             <input type="submit" name="comment_btn" value="Comment">
         </form>
+    <?php } else { ?>
+        <p>Register in the event to comment</p>
     <?php } ?>
-<?php }
-else { ?>
+<?php } else { ?>
     <p>Register in the event to comment</p>
 <?php } ?>
 
