@@ -33,10 +33,7 @@ function getUserEvents($username) {
 
 function getUserRegisteredEvents($username) {
     global $db;
-    $a = $db->prepare('
-SELECT * FROM events
-WHERE id IN
-(SELECT event_id FROM event_registrations WHERE user = ?)');
+    $a = $db->prepare('SELECT * FROM events WHERE id IN (SELECT event_id FROM event_registrations WHERE user = ?)');
     $a->execute(array($username));
 
     return $a->fetchAll();
@@ -63,8 +60,7 @@ function getRegistered($id) {
 function isRegisteredInEvent($id, $user) {
     global $db;
 
-    $a = $db->prepare('SELECT * FROM event_registrations
-WHERE event_id = ? AND user = ?');
+    $a = $db->prepare('SELECT * FROM event_registrations WHERE event_id = ? AND user = ?');
     $a->execute(array($id, $user));
 
     return $a->fetch() !== false;
@@ -75,8 +71,7 @@ function unregisterEvent($id, $user) {
 
     if (!isRegisteredInEvent($id, $user)) return false;
 
-    $a = $db->prepare('DELETE FROM event_registrations
-WHERE user = ? AND event_id = ?');
+    $a = $db->prepare('DELETE FROM event_registrations WHERE user = ? AND event_id = ?');
     $a->execute(array($user, $id));
 
     return true;
@@ -108,20 +103,20 @@ function deleteEvent($id) {
     return true;
 }
 
-function editEvent($id, $date, $description, $type) {
+function editEvent($id, $date, $description, $type, $path) {
     global $db;
 
-    $a = $db->prepare('UPDATE events SET date = ?, description = ?, type = ? WHERE events.id = ?');
-    $a->execute(array($date, $description, $type, $id));
+    $a = $db->prepare('UPDATE events SET date = ?, description = ?, type = ?, path = ? WHERE events.id = ?');
+    $a->execute(array($date, $description, $type, $path, $id));
 
     return true;
 }
 
-function createEvent($date, $description, $type, $creator) {
+function createEvent($date, $description, $type, $creator, $path) {
     global $db;
 
-    $a = $db->prepare('INSERT INTO events VALUES(null, ?, ?, ?, ?)');
-    $a->execute(array($date, $description, $type, $creator));
+    $a = $db->prepare('INSERT INTO events VALUES(null, ?, ?, ?, ?, ?)');
+    $a->execute(array($date, $description, $type, $creator, $path));
 
     return true;
 }

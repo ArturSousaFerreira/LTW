@@ -36,20 +36,20 @@ $events = getEvents();
 		
 		if(empty($_POST)){?>
 		<li><a href="show_event.php?id=<?=$event['id']?>"><?=$event['date']?> | <?=$event['type']?> | <?=$event['description']?></a> Created by <?=$event['creator']?></li>
+		
     <?php }else if($event['description'] === $_POST["search"]){?>
 		<li><a href="show_event.php?id=<?=$event['id']?>"><?=$event['date']?> | <?=$event['type']?> | <?=$event['description']?></a> Created by <?=$event['creator']?></li>
-    <?php }
 		
+    <?php }
 		
 		
 	} unset($_POST);?>
 </ul>
 			
-			
 			<?php if (isset($_SESSION['username'])) { ?>
                 <div class = "nav_buttons">
 					<button type="button" onclick="location.href='creat_event.php'">Create</button>
-					<button type="button" onclick="location.href='list_events.php'">Back</button>
+					<button type="button" onclick="location.href='index.php'">Back</button>
             <?php } else { ?>
               
 				

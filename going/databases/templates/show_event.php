@@ -9,6 +9,10 @@
         <li>Type: <?=$event['type'] ?></li>
         <li>Date: <?=$event['date'] ?></li>
         <li>Description: <?=$event['description'] ?></li>
+		<br>
+		<li>Image: <br><br> <img src="../img/uploads/<?=$event['path']?>" width="200px" height="200px" ></li>
+		<br>
+		<li>Image: ../img/uploads/<?=$event['path']?></li>
     </ul>
 
     <h3>Registered</h3>

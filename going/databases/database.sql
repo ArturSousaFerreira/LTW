@@ -8,7 +8,8 @@ id INTEGER PRIMARY KEY AUTOINCREMENT,
 date DATETIME,
 description VARCHAR,
 type VARCHAR,
-creator VARCHAR REFERENCES users(username)
+creator VARCHAR REFERENCES users(username),
+path TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS event_comments (
@@ -23,3 +24,5 @@ user VARCHAR,
 event_id INTEGER,
 PRIMARY KEY (user, event_id)
 );
+
+INSERT into users(username, password) VALUES("admin", "d033e22ae348aeb5660fc2140aec35850c4da997");
