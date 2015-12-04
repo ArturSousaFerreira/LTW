@@ -128,6 +128,7 @@ function createEvent($date, $description, $type, $creator) {
 
 function createComment($event_id, $author, $text) {
     global $db;
+    if ($text == '') return false;
 
     $a = $db->prepare('INSERT INTO event_comments VALUES(null, ?, ?, ?)');
     $a->execute(array($event_id, $author, $text));
