@@ -8,11 +8,11 @@ include_once("templates/header.php");
 
 $logged = isset($_SESSION['username']);
 
-$id = $_GET['id'];
+$id = isset($_GET['id'])?$_GET['id']:"";
 $event = getEvent($id);
 $registered = getRegistered($id);
 $comments = getComments($id);
-
+$url = 'http'.(empty($_SERVER['HTTPS'])?'':'s').'://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 include_once("templates/show_event.php");
 ?>
 
@@ -20,6 +20,7 @@ include_once("templates/show_event.php");
 <?php if ($logged && (isRegisteredInEvent($id, $_SESSION['username']) || ($_SESSION['username'] == $event['creator']))) { ?>
         <form action="action_comment.php" method="post">
             <input type="hidden" name="id" value="<?= $id ?>">
+            <input type="hidden" name="event" value="<?= $id ?>">
             <input type="hidden" name="author" value="<?= $_SESSION['username'] ?>">
             <input type="textarea" name="text">
             <br>
@@ -28,6 +29,24 @@ include_once("templates/show_event.php");
 <?php } else { ?>
     <p>Register in the event to comment</p>
 <?php } ?>
+<br>
+
+<!-- Share form -->
+<?php if ($logged && (isRegisteredInEvent($id, $_SESSION['username']) || ($_SESSION['username'] == $event['creator']))) { ?>
+    <form action="action_share.php" method="post">
+        <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="hidden" name="author" value="<?= $_SESSION['username'] ?>">
+        <input type="hidden" name="url" value ="<?= $url ?>">
+        <input type="hidden" name="description" value ="<?= $event['description'] ?>">
+        <input name="email" size="30" type="text" placeholder="email">
+        <br>
+        <input type="submit" name="share_btn" value="Share">
+    </form>
+<?php } else { ?>
+    <p>Register in the event to comment</p>
+<?php } ?>
+
+<br>
 
 <div class="nav_buttons">
         <?php if ($logged) { ?>

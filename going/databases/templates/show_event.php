@@ -3,16 +3,13 @@
 
 <h2>Event info</h2>
     <ul>
-        <li>Created by:
-            <a href="show_user.php?username=<?=$event['creator']?>"> <?=$event['creator'] ?></a>
-        </li>
-        <li>Type: <?=$event['type'] ?></li>
+        <li><?=$event['description'] ?></li>
+        <li><?= $event['type']?> by <a href="show_user.php?username=<?=$event['creator']?>"> <?=$event['creator'] ?></a>
         <li>Date: <?=$event['date'] ?></li>
-        <li>Description: <?=$event['description'] ?></li>
-        <li>Image:<br> <img src=<?=$event['image']?> width="200px" height="200px" ></li>
+        <li><img src=<?=$event['image']?> width="200px" height="200px" ></li>
     </ul>
 
-    <h3>Registered</h3>
+    <h4>Registered</h4>
     <?php if (count($registered) <= 0) echo "<p>No users registered to this event yet</p>" ?>
     <ul>
         <?php foreach ($registered as $reg) { ?>
