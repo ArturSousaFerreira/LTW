@@ -20,7 +20,7 @@
         <input type="file" name="image" id="image"/>
         <br>
         <input type="submit" value="Create" onclick="return createEventForm(this.form);">
-        <input type="submit" name="cancel_btn" value="Cancel">
+        <input type="submit" name="back_btn" value="Back">
     </form>
 
 

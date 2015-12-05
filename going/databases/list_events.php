@@ -49,7 +49,7 @@ $events = getEvents();
 			<?php if (isset($_SESSION['username'])) { ?>
                 <div class = "nav_buttons">
 					<button type="button" onclick="location.href='creat_event.php'">Create</button>
-					<button type="button" onclick="location.href='list_events.php'">Back</button>
+					<button type="button" onclick="location.href='index.php'">Back</button>
             <?php } else { ?>
               
 				

@@ -17,7 +17,7 @@ $.ajax("event_types.php", {
 });
 
 function createEventForm(form) {
-    if (form.date.value == '' || form.description.value == '') {
+    if (form.date.value == '' || form.description.value == '' || form.image.value == '') {
         alert("Please fill all the fields");
         return false;
     }

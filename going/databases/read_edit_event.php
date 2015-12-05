@@ -35,37 +35,9 @@ $comments = getComments($id);
             <br>
             <input type="file" name="image" id="image" placeholder="<?= $event['image'] ?>">
             <br>
-            <input type="submit" value="Save">
-            <input type="submit" name="cancel_btn" value="Cancel">
+            <input type="submit" value="Save" onclick="return createEventForm(this.form);">
+            <input type="submit" name="back_btn" value="Back">
         </form>
-
-        <div class="nav_buttons">
-        <?php if ($logged) { ?>
-            <?php if (!isRegisteredInEvent($id, $_SESSION['username'])) {?>
-                
-			<button type="button" onclick="location.href='action_register_event.php?id=<?=$id?>'">Register</button>
-				
-            <?php } else {?>
-			<button type="button" onclick="location.href='action_unregister_event.php?id=<?=$id?>'">Unregister</button>
-                
-            <?php } ?>
-			
-            <?php if ($_SESSION['username'] == $event['creator']
-                                           || $_SESSION['username'] == 'admin') { ?>
-			<button type="button" onclick="location.href='action_delete_event.php?id=<?=$id?>'">Delete</button>
-                
-            <?php } ?>
-			
-			 <?php if ($_SESSION['username'] == $event['creator']
-                                           || $_SESSION['username'] == 'admin') { ?>
-			<button type="button" onclick="location.href='read_edit_event.php?id=<?=$id?>'">Edit</button>
-                
-            <?php } ?>
-			
-			
-			
-        <?php } ?>
-<button type="button" onclick="location.href='list_events.php'">Back</button>
 </div>
 </div>
 </header>
