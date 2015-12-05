@@ -130,22 +130,19 @@ function checkImage($image)
             $pathToImage = "../img/uploads/" . $file_name;
             move_uploaded_file($file_tmp, $pathToImage);
             return $pathToImage;
-        } else {
-            print_r($errors);
-            return false;
-        }
+        } else return false;
     }
-    return false;
 }
 
-function editEvent($id, $date, $description, $type, $image) {
-    if (($pathToImage = checkImage($image)) != false) {
-        global $db;
-        $a = $db->prepare('UPDATE events SET date = ?, description = ?, type = ?, image = ? WHERE events.id = ?');
-        $a->execute(array($date, $description, $type, $id, $pathToImage ));
-        return true;
+function editEvent($id, $date, $description, $type, $new_image, $old_image) {
+    global $db;
+    $a = $db->prepare('UPDATE events SET date = ?, description = ?, type = ?, image = ? WHERE events.id = ?');
+    if (($pathToImage = checkImage($new_image)) != false) {
+        unlink($old_image);
+        $a->execute(array($date, $description, $type, $pathToImage, $id));
     }
-    return false;
+    else $a->execute(array($date, $description, $type, $old_image, $id));
+    return true;
 }
 
 function createEvent($date, $description, $type, $creator, $image) {

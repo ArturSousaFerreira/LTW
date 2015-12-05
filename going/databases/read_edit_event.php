@@ -8,7 +8,8 @@ include_once("templates/header.php");
 
 $logged = isset($_SESSION['username']);
 
-$id = $_GET['id'];
+
+$id = isset($_GET['id'])?$_GET['id']:"";
 $event = getEvent($id);
 $registered = getRegistered($id);
 $comments = getComments($id);
@@ -26,18 +27,47 @@ $comments = getComments($id);
     <h2>Event info</h2>
     <ul>
         <form action="action_edit_event.php" method="post" enctype="multipart/form-data">
-
+            <input type="hidden" name="id" value="<?=$id?>">
+            <input type="hidden" name="old_image" value="<?=$event['image']?>">
             <select name="type" id="type"></select>
             <br>
-            <input type="datetime" name="date" id="date" placeholder="<?= $event['date'] ?>">
+            <input type="datetime" name="date" id="date" value="<?= $event['date'] ?>">
             <br>
-            <input type="textarea" name="description" placeholder="<?= $event['description'] ?>">
+            <input type="textarea" name="description" value="<?= $event['description'] ?>">
             <br>
-            <input type="file" name="image" id="image" placeholder="<?= $event['image'] ?>">
+            <input type="file" name="image" id="image">
             <br>
-            <input type="submit" value="Save" onclick="return createEventForm(this.form);">
+            <input type="submit" value="Save">
             <input type="submit" name="back_btn" value="Back">
         </form>
+
+        <div class="nav_buttons">
+        <?php if ($logged) { ?>
+            <?php if (!isRegisteredInEvent($id, $_SESSION['username'])) {?>
+                
+			<button type="button" onclick="location.href='action_register_event.php?id=<?=$id?>'">Register</button>
+				
+            <?php } else {?>
+			<button type="button" onclick="location.href='action_unregister_event.php?id=<?=$id?>'">Unregister</button>
+                
+            <?php } ?>
+			
+            <?php if ($_SESSION['username'] == $event['creator']
+                                           || $_SESSION['username'] == 'admin') { ?>
+			<button type="button" onclick="location.href='action_delete_event.php?id=<?=$id?>'">Delete</button>
+                
+            <?php } ?>
+			
+			 <?php if ($_SESSION['username'] == $event['creator']
+                                           || $_SESSION['username'] == 'admin') { ?>
+			<button type="button" onclick="location.href='read_edit_event.php?id=<?=$id?>'">Edit</button>
+                
+            <?php } ?>
+			
+			
+			
+        <?php } ?>
+<button type="button" onclick="location.href='list_events.php'">Back</button>
 </div>
 </div>
 </header>
