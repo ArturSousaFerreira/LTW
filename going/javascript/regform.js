@@ -34,5 +34,6 @@ function regform(form, username, email, pass, conf) {
     confirm_btn.type = "hidden";
     form.appendChild(confirm_btn);
     form.submit();
+	alert("You have done a beautiful register, please login!");
     return true;
 }
