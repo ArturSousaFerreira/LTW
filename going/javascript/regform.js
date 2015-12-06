@@ -30,7 +30,7 @@ function regform(form, username, email, pass, conf) {
         return false;
     }
     var confirm_btn = document.createElement("input");
-    confirm_btn.name = "confirm_pass_btn";
+    confirm_btn.name = "confirm_btn";
     confirm_btn.type = "hidden";
     form.appendChild(confirm_btn);
     form.submit();
@@ -54,7 +54,7 @@ function passform(form, old_pass, new_pass, conf) {
         return false;
     }
     var confirm_btn = document.createElement("input");
-    confirm_btn.name = "confirm_btn";
+    confirm_btn.name = "confirm_pass_btn";
     confirm_btn.type = "hidden";
     form.appendChild(confirm_btn);
     form.submit();

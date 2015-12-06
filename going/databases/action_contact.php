@@ -1,8 +1,12 @@
 <?php
+session_start();
+
 if(isset($_POST["submit"])){
 // Checking For Blank Fields..
     if($_POST["name"]==""||$_POST["email"]==""||$_POST["message"]==""){
         echo "Fill All Fields..";
+		$_SESSION['emailSend'] = 'fill';
+		header('Location: ' . './contact.php');
     }else{
 // Check if the "Sender's Email" input field is filled out
         $email=$_POST['email'];
@@ -12,9 +16,11 @@ if(isset($_POST["submit"])){
         $email= filter_var($email, FILTER_VALIDATE_EMAIL);
         if (!$email){
             echo "Invalid Sender's Email";
+			$_SESSION['emailSend'] = 'invsend';
+			header('Location: ' . './contact.php');
         }
         else{
-            $contact_mail = "angela.cardoso@fe.up.pt";
+            $contact_mail = "nunomrvalente@gmail.com";
             $subject = "Message from your site GOING!";
             $message = $_POST['message'];
             $headers = 'From:'. $email . "\r\n"; // Sender's Email
@@ -23,8 +29,8 @@ if(isset($_POST["submit"])){
             $message = wordwrap($message, 70);
 // Send Mail By PHP Mail Function
             mail($contact_mail, $subject, $message, $headers);
-            $_SESSION['emailSend']='send';
+            $_SESSION['emailSend'] = 'send';
+			header('Location: ' . './index.php');
         }
     }
-    header('Location: ' . './index.php');
 }

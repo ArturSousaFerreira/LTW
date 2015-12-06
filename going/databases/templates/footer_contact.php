@@ -17,4 +17,15 @@
 			
         </form>
     </div>
+	
+	<?php
+	
+		if($_SESSION['emailSend'] == 'invsend'){
+		echo "<script>alert('Invalid Sender's Email')</script>";
+		}
+		else if($_SESSION['emailSend'] == 'fill'){
+		echo "<script>alert('Fill All Fields..')</script>";
+		}
+		$_SESSION['emailSend'] = '';
+	?>
 </header>

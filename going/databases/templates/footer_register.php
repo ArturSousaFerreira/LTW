@@ -18,7 +18,7 @@
             <input id="last_input" type="password" name="confirm" placeholder="confirm password">
             <br>
             <input type="button" value="Confirm"
-                   onclick="return validateEmail(this.form,
+                   onclick="return regform(this.form,
                             this.form.username,
                             this.form.email,
                             this.form.password,
