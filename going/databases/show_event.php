@@ -61,7 +61,7 @@ include_once("templates/show_event.php");
 
         <?php if ($_SESSION['username'] == $event['creator']
             || $_SESSION['username'] == 'admin') { ?>
-            <button type="button" onclick="location.href='action_edit_event.php?id=<?=$id?>'">Edit</button>
+            <button type="button" onclick="location.href='read_edit_event.php?id=<?=$id?>'">Edit</button>
 
         <?php } ?>
     <?php } ?>
