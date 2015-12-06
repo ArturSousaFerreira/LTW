@@ -14,6 +14,7 @@
             <textarea name="message" rows="7" cols="30" placeholder="message"></textarea>
             <br>
             <input name="submit" value="Send email" type="submit">
+			
         </form>
     </div>
 </header>

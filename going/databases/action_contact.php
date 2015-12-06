@@ -1,4 +1,5 @@
 <?php
+
 if(isset($_POST["submit"])){
 // Checking For Blank Fields..
 if($_POST["name"]==""||$_POST["email"]==""||$_POST["message"]==""){
@@ -24,8 +25,9 @@ $message = wordwrap($message, 70);
 // Send Mail By PHP Mail Function
 echo $headers;
 mail($contact_mail, $subject, $message, $headers);
-echo "Your mail has been sent successfuly ! Thank you for your feedback";
+$_SESSION['emailSend']='send';
 }
 }
 }
+header('Location: ' . './index.php');
 ?>

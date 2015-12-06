@@ -14,7 +14,7 @@
 			</div>
         </div>
     </header>
-	
+			
 			
             <?php if (isset($_SESSION['username'])) { 
 			if($_SESSION['counter_login'] == 0){
@@ -53,6 +53,14 @@
 			
 			
 			}  ?>
+			
+			<?php
+			if($_SESSION['emailSend'] == 'send'){
+			echo "<script>alert('Your mail has been sent successfuly ! Thank you for your feedback')</script>";
+			$_SESSION['emailSend'] == '';
+			}
+			
+			?>
 
 
 </body>
