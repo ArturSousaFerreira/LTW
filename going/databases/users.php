@@ -18,6 +18,19 @@ function getUserEmail($username) {
     return $a->fetch();
 }
 
+function changeUserPass($username, $password) {
+    global $db;
+    $a = $db->prepare('UPDATE users SET password = ? WHERE users.username = ?');
+    $a->execute(array(sha1($password), $username));
+    return true;
+}
+
+function changeUserEmail($username, $email) {
+    global $db;
+    $a = $db->prepare('UPDATE users SET email = ? WHERE users.username = ?');
+    $a->execute(array($email, $username));
+    return true;
+}
 
 function getUsers() {
     global $db;

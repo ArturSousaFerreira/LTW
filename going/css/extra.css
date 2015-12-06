@@ -40,20 +40,20 @@ input[type=submit] {
 }
 
 
-#footer_register, #footer_detail_event, #footer_listevents{
+#footer_register, #footer_pass, #footer_email, #footer_detail_event, #footer_listevents{
 	background-color:rgba(100,100,100,0.5);
 	width:500px;
 	margin:auto;
 	padding-bottom: 15px;
 }
 
-#footer_register > ul, #footer_login > ul , #footer_detail_event > ul{
+#footer_register > ul, #footer_login > ul , #footer_detail_event > ul, #footer_pass > ul, #footer_email > ul {
 	list-style-type:none;
 	padding:0;
 	color:white;
 }
 
-#footer_register > h1, #footer_login > h1, #footer_detail_event > h1,h2,h3,h4, #footer_listevents > h1{
+#footer_register > h1, #footer_login > h1, #footer_pass > h1, #footer_email > h1, #footer_detail_event > h1,h2,h3,h4, #footer_listevents > h1{
 	color:white;
 }
 

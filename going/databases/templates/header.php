@@ -40,7 +40,7 @@
                     <a href="my_events.php">MyEvents</a>
 					</li>
 					<li id ="acount">
-                    <a><?=$_SESSION['username']?></a>
+                    <a href="change_pass.php"><?=$_SESSION['username']?></a>
 					</li>
 					<li>
                     <a href="action_logout.php">Logout</a>

@@ -55,10 +55,10 @@
 			}  ?>
 			
 			<?php
-			if($_SESSION['emailSend'] == 'send'){
-			echo "<script>alert('Your mail has been sent successfuly ! Thank you for your feedback')</script>";
-			$_SESSION['emailSend'] == '';
-			}
+//			if($_SESSION['emailSend'] == 'send'){
+//			echo "<script>alert('Your mail has been sent successfuly ! Thank you for your feedback')</script>";
+//			$_SESSION['emailSend'] == '';
+//			}
 			
 			?>
 
