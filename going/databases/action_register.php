@@ -8,7 +8,7 @@ if (isset($_COOKIE['redirect'])) $referer = $_COOKIE['redirect'];
 else $referer = './index.php';
 
 if (isset($_POST['confirm_btn'])) {
-    if (!registerUser($_POST['username'], $_POST['password'])) {
+    if (!registerUser($_POST['username'], $_POST['email'], $_POST['password'])) {
         echo "<script>alert('User is already registered!')</script>";
     }
     else echo "<script>alert('Successfully registered')</script>";

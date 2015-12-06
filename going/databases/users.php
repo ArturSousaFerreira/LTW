@@ -11,6 +11,14 @@ function getUser($username) {
     return $a->fetch();
 }
 
+function getUserEmail($username) {
+    global $db;
+    $a = $db->prepare('SELECT email FROM users WHERE username = ?');
+    $a->execute(array($username));
+    return $a->fetch();
+}
+
+
 function getUsers() {
     global $db;
 
@@ -34,13 +42,13 @@ function checkCredentials($username, $password) {
 }
 
 // User actions
-function registerUser($username, $password) {
+function registerUser($username, $email, $password) {
     global $db;
 
     if (isRegistered($username)) return false;
 
-    $a = $db->prepare('INSERT INTO users VALUES (?, ?)');
-    $a->execute(array($username, sha1($password)));
+    $a = $db->prepare('INSERT INTO users VALUES (?, ?, ?)');
+    $a->execute(array($username, $email, sha1($password)));
 
     return true;
 }

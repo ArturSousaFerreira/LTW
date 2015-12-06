@@ -13,13 +13,14 @@ if (isset($_POST["share_btn"])) {
         if (!$email) {
             echo "Invalid email address.";
         } else {
-            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers = 'MIME-Version: 1.0' . "\r\n";
             $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+            $headers .= 'From:'. $_POST['from_email'] . "\r\n"; // Sender's Email
             $author = $_POST['author'];
             $url = $_POST['url'];
             $description = $_POST['description'];
-            $message = 'GOING user ' . $author . ' wants to share the event '
-                . '<a href="' . $url . '">' . $description . '</a>' . ' with you.';
+            $message = 'Hello,' . '<br>' . 'Check out the event '
+                . '<a href="' . $url . '">' . $description . '</a>' . ' at GOING.' . '<br>' . $author;
             $message = wordwrap($message, 50);
             mail($email, 'GOING event', $message, $headers);
         }

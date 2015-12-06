@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS users (
 username VARCHAR PRIMARY KEY,
+email VARCHAR,
 password VARCHAR
 );
 

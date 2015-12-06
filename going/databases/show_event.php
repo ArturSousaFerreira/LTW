@@ -2,6 +2,7 @@
 session_start();
 
 include_once("events.php");
+include_once("users.php");
 
 include_once("templates/header.php");
 
@@ -11,6 +12,7 @@ $logged = isset($_SESSION['username']);
 $id = isset($_GET['id'])?$_GET['id']:"";
 $event = getEvent($id);
 $registered = getRegistered($id);
+$from_email = getUserEmail($_SESSION['username'])[0];
 $comments = getComments($id);
 $url = 'http'.(empty($_SERVER['HTTPS'])?'':'s').'://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 include_once("templates/show_event.php");
@@ -29,6 +31,7 @@ include_once("templates/show_event.php");
     <form action="action_share.php" method="post">
         <input type="hidden" name="id" value="<?= $id ?>">
         <input type="hidden" name="author" value="<?= $_SESSION['username'] ?>">
+        <input type="hidden" name="from_email" value="<?= $from_email ?>">
         <input type="hidden" name="url" value ="<?= $url ?>">
         <input type="hidden" name="description" value ="<?= $event['description'] ?>">
         <input name="email" size="30" type="text" placeholder="email">
