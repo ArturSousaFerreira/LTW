@@ -42,7 +42,7 @@
 			if(isset($_SESSION['counter_login'])){
 	 if($_SESSION['counter_login'] == -1){
 	 echo "<script> alert('Wrong password!'); </script>";
-	 $_SESSION['counter_login'] = $_SESSION['contador_login'] + 2;
+	 $_SESSION['counter_login'] = $_SESSION['counter_login'] + 2;
 	 } else if($_SESSION['counter_login'] == -2){
 	 echo "<script> alert('Invalid user!'); </script>";
 	 $_SESSION['counter_login'] = $_SESSION['counter_login'] + 3;
