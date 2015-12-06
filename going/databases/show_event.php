@@ -16,23 +16,16 @@ $url = 'http'.(empty($_SERVER['HTTPS'])?'':'s').'://'.$_SERVER['SERVER_NAME'].$_
 include_once("templates/show_event.php");
 ?>
 
-<!-- Comment form -->
+<!-- Comment form and Share form-->
 <?php if ($logged && (isRegisteredInEvent($id, $_SESSION['username']) || ($_SESSION['username'] == $event['creator']))) { ?>
-        <form action="action_comment.php" method="post">
-            <input type="hidden" name="id" value="<?= $id ?>">
-            <input type="hidden" name="event" value="<?= $id ?>">
-            <input type="hidden" name="author" value="<?= $_SESSION['username'] ?>">
-            <input type="textarea" name="text">
-            <br>
-            <input type="submit" name="comment_btn" value="Comment">
-        </form>
-<?php } else { ?>
-    <p>Register in the event to comment</p>
-<?php } ?>
-<br>
-
-<!-- Share form -->
-<?php if ($logged && (isRegisteredInEvent($id, $_SESSION['username']) || ($_SESSION['username'] == $event['creator']))) { ?>
+    <form action="action_comment.php" method="post">
+        <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="hidden" name="event" value="<?= $id ?>">
+        <input type="hidden" name="author" value="<?= $_SESSION['username'] ?>">
+        <input type="textarea" name="text">
+        <br>
+        <input type="submit" name="comment_btn" value="Comment">
+    </form>
     <form action="action_share.php" method="post">
         <input type="hidden" name="id" value="<?= $id ?>">
         <input type="hidden" name="author" value="<?= $_SESSION['username'] ?>">
@@ -43,7 +36,7 @@ include_once("templates/show_event.php");
         <input type="submit" name="share_btn" value="Share">
     </form>
 <?php } else { ?>
-    <p>Register in the event to comment</p>
+    <p>Register in the event to comment or share</p>
 <?php } ?>
 
 <br>
