@@ -26,4 +26,4 @@
 		}
 		$_SESSION['emailSend'] = '';
 	?>
-</header>
+

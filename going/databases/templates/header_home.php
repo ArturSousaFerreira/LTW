@@ -1,4 +1,7 @@
-<header>
+<?php
+	session_start();
+	?>
+	<header>
 	<div class="header-content">
 		<div class="header-content-inner">
 			<h1>Going</h1>
