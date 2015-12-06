@@ -18,5 +18,3 @@
         </form>
     </div>
 </header>
-</body>
-</html>

@@ -27,4 +27,3 @@ if (isset($_POST["share_btn"])) {
     }
     header('Location: ' . './show_event.php?id='.$_POST['id']);
 }
-?>

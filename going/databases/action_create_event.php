@@ -6,4 +6,4 @@ if (isset($_POST['create_btn'])) {
 }
 
 header('Location: ' . './list_events.php');
-?>
+

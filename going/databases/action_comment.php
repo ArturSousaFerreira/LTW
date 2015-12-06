@@ -11,4 +11,4 @@ $text = $_POST['text'];
 createComment($event, $author, $text);
 
 header('Location: ' . './show_event.php?id=' . $event);
-?>
+

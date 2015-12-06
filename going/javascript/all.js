@@ -4,7 +4,7 @@
  * Copyright 2013, ZURB
  * Free to use under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
-*/
+ */
 
 
 (function ($, window, document, undefined) {
@@ -56,41 +56,41 @@
   };
 
   /*
-    https://github.com/paulirish/matchMedia.js
-  */
+   https://github.com/paulirish/matchMedia.js
+   */
 
   window.matchMedia = window.matchMedia || (function( doc, undefined ) {
 
-    "use strict";
+        "use strict";
 
-    var bool,
-        docElem = doc.documentElement,
-        refNode = docElem.firstElementChild || docElem.firstChild,
+        var bool,
+            docElem = doc.documentElement,
+            refNode = docElem.firstElementChild || docElem.firstChild,
         // fakeBody required for <FF4 when executed in <head>
-        fakeBody = doc.createElement( "body" ),
-        div = doc.createElement( "div" );
+            fakeBody = doc.createElement( "body" ),
+            div = doc.createElement( "div" );
 
-    div.id = "mq-test-1";
-    div.style.cssText = "position:absolute;top:-100em";
-    fakeBody.style.background = "none";
-    fakeBody.appendChild(div);
+        div.id = "mq-test-1";
+        div.style.cssText = "position:absolute;top:-100em";
+        fakeBody.style.background = "none";
+        fakeBody.appendChild(div);
 
-    return function(q){
+        return function(q){
 
-      div.innerHTML = "&shy;<style media=\"" + q + "\"> #mq-test-1 { width: 42px; }</style>";
+          div.innerHTML = "&shy;<style media=\"" + q + "\"> #mq-test-1 { width: 42px; }</style>";
 
-      docElem.insertBefore( fakeBody, refNode );
-      bool = div.offsetWidth === 42;
-      docElem.removeChild( fakeBody );
+          docElem.insertBefore( fakeBody, refNode );
+          bool = div.offsetWidth === 42;
+          docElem.removeChild( fakeBody );
 
-      return {
-        matches: bool,
-        media: q
-      };
+          return {
+            matches: bool,
+            media: q
+          };
 
-    };
+        };
 
-  }( document ));
+      }( document ));
 
   /*
    * jquery.requestAnimationFrame
@@ -103,63 +103,63 @@
 
   (function( $ ) {
 
-  // requestAnimationFrame polyfill adapted from Erik Möller
-  // fixes from Paul Irish and Tino Zijdel
-  // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-  // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+    // requestAnimationFrame polyfill adapted from Erik Möller
+    // fixes from Paul Irish and Tino Zijdel
+    // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+    // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
 
 
-  var animating,
-    lastTime = 0,
-    vendors = ['webkit', 'moz'],
-    requestAnimationFrame = window.requestAnimationFrame,
-    cancelAnimationFrame = window.cancelAnimationFrame;
+    var animating,
+        lastTime = 0,
+        vendors = ['webkit', 'moz'],
+        requestAnimationFrame = window.requestAnimationFrame,
+        cancelAnimationFrame = window.cancelAnimationFrame;
 
-  for(; lastTime < vendors.length && !requestAnimationFrame; lastTime++) {
-    requestAnimationFrame = window[ vendors[lastTime] + "RequestAnimationFrame" ];
-    cancelAnimationFrame = cancelAnimationFrame ||
-      window[ vendors[lastTime] + "CancelAnimationFrame" ] || 
-      window[ vendors[lastTime] + "CancelRequestAnimationFrame" ];
-  }
-
-  function raf() {
-    if ( animating ) {
-      requestAnimationFrame( raf );
-      jQuery.fx.tick();
+    for(; lastTime < vendors.length && !requestAnimationFrame; lastTime++) {
+      requestAnimationFrame = window[ vendors[lastTime] + "RequestAnimationFrame" ];
+      cancelAnimationFrame = cancelAnimationFrame ||
+          window[ vendors[lastTime] + "CancelAnimationFrame" ] ||
+          window[ vendors[lastTime] + "CancelRequestAnimationFrame" ];
     }
-  }
 
-  if ( requestAnimationFrame ) {
-    // use rAF
-    window.requestAnimationFrame = requestAnimationFrame;
-    window.cancelAnimationFrame = cancelAnimationFrame;
-    jQuery.fx.timer = function( timer ) {
-      if ( timer() && jQuery.timers.push( timer ) && !animating ) {
-        animating = true;
-        raf();
+    function raf() {
+      if ( animating ) {
+        requestAnimationFrame( raf );
+        jQuery.fx.tick();
       }
-    };
+    }
 
-    jQuery.fx.stop = function() {
-      animating = false;
-    };
-  } else {
-    // polyfill
-    window.requestAnimationFrame = function( callback, element ) {
-      var currTime = new Date().getTime(),
-        timeToCall = Math.max( 0, 16 - ( currTime - lastTime ) ),
-        id = window.setTimeout( function() {
-          callback( currTime + timeToCall );
-        }, timeToCall );
-      lastTime = currTime + timeToCall;
-      return id;
-    };
+    if ( requestAnimationFrame ) {
+      // use rAF
+      window.requestAnimationFrame = requestAnimationFrame;
+      window.cancelAnimationFrame = cancelAnimationFrame;
+      jQuery.fx.timer = function( timer ) {
+        if ( timer() && jQuery.timers.push( timer ) && !animating ) {
+          animating = true;
+          raf();
+        }
+      };
 
-    window.cancelAnimationFrame = function(id) {
-      clearTimeout(id);
-    };
-      
-  }
+      jQuery.fx.stop = function() {
+        animating = false;
+      };
+    } else {
+      // polyfill
+      window.requestAnimationFrame = function( callback, element ) {
+        var currTime = new Date().getTime(),
+            timeToCall = Math.max( 0, 16 - ( currTime - lastTime ) ),
+            id = window.setTimeout( function() {
+              callback( currTime + timeToCall );
+            }, timeToCall );
+        lastTime = currTime + timeToCall;
+        return id;
+      };
+
+      window.cancelAnimationFrame = function(id) {
+        clearTimeout(id);
+      };
+
+    }
 
   }( jQuery ));
 
@@ -284,7 +284,7 @@
         }
 
         opts_arr = (data_options || ':').split(';'),
-        opts_len = opts_arr.length;
+            opts_len = opts_arr.length;
 
         function isNumber (o) {
           return ! isNaN (o-0) && o !== null && o !== "" && o !== false && o !== true;
@@ -340,8 +340,8 @@
         } else {
           var query = Foundation.media_queries[media];
           if(query !== undefined) {
-            Foundation.stylesheet.insertRule('@media ' + 
-              Foundation.media_queries[media] + '{ ' + rule + ' }');
+            Foundation.stylesheet.insertRule('@media ' +
+                Foundation.media_queries[media] + '{ ' + rule + ' }');
           }
         }
       },
@@ -473,12 +473,12 @@
           settings = form.data('abide-init');
 
       form
-        .off('.abide')
-        .on('submit.fndtn.abide validate.fndtn.abide', function (e) {
-          var is_ajax = /ajax/i.test($(this).attr('data-abide'));
-          return self.validate($(this).find('input, textarea, select').get(), e, is_ajax);
-        })
-        .find('input, textarea, select')
+          .off('.abide')
+          .on('submit.fndtn.abide validate.fndtn.abide', function (e) {
+            var is_ajax = /ajax/i.test($(this).attr('data-abide'));
+            return self.validate($(this).find('input, textarea, select').get(), e, is_ajax);
+          })
+          .find('input, textarea, select')
           .off('.abide')
           .on('blur.fndtn.abide change.fndtn.abide', function (e) {
             self.validate([this], e);
@@ -568,7 +568,7 @@
           validations.push(this.valid_equal(el, required));
         } else {
           if (el_patterns[i][1].test(value) && valid_length ||
-            !required && el.value.length < 1) {
+              !required && el.value.length < 1) {
             $(el).removeAttr('data-invalid').parent().removeClass('error');
             validations.push(true);
           } else {
@@ -679,8 +679,8 @@
 
     events : function () {
       $(this.scope).off('.alert').on('click.fndtn.alert', '[data-alert] a.close', function (e) {
-          var alertBox = $(this).closest("[data-alert]"),
-              settings = alertBox.data('alert-init');
+        var alertBox = $(this).closest("[data-alert]"),
+            settings = alertBox.data('alert-init');
 
         e.preventDefault();
         alertBox[settings.animation](settings.speed, function () {
@@ -704,9 +704,9 @@
     settings : {
       templates : {
         viewing : '<a href="#" class="clearing-close">&times;</a>' +
-          '<div class="visible-img" style="display: none"><img src="//:0">' +
-          '<p class="clearing-caption"></p><a href="#" class="clearing-main-prev"><span></span></a>' +
-          '<a href="#" class="clearing-main-next"><span></span></a></div>'
+        '<div class="visible-img" style="display: none"><img src="//:0">' +
+        '<p class="clearing-caption"></p><a href="#" class="clearing-main-prev"><span></span></a>' +
+        '<a href="#" class="clearing-main-next"><span></span></a></div>'
       },
 
       // comma delimited list of selectors that, on click, will close clearing,
@@ -737,47 +737,47 @@
       var self = this;
 
       $(this.scope)
-        .off('.clearing')
-        .on('click.fndtn.clearing', 'ul[data-clearing] li',
-          function (e, current, target) {
-            var current = current || $(this),
-                target = target || current,
-                next = current.next('li'),
-                settings = current.closest('[data-clearing]').data('clearing-init'),
-                image = $(e.target);
+          .off('.clearing')
+          .on('click.fndtn.clearing', 'ul[data-clearing] li',
+              function (e, current, target) {
+                var current = current || $(this),
+                    target = target || current,
+                    next = current.next('li'),
+                    settings = current.closest('[data-clearing]').data('clearing-init'),
+                    image = $(e.target);
 
-            e.preventDefault();
+                e.preventDefault();
 
-            if (!settings) {
-              self.init();
-              settings = current.closest('[data-clearing]').data('clearing-init');
-            }
+                if (!settings) {
+                  self.init();
+                  settings = current.closest('[data-clearing]').data('clearing-init');
+                }
 
-            // if clearing is open and the current image is
-            // clicked, go to the next image in sequence
-            if (target.hasClass('visible') && 
-              current[0] === target[0] && 
-              next.length > 0 && self.is_open(current)) {
-              target = next;
-              image = $('img', target);
-            }
+                // if clearing is open and the current image is
+                // clicked, go to the next image in sequence
+                if (target.hasClass('visible') &&
+                    current[0] === target[0] &&
+                    next.length > 0 && self.is_open(current)) {
+                  target = next;
+                  image = $('img', target);
+                }
 
-            // set current and target to the clicked li if not otherwise defined.
-            self.open(image, current, target);
-            self.update_paddles(target);
-          })
+                // set current and target to the clicked li if not otherwise defined.
+                self.open(image, current, target);
+                self.update_paddles(target);
+              })
 
-        .on('click.fndtn.clearing', '.clearing-main-next',
-          function (e) { self.nav(e, 'next') })
-        .on('click.fndtn.clearing', '.clearing-main-prev',
-          function (e) { self.nav(e, 'prev') })
-        .on('click.fndtn.clearing', this.settings.close_selectors,
-          function (e) { Foundation.libs.clearing.close(e, this) })
-        .on('keydown.fndtn.clearing',
-          function (e) { self.keydown(e) });
+          .on('click.fndtn.clearing', '.clearing-main-next',
+              function (e) { self.nav(e, 'next') })
+          .on('click.fndtn.clearing', '.clearing-main-prev',
+              function (e) { self.nav(e, 'prev') })
+          .on('click.fndtn.clearing', this.settings.close_selectors,
+              function (e) { Foundation.libs.clearing.close(e, this) })
+          .on('keydown.fndtn.clearing',
+              function (e) { self.keydown(e) });
 
       $(window).off('.clearing').on('resize.fndtn.clearing',
-        function () { self.resize() });
+          function () { self.resize() });
 
       this.swipe_events(scope);
     },
@@ -786,47 +786,47 @@
       var self = this;
 
       $(this.scope)
-        .on('touchstart.fndtn.clearing', '.visible-img', function(e) {
-          if (!e.touches) { e = e.originalEvent; }
-          var data = {
-                start_page_x: e.touches[0].pageX,
-                start_page_y: e.touches[0].pageY,
-                start_time: (new Date()).getTime(),
-                delta_x: 0,
-                is_scrolling: undefined
-              };
+          .on('touchstart.fndtn.clearing', '.visible-img', function(e) {
+            if (!e.touches) { e = e.originalEvent; }
+            var data = {
+              start_page_x: e.touches[0].pageX,
+              start_page_y: e.touches[0].pageY,
+              start_time: (new Date()).getTime(),
+              delta_x: 0,
+              is_scrolling: undefined
+            };
 
-          $(this).data('swipe-transition', data);
-          e.stopPropagation();
-        })
-        .on('touchmove.fndtn.clearing', '.visible-img', function(e) {
-          if (!e.touches) { e = e.originalEvent; }
-          // Ignore pinch/zoom events
-          if(e.touches.length > 1 || e.scale && e.scale !== 1) return;
+            $(this).data('swipe-transition', data);
+            e.stopPropagation();
+          })
+          .on('touchmove.fndtn.clearing', '.visible-img', function(e) {
+            if (!e.touches) { e = e.originalEvent; }
+            // Ignore pinch/zoom events
+            if(e.touches.length > 1 || e.scale && e.scale !== 1) return;
 
-          var data = $(this).data('swipe-transition');
+            var data = $(this).data('swipe-transition');
 
-          if (typeof data === 'undefined') {
-            data = {};
-          }
+            if (typeof data === 'undefined') {
+              data = {};
+            }
 
-          data.delta_x = e.touches[0].pageX - data.start_page_x;
+            data.delta_x = e.touches[0].pageX - data.start_page_x;
 
-          if ( typeof data.is_scrolling === 'undefined') {
-            data.is_scrolling = !!( data.is_scrolling || Math.abs(data.delta_x) < Math.abs(e.touches[0].pageY - data.start_page_y) );
-          }
+            if ( typeof data.is_scrolling === 'undefined') {
+              data.is_scrolling = !!( data.is_scrolling || Math.abs(data.delta_x) < Math.abs(e.touches[0].pageY - data.start_page_y) );
+            }
 
-          if (!data.is_scrolling && !data.active) {
-            e.preventDefault();
-            var direction = (data.delta_x < 0) ? 'next' : 'prev';
-            data.active = true;
-            self.nav(e, direction);
-          }
-        })
-        .on('touchend.fndtn.clearing', '.visible-img', function(e) {
-          $(this).data('swipe-transition', {});
-          e.stopPropagation();
-        });
+            if (!data.is_scrolling && !data.active) {
+              e.preventDefault();
+              var direction = (data.delta_x < 0) ? 'next' : 'prev';
+              data.active = true;
+              self.nav(e, direction);
+            }
+          })
+          .on('touchend.fndtn.clearing', '.visible-img', function(e) {
+            $(this).data('swipe-transition', {});
+            e.stopPropagation();
+          });
     },
 
     assemble : function ($li) {
@@ -843,7 +843,7 @@
             viewing: settings.templates.viewing
           },
           wrapper = '<div class="clearing-assembled"><div>' + data.viewing +
-            data.grid + '</div></div>';
+              data.grid + '</div></div>';
 
       return holder.after(wrapper).remove();
     },
@@ -857,8 +857,8 @@
       if (!this.locked()) {
         // set the image to the selected thumbnail
         image
-          .attr('src', this.load($image))
-          .css('visibility', 'hidden');
+            .attr('src', this.load($image))
+            .css('visibility', 'hidden');
 
         this.loaded(image, function () {
           image.css('visibility', 'visible');
@@ -867,12 +867,12 @@
           container.addClass('clearing-container');
           visible_image.show();
           this.fix_height(target)
-            .caption($('.clearing-caption', visible_image), $image)
-            .center(image)
-            .shift(current, target, function () {
-              target.siblings().removeClass('visible');
-              target.addClass('visible');
-            });
+              .caption($('.clearing-caption', visible_image), $image)
+              .center(image)
+              .shift(current, target, function () {
+                target.siblings().removeClass('visible');
+                target.addClass('visible');
+              });
         }.bind(this));
       }
     },
@@ -881,20 +881,20 @@
       e.preventDefault();
 
       var root = (function (target) {
-            if (/blackout/.test(target.selector)) {
-              return target;
-            } else {
-              return target.closest('.clearing-blackout');
-            }
-          }($(el))), container, visible_image;
+        if (/blackout/.test(target.selector)) {
+          return target;
+        } else {
+          return target.closest('.clearing-blackout');
+        }
+      }($(el))), container, visible_image;
 
       if (el === e.target && root) {
         container = $('div', root).first();
         visible_image = $('.visible-img', container);
         this.settings.prev_index = 0;
         $('ul[data-clearing]', root)
-          .attr('style', '').closest('.clearing-blackout')
-          .removeClass('clearing-blackout');
+            .attr('style', '').closest('.clearing-blackout')
+            .removeClass('clearing-blackout');
         container.removeClass('clearing-container');
         visible_image.hide();
       }
@@ -935,38 +935,38 @@
           self = this;
 
       lis.each(function () {
-          var li = $(this),
-              image = li.find('img');
+            var li = $(this),
+                image = li.find('img');
 
-          if (li.height() > image.outerHeight()) {
-            li.addClass('fix-height');
-          }
-        })
-        .closest('ul')
-        .width(lis.length * 100 + '%');
+            if (li.height() > image.outerHeight()) {
+              li.addClass('fix-height');
+            }
+          })
+          .closest('ul')
+          .width(lis.length * 100 + '%');
 
       return this;
     },
 
     update_paddles : function (target) {
       var visible_image = target
-        .closest('.carousel')
-        .siblings('.visible-img');
+          .closest('.carousel')
+          .siblings('.visible-img');
 
       if (target.next().length > 0) {
         $('.clearing-main-next', visible_image)
-          .removeClass('disabled');
+            .removeClass('disabled');
       } else {
         $('.clearing-main-next', visible_image)
-          .addClass('disabled');
+            .addClass('disabled');
       }
 
       if (target.prev().length > 0) {
         $('.clearing-main-prev', visible_image)
-          .removeClass('disabled');
+            .removeClass('disabled');
       } else {
         $('.clearing-main-prev', visible_image)
-          .addClass('disabled');
+            .addClass('disabled');
       }
     },
 
@@ -1002,8 +1002,8 @@
 
     preload : function ($image) {
       this
-        .img($image.closest('li').next())
-        .img($image.closest('li').prev());
+          .img($image.closest('li').next())
+          .img($image.closest('li').prev());
     },
 
     img : function (img) {
@@ -1027,12 +1027,12 @@
 
       if (caption) {
         container
-          .html(caption)
-          .show();
+            .html(caption)
+            .show();
       } else {
         container
-          .text('')
-          .hide();
+            .text('')
+            .hide();
       }
       return this;
     },
@@ -1045,7 +1045,7 @@
 
       if (target.length) {
         $('img', target)
-          .trigger('click', [current, target]);
+            .trigger('click', [current, target]);
       }
     },
 
@@ -1094,10 +1094,10 @@
 
       if (this.adjacent(this.settings.prev_index, target_index)) {
         if ((target_index > up_count)
-          && target_index > this.settings.prev_index) {
+            && target_index > this.settings.prev_index) {
           response = 'right';
         } else if ((target_index > up_count - 1)
-          && target_index <= this.settings.prev_index) {
+            && target_index <= this.settings.prev_index) {
           response = 'left';
         } else {
           response = false;
@@ -1169,64 +1169,64 @@
       var self = this;
 
       $(this.scope)
-        .off('.dropdown')
-        .on('click.fndtn.dropdown', '[data-dropdown]', function (e) {
-          var settings = $(this).data('dropdown-init');
-          e.preventDefault();
+          .off('.dropdown')
+          .on('click.fndtn.dropdown', '[data-dropdown]', function (e) {
+            var settings = $(this).data('dropdown-init');
+            e.preventDefault();
 
-          if (!settings.is_hover || Modernizr.touch) self.toggle($(this));
-        })
-        .on('mouseenter.fndtn.dropdown', '[data-dropdown], [data-dropdown-content]', function (e) {
-          var $this = $(this);
-          clearTimeout(self.timeout);
+            if (!settings.is_hover || Modernizr.touch) self.toggle($(this));
+          })
+          .on('mouseenter.fndtn.dropdown', '[data-dropdown], [data-dropdown-content]', function (e) {
+            var $this = $(this);
+            clearTimeout(self.timeout);
 
-          if ($this.data('dropdown')) {
-            var dropdown = $('#' + $this.data('dropdown')),
-                target = $this;
-          } else {
-            var dropdown = $this;
-                target = $("[data-dropdown='" + dropdown.attr('id') + "']");
-          }
-
-          var settings = target.data('dropdown-init');
-          if (settings.is_hover) self.open.apply(self, [dropdown, target]);
-        })
-        .on('mouseleave.fndtn.dropdown', '[data-dropdown], [data-dropdown-content]', function (e) {
-          var $this = $(this);
-          self.timeout = setTimeout(function () {
             if ($this.data('dropdown')) {
-              var settings = $this.data('dropdown-init');
-              if (settings.is_hover) self.close.call(self, $('#' + $this.data('dropdown')));
+              var dropdown = $('#' + $this.data('dropdown')),
+                  target = $this;
             } else {
-              var target = $('[data-dropdown="' + $(this).attr('id') + '"]'),
-                  settings = target.data('dropdown-init');
-              if (settings.is_hover) self.close.call(self, $this);
+              var dropdown = $this;
+              target = $("[data-dropdown='" + dropdown.attr('id') + "']");
             }
-          }.bind(this), 150);
-        })
-        .on('click.fndtn.dropdown', function (e) {
-          var parent = $(e.target).closest('[data-dropdown-content]');
 
-          if ($(e.target).data('dropdown') || $(e.target).parent().data('dropdown')) {
-            return;
-          }
-          if (!($(e.target).data('revealId')) && 
-            (parent.length > 0 && ($(e.target).is('[data-dropdown-content]') || 
-              $.contains(parent.first()[0], e.target)))) {
-            e.stopPropagation();
-            return;
-          }
+            var settings = target.data('dropdown-init');
+            if (settings.is_hover) self.open.apply(self, [dropdown, target]);
+          })
+          .on('mouseleave.fndtn.dropdown', '[data-dropdown], [data-dropdown-content]', function (e) {
+            var $this = $(this);
+            self.timeout = setTimeout(function () {
+              if ($this.data('dropdown')) {
+                var settings = $this.data('dropdown-init');
+                if (settings.is_hover) self.close.call(self, $('#' + $this.data('dropdown')));
+              } else {
+                var target = $('[data-dropdown="' + $(this).attr('id') + '"]'),
+                    settings = target.data('dropdown-init');
+                if (settings.is_hover) self.close.call(self, $this);
+              }
+            }.bind(this), 150);
+          })
+          .on('click.fndtn.dropdown', function (e) {
+            var parent = $(e.target).closest('[data-dropdown-content]');
 
-          self.close.call(self, $('[data-dropdown-content]'));
-        })
-        .on('opened.fndtn.dropdown', '[data-dropdown-content]', this.settings.opened)
-        .on('closed.fndtn.dropdown', '[data-dropdown-content]', this.settings.closed);
+            if ($(e.target).data('dropdown') || $(e.target).parent().data('dropdown')) {
+              return;
+            }
+            if (!($(e.target).data('revealId')) &&
+                (parent.length > 0 && ($(e.target).is('[data-dropdown-content]') ||
+                $.contains(parent.first()[0], e.target)))) {
+              e.stopPropagation();
+              return;
+            }
+
+            self.close.call(self, $('[data-dropdown-content]'));
+          })
+          .on('opened.fndtn.dropdown', '[data-dropdown-content]', this.settings.opened)
+          .on('closed.fndtn.dropdown', '[data-dropdown-content]', this.settings.closed);
 
       $(window)
-        .off('.dropdown')
-        .on('resize.fndtn.dropdown', self.throttle(function () {
-          self.resize.call(self);
-        }, 50)).trigger('resize');
+          .off('.dropdown')
+          .on('resize.fndtn.dropdown', self.throttle(function () {
+            self.resize.call(self);
+          }, 50)).trigger('resize');
     },
 
     close: function (dropdown) {
@@ -1234,18 +1234,18 @@
       dropdown.each(function () {
         if ($(this).hasClass(self.settings.active_class)) {
           $(this)
-            .css(Foundation.rtl ? 'right':'left', '-99999px')
-            .removeClass(self.settings.active_class);
+              .css(Foundation.rtl ? 'right':'left', '-99999px')
+              .removeClass(self.settings.active_class);
           $(this).trigger('closed');
         }
       });
     },
 
     open: function (dropdown, target) {
-        this
+      this
           .css(dropdown
-            .addClass(this.settings.active_class), target);
-        dropdown.trigger('opened');
+              .addClass(this.settings.active_class), target);
+      dropdown.trigger('opened');
     },
 
     toggle : function (target) {
@@ -1314,7 +1314,7 @@
 
     small : function () {
       return matchMedia(Foundation.media_queries.small).matches &&
-        !matchMedia(Foundation.media_queries.medium).matches;
+          !matchMedia(Foundation.media_queries.medium).matches;
     },
 
     off: function () {
@@ -1354,12 +1354,12 @@
         xxlarge: Foundation.media_queries.xxlarge,
         landscape : 'only screen and (orientation: landscape)',
         portrait : 'only screen and (orientation: portrait)',
-        retina : 'only screen and (-webkit-min-device-pixel-ratio: 2),' + 
-          'only screen and (min--moz-device-pixel-ratio: 2),' + 
-          'only screen and (-o-min-device-pixel-ratio: 2/1),' + 
-          'only screen and (min-device-pixel-ratio: 2),' + 
-          'only screen and (min-resolution: 192dpi),' + 
-          'only screen and (min-resolution: 2dppx)'
+        retina : 'only screen and (-webkit-min-device-pixel-ratio: 2),' +
+        'only screen and (min--moz-device-pixel-ratio: 2),' +
+        'only screen and (-o-min-device-pixel-ratio: 2/1),' +
+        'only screen and (min-device-pixel-ratio: 2),' +
+        'only screen and (min-resolution: 192dpi),' +
+        'only screen and (min-resolution: 2dppx)'
       },
 
       directives : {
@@ -1412,10 +1412,10 @@
       var self = this;
 
       $(window)
-        .off('.interchange')
-        .on('resize.fndtn.interchange', self.throttle(function () {
-          self.resize.call(self);
-        }, 50));
+          .off('.interchange')
+          .on('resize.fndtn.interchange', self.throttle(function () {
+            self.resize.call(self);
+          }, 50));
 
       return this;
     },
@@ -1434,15 +1434,15 @@
 
           if (passed) {
             this.settings.directives[passed
-              .scenario[1]](passed.el, passed.scenario[0], function () {
-                if (arguments[0] instanceof Array) { 
-                  var args = arguments[0];
-                } else { 
-                  var args = Array.prototype.slice.call(arguments, 0);
-                }
+                .scenario[1]](passed.el, passed.scenario[0], function () {
+              if (arguments[0] instanceof Array) {
+                var args = arguments[0];
+              } else {
+                var args = Array.prototype.slice.call(arguments, 0);
+              }
 
-                passed.el.trigger(passed.scenario[1], args);
-              });
+              passed.el.trigger(passed.scenario[1], args);
+            });
           }
         }
       }
@@ -1572,7 +1572,7 @@
           if (split.length > 1) {
             var cached_split = split[0].split(','),
                 params = this.parse_params(cached_split[0],
-                  cached_split[1], split[1]);
+                    cached_split[1], split[1]);
 
             scenarios.push(params);
           }
@@ -1590,7 +1590,7 @@
       }
 
       return (S4() + S4() + delim + S4() + delim + S4()
-        + delim + S4() + delim + S4() + S4() + S4());
+      + delim + S4() + delim + S4() + S4() + S4());
     },
 
     store : function (el, scenarios) {
@@ -1699,50 +1699,50 @@
       var self = this;
 
       $(this.scope)
-        .off('.joyride')
-        .on('click.fndtn.joyride', '.joyride-next-tip, .joyride-modal-bg', function (e) {
-          e.preventDefault();
+          .off('.joyride')
+          .on('click.fndtn.joyride', '.joyride-next-tip, .joyride-modal-bg', function (e) {
+            e.preventDefault();
 
-          if (this.settings.$li.next().length < 1) {
+            if (this.settings.$li.next().length < 1) {
+              this.end();
+            } else if (this.settings.timer > 0) {
+              clearTimeout(this.settings.automate);
+              this.hide();
+              this.show();
+              this.startTimer();
+            } else {
+              this.hide();
+              this.show();
+            }
+
+          }.bind(this))
+
+          .on('click.fndtn.joyride', '.joyride-close-tip', function (e) {
+            e.preventDefault();
             this.end();
-          } else if (this.settings.timer > 0) {
-            clearTimeout(this.settings.automate);
-            this.hide();
-            this.show();
-            this.startTimer();
-          } else {
-            this.hide();
-            this.show();
-          }
-
-        }.bind(this))
-
-        .on('click.fndtn.joyride', '.joyride-close-tip', function (e) {
-          e.preventDefault();
-          this.end();
-        }.bind(this));
+          }.bind(this));
 
       $(window)
-        .off('.joyride')
-        .on('resize.fndtn.joyride', self.throttle(function () {
-          if ($('[data-joyride]').length > 0 && self.settings.$next_tip) {
-            if (self.settings.exposed.length > 0) {
-              var $els = $(self.settings.exposed);
+          .off('.joyride')
+          .on('resize.fndtn.joyride', self.throttle(function () {
+            if ($('[data-joyride]').length > 0 && self.settings.$next_tip) {
+              if (self.settings.exposed.length > 0) {
+                var $els = $(self.settings.exposed);
 
-              $els.each(function () {
-                var $this = $(this);
-                self.un_expose($this);
-                self.expose($this);
-              });
-            }
+                $els.each(function () {
+                  var $this = $(this);
+                  self.un_expose($this);
+                  self.expose($this);
+                });
+              }
 
-            if (self.is_phone()) {
-              self.pos_phone();
-            } else {
-              self.pos_default(false, true);
+              if (self.is_phone()) {
+                self.pos_phone();
+              } else {
+                self.pos_default(false, true);
+              }
             }
-          }
-        }, 100));
+          }, 100));
     },
 
     start : function () {
@@ -1806,9 +1806,9 @@
 
       $blank = $(this.settings.template.tip).addClass(opts.tip_class);
       content = $.trim($(opts.li).html()) +
-        this.button_text(opts.button_text) +
-        this.settings.template.link +
-        this.timer_instance(opts.index);
+          this.button_text(opts.button_text) +
+          this.settings.template.link +
+          this.timer_instance(opts.index);
 
       $blank.append($(this.settings.template.wrapper));
       $blank.first().attr('data-index', opts.index);
@@ -1840,13 +1840,13 @@
 
     create : function (opts) {
       var buttonText = opts.$li.attr('data-button') || opts.$li.attr('data-text'),
-        tipClass = opts.$li.attr('class'),
-        $tip_content = $(this.tip_template({
-          tip_class : tipClass,
-          index : opts.index,
-          button_text : buttonText,
-          li : opts.$li
-        }));
+          tipClass = opts.$li.attr('class'),
+          $tip_content = $(this.tip_template({
+            tip_class : tipClass,
+            index : opts.index,
+            button_text : buttonText,
+            li : opts.$li
+          }));
 
       $(this.settings.tip_container).append($tip_content);
     },
@@ -1856,7 +1856,7 @@
 
       // are we paused?
       if (this.settings.$li === undefined
-        || ($.inArray(this.settings.$li.index(), this.settings.pause_after) === -1)) {
+          || ($.inArray(this.settings.$li.index(), this.settings.pause_after) === -1)) {
 
         // don't go to the next li if the tour was paused
         if (this.settings.paused) {
@@ -1927,8 +1927,8 @@
             if (this.settings.timer > 0) {
 
               this.settings.$next_tip
-                .fadeIn(this.settings.tip_animation_fade_speed)
-                .show();
+                  .fadeIn(this.settings.tip_animation_fade_speed)
+                  .show();
 
               this.delay(function () {
                 $timer.animate({
@@ -1943,7 +1943,7 @@
 
           this.settings.$current_tip = this.settings.$next_tip;
 
-        // skip non-existant targets
+          // skip non-existant targets
         } else if (this.settings.$li && this.settings.$target.length < 1) {
 
           this.show();
@@ -1963,7 +1963,7 @@
 
     is_phone : function () {
       return matchMedia(Foundation.media_queries.small).matches &&
-        !matchMedia(Foundation.media_queries.medium).matches;
+          !matchMedia(Foundation.media_queries.medium).matches;
     },
 
     hide : function () {
@@ -1982,7 +1982,7 @@
         this.css('visibility', 'visible');
       }, this.settings.$current_tip), 0);
       this.settings.post_step_callback(this.settings.$li.index(),
-        this.settings.$current_tip);
+          this.settings.$current_tip);
     },
 
     set_li : function (init) {
@@ -2062,60 +2062,60 @@
 
       if (!/body/i.test(this.settings.$target.selector)) {
 
-          if (this.bottom()) {
-            var leftOffset = this.settings.$target.offset().left;
-            if (Foundation.rtl) {
-              leftOffset = this.settings.$target.offset().width - this.settings.$next_tip.width() + leftOffset;
-            }
-            this.settings.$next_tip.css({
-              top: (this.settings.$target.offset().top + nub_height + this.settings.$target.outerHeight()),
-              left: leftOffset});
-
-            this.nub_position($nub, this.settings.tip_settings.nub_position, 'top');
-
-          } else if (this.top()) {
-            var leftOffset = this.settings.$target.offset().left;
-            if (Foundation.rtl) {
-              leftOffset = this.settings.$target.offset().width - this.settings.$next_tip.width() + leftOffset;
-            }
-            this.settings.$next_tip.css({
-              top: (this.settings.$target.offset().top - this.settings.$next_tip.outerHeight() - nub_height),
-              left: leftOffset});
-
-            this.nub_position($nub, this.settings.tip_settings.nub_position, 'bottom');
-
-          } else if (this.right()) {
-
-            this.settings.$next_tip.css({
-              top: this.settings.$target.offset().top,
-              left: (this.outerWidth(this.settings.$target) + this.settings.$target.offset().left + nub_width)});
-
-            this.nub_position($nub, this.settings.tip_settings.nub_position, 'left');
-
-          } else if (this.left()) {
-
-            this.settings.$next_tip.css({
-              top: this.settings.$target.offset().top,
-              left: (this.settings.$target.offset().left - this.outerWidth(this.settings.$next_tip) - nub_width)});
-
-            this.nub_position($nub, this.settings.tip_settings.nub_position, 'right');
-
+        if (this.bottom()) {
+          var leftOffset = this.settings.$target.offset().left;
+          if (Foundation.rtl) {
+            leftOffset = this.settings.$target.offset().width - this.settings.$next_tip.width() + leftOffset;
           }
+          this.settings.$next_tip.css({
+            top: (this.settings.$target.offset().top + nub_height + this.settings.$target.outerHeight()),
+            left: leftOffset});
 
-          if (!this.visible(this.corners(this.settings.$next_tip)) && this.settings.attempts < this.settings.tip_settings.tip_location_pattern.length) {
+          this.nub_position($nub, this.settings.tip_settings.nub_position, 'top');
 
-            $nub.removeClass('bottom')
+        } else if (this.top()) {
+          var leftOffset = this.settings.$target.offset().left;
+          if (Foundation.rtl) {
+            leftOffset = this.settings.$target.offset().width - this.settings.$next_tip.width() + leftOffset;
+          }
+          this.settings.$next_tip.css({
+            top: (this.settings.$target.offset().top - this.settings.$next_tip.outerHeight() - nub_height),
+            left: leftOffset});
+
+          this.nub_position($nub, this.settings.tip_settings.nub_position, 'bottom');
+
+        } else if (this.right()) {
+
+          this.settings.$next_tip.css({
+            top: this.settings.$target.offset().top,
+            left: (this.outerWidth(this.settings.$target) + this.settings.$target.offset().left + nub_width)});
+
+          this.nub_position($nub, this.settings.tip_settings.nub_position, 'left');
+
+        } else if (this.left()) {
+
+          this.settings.$next_tip.css({
+            top: this.settings.$target.offset().top,
+            left: (this.settings.$target.offset().left - this.outerWidth(this.settings.$next_tip) - nub_width)});
+
+          this.nub_position($nub, this.settings.tip_settings.nub_position, 'right');
+
+        }
+
+        if (!this.visible(this.corners(this.settings.$next_tip)) && this.settings.attempts < this.settings.tip_settings.tip_location_pattern.length) {
+
+          $nub.removeClass('bottom')
               .removeClass('top')
               .removeClass('right')
               .removeClass('left');
 
-            this.settings.tip_settings.tip_location = this.settings.tip_settings.tip_location_pattern[this.settings.attempts];
+          this.settings.tip_settings.tip_location = this.settings.tip_settings.tip_location_pattern[this.settings.attempts];
 
-            this.settings.attempts++;
+          this.settings.attempts++;
 
-            this.pos_default();
+          this.pos_default();
 
-          }
+        }
 
       } else if (this.settings.$li.length) {
 
@@ -2139,9 +2139,9 @@
           toggle = init || false;
 
       $nub.removeClass('bottom')
-        .removeClass('top')
-        .removeClass('right')
-        .removeClass('left');
+          .removeClass('top')
+          .removeClass('right')
+          .removeClass('left');
 
       if (toggle) {
         this.settings.$next_tip.css('visibility', 'hidden');
@@ -2152,8 +2152,8 @@
 
         if (this.top()) {
 
-            this.settings.$next_tip.offset({top: this.settings.$target.offset().top - tip_height - nub_height});
-            $nub.addClass('bottom');
+          this.settings.$next_tip.offset({top: this.settings.$target.offset().top - tip_height - nub_height});
+          $nub.addClass('bottom');
 
         } else {
 
@@ -2187,9 +2187,9 @@
         }
 
         if (/pop/i.test(this.settings.tip_animation)) {
-            joyridemodalbg.show();
+          joyridemodalbg.show();
         } else {
-            joyridemodalbg.fadeIn(this.settings.tip_animation_fade_speed);
+          joyridemodalbg.fadeIn(this.settings.tip_animation_fade_speed);
         }
       }
     },
@@ -2381,7 +2381,7 @@
     corners : function (el) {
       var w = $(window),
           window_half = w.height() / 2,
-          //using this to calculate since scroll may not have finished yet.
+      //using this to calculate since scroll may not have finished yet.
           tipOffset = Math.ceil(this.settings.$target.offset().top - window_half + this.settings.$next_tip.outerHeight()),
           right = w.width() + w.scrollLeft(),
           offsetBottom =  w.height() + tipOffset,
@@ -2497,61 +2497,61 @@
       var self = this;
 
       $(this.scope)
-        .off('.magellan')
-        .on('arrival.fndtn.magellan', '[data-magellan-arrival]', function (e) {
-          var $destination = $(this),
-              $expedition = $destination.closest('[data-magellan-expedition]'),
-              active_class = $expedition.attr('data-magellan-active-class')
-                || self.settings.active_class;
+          .off('.magellan')
+          .on('arrival.fndtn.magellan', '[data-magellan-arrival]', function (e) {
+            var $destination = $(this),
+                $expedition = $destination.closest('[data-magellan-expedition]'),
+                active_class = $expedition.attr('data-magellan-active-class')
+                    || self.settings.active_class;
 
             $destination
-              .closest('[data-magellan-expedition]')
-              .find('[data-magellan-arrival]')
-              .not($destination)
-              .removeClass(active_class);
+                .closest('[data-magellan-expedition]')
+                .find('[data-magellan-arrival]')
+                .not($destination)
+                .removeClass(active_class);
             $destination.addClass(active_class);
-        });
+          });
 
       this.fixed_magellan
-        .off('.magellan')
-        .on('update-position.fndtn.magellan', function() {
-          var $el = $(this);
-        })
-        .trigger('update-position');
+          .off('.magellan')
+          .on('update-position.fndtn.magellan', function() {
+            var $el = $(this);
+          })
+          .trigger('update-position');
 
       $(window)
-        .off('.magellan')
-        .on('resize.fndtn.magellan', function() {
-          this.fixed_magellan.trigger('update-position');
-        }.bind(this))
-        .on('scroll.fndtn.magellan', function() {
-          var windowScrollTop = $(window).scrollTop();
-          self.fixed_magellan.each(function() {
-            var $expedition = $(this);
-            if (typeof $expedition.data('magellan-top-offset') === 'undefined') {
-              $expedition.data('magellan-top-offset', $expedition.offset().top);
-            }
-            if (typeof $expedition.data('magellan-fixed-position') === 'undefined') {
-              $expedition.data('magellan-fixed-position', false);
-            }
-            var fixed_position = (windowScrollTop + self.settings.threshold) > $expedition.data("magellan-top-offset");
-            var attr = $expedition.attr('data-magellan-top-offset');
+          .off('.magellan')
+          .on('resize.fndtn.magellan', function() {
+            this.fixed_magellan.trigger('update-position');
+          }.bind(this))
+          .on('scroll.fndtn.magellan', function() {
+            var windowScrollTop = $(window).scrollTop();
+            self.fixed_magellan.each(function() {
+              var $expedition = $(this);
+              if (typeof $expedition.data('magellan-top-offset') === 'undefined') {
+                $expedition.data('magellan-top-offset', $expedition.offset().top);
+              }
+              if (typeof $expedition.data('magellan-fixed-position') === 'undefined') {
+                $expedition.data('magellan-fixed-position', false);
+              }
+              var fixed_position = (windowScrollTop + self.settings.threshold) > $expedition.data("magellan-top-offset");
+              var attr = $expedition.attr('data-magellan-top-offset');
 
-            if ($expedition.data("magellan-fixed-position") != fixed_position) {
-              $expedition.data("magellan-fixed-position", fixed_position);
-              if (fixed_position) {
-                $expedition.addClass('fixed');
-                $expedition.css({position:"fixed", top:0});
-              } else {
-                $expedition.removeClass('fixed');
-                $expedition.css({position:"", top:""});
+              if ($expedition.data("magellan-fixed-position") != fixed_position) {
+                $expedition.data("magellan-fixed-position", fixed_position);
+                if (fixed_position) {
+                  $expedition.addClass('fixed');
+                  $expedition.css({position:"fixed", top:0});
+                } else {
+                  $expedition.removeClass('fixed');
+                  $expedition.css({position:"", top:""});
+                }
+                if (fixed_position && typeof attr != 'undefined' && attr != false) {
+                  $expedition.css({position:"fixed", top:attr + "px"});
+                }
               }
-              if (fixed_position && typeof attr != 'undefined' && attr != false) {
-                $expedition.css({position:"fixed", top:attr + "px"});
-              }
-            }
+            });
           });
-        });
 
 
       if (this.last_destination.length > 0) {
@@ -2579,7 +2579,7 @@
     set_threshold : function () {
       if (typeof this.settings.threshold !== 'number') {
         this.settings.threshold = (this.fixed_magellan.length > 0) ?
-          this.fixed_magellan.outerHeight(true) : 0;
+            this.fixed_magellan.outerHeight(true) : 0;
       }
     },
 
@@ -2608,22 +2608,22 @@
 
     events : function () {
       $(this.scope).off('.offcanvas')
-        .on('click.fndtn.offcanvas', '.left-off-canvas-toggle', function (e) {
-          e.preventDefault();
-          $(this).closest('.off-canvas-wrap').toggleClass('move-right');
-        })
-        .on('click.fndtn.offcanvas', '.exit-off-canvas', function (e) {
-          e.preventDefault();
-          $(".off-canvas-wrap").removeClass("move-right");
-        })
-        .on('click.fndtn.offcanvas', '.right-off-canvas-toggle', function (e) {
-          e.preventDefault();
-          $(this).closest(".off-canvas-wrap").toggleClass("move-left");
-        })
-        .on('click.fndtn.offcanvas', '.exit-off-canvas', function (e) {
-          e.preventDefault();
-          $(".off-canvas-wrap").removeClass("move-left");
-        });
+          .on('click.fndtn.offcanvas', '.left-off-canvas-toggle', function (e) {
+            e.preventDefault();
+            $(this).closest('.off-canvas-wrap').toggleClass('move-right');
+          })
+          .on('click.fndtn.offcanvas', '.exit-off-canvas', function (e) {
+            e.preventDefault();
+            $(".off-canvas-wrap").removeClass("move-right");
+          })
+          .on('click.fndtn.offcanvas', '.right-off-canvas-toggle', function (e) {
+            e.preventDefault();
+            $(this).closest(".off-canvas-wrap").toggleClass("move-left");
+          })
+          .on('click.fndtn.offcanvas', '.exit-off-canvas', function (e) {
+            e.preventDefault();
+            $(".off-canvas-wrap").removeClass("move-left");
+          });
     },
 
     reflow : function () {}
@@ -2675,7 +2675,7 @@
       slides_container.wrap('<div class="'+settings.container_class+'"></div>');
       container = slides_container.parent();
       slides_container.addClass(settings.slides_container_class);
-      
+
       if (settings.navigation_arrows) {
         container.append($('<a href="#"><span></span></a>').addClass(settings.prev_class));
         container.append($('<a href="#"><span></span></a>').addClass(settings.next_class));
@@ -2724,7 +2724,7 @@
       if (next_idx < idx) {dir = 'prev';}
       if (next_idx >= slides.length) {next_idx = 0;}
       else if (next_idx < 0) {next_idx = slides.length - 1;}
-      
+
       var current = $(slides.get(idx));
       var next = $(slides.get(next_idx));
 
@@ -2735,7 +2735,7 @@
       slides_container.trigger('before-slide-change.fndtn.orbit');
       settings.before_slide_change();
       self.update_active_link(next_idx);
-      
+
       var callback = function() {
         var unlock = function() {
           idx = next_idx;
@@ -2756,7 +2756,7 @@
 
       var start_animation = function() {
         if (dir === 'next') {animate.next(current, next, callback);}
-        if (dir === 'prev') {animate.prev(current, next, callback);}        
+        if (dir === 'prev') {animate.prev(current, next, callback);}
       };
 
       if (next.height() > slides_container.height() && settings.variable_height) {
@@ -2765,13 +2765,13 @@
         start_animation();
       }
     };
-    
+
     self.next = function(e) {
       e.stopImmediatePropagation();
       e.preventDefault();
       self._goto(idx + 1);
     };
-    
+
     self.prev = function(e) {
       e.stopImmediatePropagation();
       e.preventDefault();
@@ -2797,7 +2797,7 @@
     self.timer_callback = function() {
       self._goto(idx + 1, true);
     }
-    
+
     self.compute_dimensions = function() {
       var current = $(slides_container.children().get(idx));
       var h = current.height();
@@ -2811,9 +2811,9 @@
 
     self.create_timer = function() {
       var t = new Timer(
-        container.find('.'+settings.timer_container_class), 
-        settings, 
-        self.timer_callback
+          container.find('.'+settings.timer_container_class),
+          settings,
+          self.timer_callback
       );
       return t;
     };
@@ -2826,7 +2826,7 @@
       var t = container.find('.'+settings.timer_container_class);
       if (t.hasClass(settings.timer_paused_class)) {
         if (typeof timer === 'undefined') {timer = self.create_timer();}
-        timer.start();     
+        timer.start();
       }
       else {
         if (typeof timer === 'object') {timer.stop();}
@@ -2837,62 +2837,62 @@
       self.build_markup();
       if (settings.timer) {timer = self.create_timer(); timer.start();}
       animate = new FadeAnimation(settings, slides_container);
-      if (settings.animation === 'slide') 
-        animate = new SlideAnimation(settings, slides_container);        
+      if (settings.animation === 'slide')
+        animate = new SlideAnimation(settings, slides_container);
       container.on('click', '.'+settings.next_class, self.next);
       container.on('click', '.'+settings.prev_class, self.prev);
       container.on('click', '[data-orbit-slide]', self.link_bullet);
       container.on('click', self.toggle_timer);
       if (settings.swipe) {
         container.on('touchstart.fndtn.orbit', function(e) {
-          if (!e.touches) {e = e.originalEvent;}
-          var data = {
-            start_page_x: e.touches[0].pageX,
-            start_page_y: e.touches[0].pageY,
-            start_time: (new Date()).getTime(),
-            delta_x: 0,
-            is_scrolling: undefined
-          };
-          container.data('swipe-transition', data);
-          e.stopPropagation();
-        })
-        .on('touchmove.fndtn.orbit', function(e) {
-          if (!e.touches) { e = e.originalEvent; }
-          // Ignore pinch/zoom events
-          if(e.touches.length > 1 || e.scale && e.scale !== 1) return;
+              if (!e.touches) {e = e.originalEvent;}
+              var data = {
+                start_page_x: e.touches[0].pageX,
+                start_page_y: e.touches[0].pageY,
+                start_time: (new Date()).getTime(),
+                delta_x: 0,
+                is_scrolling: undefined
+              };
+              container.data('swipe-transition', data);
+              e.stopPropagation();
+            })
+            .on('touchmove.fndtn.orbit', function(e) {
+              if (!e.touches) { e = e.originalEvent; }
+              // Ignore pinch/zoom events
+              if(e.touches.length > 1 || e.scale && e.scale !== 1) return;
 
-          var data = container.data('swipe-transition');
-          if (typeof data === 'undefined') {data = {};}
+              var data = container.data('swipe-transition');
+              if (typeof data === 'undefined') {data = {};}
 
-          data.delta_x = e.touches[0].pageX - data.start_page_x;
+              data.delta_x = e.touches[0].pageX - data.start_page_x;
 
-          if ( typeof data.is_scrolling === 'undefined') {
-            data.is_scrolling = !!( data.is_scrolling || Math.abs(data.delta_x) < Math.abs(e.touches[0].pageY - data.start_page_y) );
-          }
+              if ( typeof data.is_scrolling === 'undefined') {
+                data.is_scrolling = !!( data.is_scrolling || Math.abs(data.delta_x) < Math.abs(e.touches[0].pageY - data.start_page_y) );
+              }
 
-          if (!data.is_scrolling && !data.active) {
-            e.preventDefault();
-            var direction = (data.delta_x < 0) ? (idx+1) : (idx-1);
-            data.active = true;
-            self._goto(direction);
-          }
-        })
-        .on('touchend.fndtn.orbit', function(e) {
-          container.data('swipe-transition', {});
-          e.stopPropagation();
-        })
+              if (!data.is_scrolling && !data.active) {
+                e.preventDefault();
+                var direction = (data.delta_x < 0) ? (idx+1) : (idx-1);
+                data.active = true;
+                self._goto(direction);
+              }
+            })
+            .on('touchend.fndtn.orbit', function(e) {
+              container.data('swipe-transition', {});
+              e.stopPropagation();
+            })
       }
       container.on('mouseenter.fndtn.orbit', function(e) {
-        if (settings.timer && settings.pause_on_hover) {
-          self.stop_timer();
-        }
-      })
-      .on('mouseleave.fndtn.orbit', function(e) {
-        if (settings.timer && settings.resume_on_mouseout) {
-          timer.start();
-        }
-      });
-      
+            if (settings.timer && settings.pause_on_hover) {
+              self.stop_timer();
+            }
+          })
+          .on('mouseleave.fndtn.orbit', function(e) {
+            if (settings.timer && settings.resume_on_mouseout) {
+              timer.start();
+            }
+          });
+
       $(document).on('click', '[data-orbit-link]', self.link_custom);
       $(window).on('resize', self.compute_dimensions);
       $(window).on('load', self.compute_dimensions);
@@ -2909,7 +2909,7 @@
     var self = this,
         duration = settings.timer_speed,
         progress = el.find('.'+settings.timer_progress_class),
-        start, 
+        start,
         timeout,
         left = -1;
 
@@ -2952,7 +2952,7 @@
       el.trigger('timer-stopped.fndtn.orbit');
     };
   };
-  
+
   var SlideAnimation = function(settings, container) {
     var duration = settings.animation_speed;
     var is_rtl = ($('html[dir=rtl]').length === 1);
@@ -3061,7 +3061,7 @@
     }
   };
 
-    
+
 }(jQuery, this, this.document));
 
 ;(function ($, window, document, undefined) {
@@ -3110,63 +3110,63 @@
       var self = this;
 
       $('[data-reveal-id]', this.scope)
-        .off('.reveal')
-        .on('click.fndtn.reveal', function (e) {
-          e.preventDefault();
+          .off('.reveal')
+          .on('click.fndtn.reveal', function (e) {
+            e.preventDefault();
 
-          if (!self.locked) {
-            var element = $(this),
-                ajax = element.data('reveal-ajax');
+            if (!self.locked) {
+              var element = $(this),
+                  ajax = element.data('reveal-ajax');
 
-            self.locked = true;
+              self.locked = true;
 
-            if (typeof ajax === 'undefined') {
-              self.open.call(self, element);
-            } else {
-              var url = ajax === true ? element.attr('href') : ajax;
+              if (typeof ajax === 'undefined') {
+                self.open.call(self, element);
+              } else {
+                var url = ajax === true ? element.attr('href') : ajax;
 
-              self.open.call(self, element, {url: url});
+                self.open.call(self, element, {url: url});
+              }
             }
-          }
-        });
+          });
 
       $(this.scope)
-        .off('.reveal')
-        .on('click.fndtn.reveal', this.close_targets(), function (e) {
+          .off('.reveal')
+          .on('click.fndtn.reveal', this.close_targets(), function (e) {
 
-          e.preventDefault();
+            e.preventDefault();
 
-          if (!self.locked) {
-            var settings = $('[data-reveal].open').data('reveal-init'),
-                bg_clicked = $(e.target)[0] === $('.' + settings.bg_class)[0];
+            if (!self.locked) {
+              var settings = $('[data-reveal].open').data('reveal-init'),
+                  bg_clicked = $(e.target)[0] === $('.' + settings.bg_class)[0];
 
-            if (bg_clicked && !settings.close_on_background_click) {
-              return;
+              if (bg_clicked && !settings.close_on_background_click) {
+                return;
+              }
+
+              self.locked = true;
+              self.close.call(self, bg_clicked ? $('[data-reveal].open') : $(this).closest('[data-reveal]'));
             }
-
-            self.locked = true;
-            self.close.call(self, bg_clicked ? $('[data-reveal].open') : $(this).closest('[data-reveal]'));
-          }
-        });
+          });
 
       if($('[data-reveal]', this.scope).length > 0) {
         $(this.scope)
-          // .off('.reveal')
-          .on('open.fndtn.reveal', this.settings.open)
-          .on('opened.fndtn.reveal', this.settings.opened)
-          .on('opened.fndtn.reveal', this.open_video)
-          .on('close.fndtn.reveal', this.settings.close)
-          .on('closed.fndtn.reveal', this.settings.closed)
-          .on('closed.fndtn.reveal', this.close_video);
+        // .off('.reveal')
+            .on('open.fndtn.reveal', this.settings.open)
+            .on('opened.fndtn.reveal', this.settings.opened)
+            .on('opened.fndtn.reveal', this.open_video)
+            .on('close.fndtn.reveal', this.settings.close)
+            .on('closed.fndtn.reveal', this.settings.closed)
+            .on('closed.fndtn.reveal', this.close_video);
       } else {
         $(this.scope)
-          // .off('.reveal')
-          .on('open.fndtn.reveal', '[data-reveal]', this.settings.open)
-          .on('opened.fndtn.reveal', '[data-reveal]', this.settings.opened)
-          .on('opened.fndtn.reveal', '[data-reveal]', this.open_video)
-          .on('close.fndtn.reveal', '[data-reveal]', this.settings.close)
-          .on('closed.fndtn.reveal', '[data-reveal]', this.settings.closed)
-          .on('closed.fndtn.reveal', '[data-reveal]', this.close_video);
+        // .off('.reveal')
+            .on('open.fndtn.reveal', '[data-reveal]', this.settings.open)
+            .on('opened.fndtn.reveal', '[data-reveal]', this.settings.opened)
+            .on('opened.fndtn.reveal', '[data-reveal]', this.open_video)
+            .on('close.fndtn.reveal', '[data-reveal]', this.settings.close)
+            .on('closed.fndtn.reveal', '[data-reveal]', this.settings.closed)
+            .on('closed.fndtn.reveal', '[data-reveal]', this.close_video);
       }
 
       $('body').on('keyup.fndtn.reveal', function ( event ) {
@@ -3198,7 +3198,7 @@
 
         if (typeof modal.data('css-top') === 'undefined') {
           modal.data('css-top', parseInt(modal.css('top'), 10))
-            .data('offset', this.cache_offset(modal));
+              .data('offset', this.cache_offset(modal));
         }
 
         modal.trigger('open');
@@ -3259,7 +3259,7 @@
     toggle_bg : function () {
       if ($('.' + this.settings.bg_class).length === 0) {
         this.settings.bg = $('<div />', {'class': this.settings.bg_class})
-          .appendTo('body');
+            .appendTo('body');
       }
 
       if (this.settings.bg.filter(':visible').length > 0) {
@@ -3291,12 +3291,12 @@
 
           return this.delay(function () {
             return el
-              .css(css)
-              .animate(end_css, this.settings.animation_speed, 'linear', function () {
-                this.locked = false;
-                el.trigger('opened');
-              }.bind(this))
-              .addClass('open');
+                .css(css)
+                .animate(end_css, this.settings.animation_speed, 'linear', function () {
+                  this.locked = false;
+                  el.trigger('opened');
+                }.bind(this))
+                .addClass('open');
           }.bind(this), this.settings.animation_speed / 2);
         }
 
@@ -3305,12 +3305,12 @@
 
           return this.delay(function () {
             return el
-              .css(css)
-              .animate(end_css, this.settings.animation_speed, 'linear', function () {
-                this.locked = false;
-                el.trigger('opened');
-              }.bind(this))
-              .addClass('open');
+                .css(css)
+                .animate(end_css, this.settings.animation_speed, 'linear', function () {
+                  this.locked = false;
+                  el.trigger('opened');
+                }.bind(this))
+                .addClass('open');
           }.bind(this), this.settings.animation_speed / 2);
         }
 
@@ -3336,11 +3336,11 @@
 
           return this.delay(function () {
             return el
-              .animate(end_css, this.settings.animation_speed, 'linear', function () {
-                this.locked = false;
-                el.css(css).trigger('closed');
-              }.bind(this))
-              .removeClass('open');
+                .animate(end_css, this.settings.animation_speed, 'linear', function () {
+                  this.locked = false;
+                  el.css(css).trigger('closed');
+                }.bind(this))
+                .removeClass('open');
           }.bind(this), this.settings.animation_speed / 2);
         }
 
@@ -3349,11 +3349,11 @@
 
           return this.delay(function () {
             return el
-              .animate(end_css, this.settings.animation_speed, 'linear', function () {
-                this.locked = false;
-                el.css(css).trigger('closed');
-              }.bind(this))
-              .removeClass('open');
+                .animate(end_css, this.settings.animation_speed, 'linear', function () {
+                  this.locked = false;
+                  el.css(css).trigger('closed');
+                }.bind(this))
+                .removeClass('open');
           }.bind(this), this.settings.animation_speed / 2);
         }
 
@@ -3465,9 +3465,9 @@
       touch_close_text: 'Tap To Close',
       disable_for_touch: false,
       tip_template : function (selector, content) {
-        return '<span data-selector="' + selector + '" class="' 
-          + Foundation.libs.tooltip.settings.tooltip_class.substring(1) 
-          + '">' + content + '<span class="nub"></span></span>';
+        return '<span data-selector="' + selector + '" class="'
+            + Foundation.libs.tooltip.settings.tooltip_class.substring(1)
+            + '">' + content + '<span class="nub"></span></span>';
       }
     },
 
@@ -3482,34 +3482,34 @@
 
       if (Modernizr.touch) {
         $(this.scope)
-          .off('.tooltip')
-          .on('click.fndtn.tooltip touchstart.fndtn.tooltip touchend.fndtn.tooltip', 
-            '[data-tooltip]', function (e) {
-            var settings = $.extend({}, self.settings, self.data_options($(this)));
-            if (!settings.disable_for_touch) {
-              e.preventDefault();
-              $(settings.tooltip_class).hide();
-              self.showOrCreateTip($(this));
-            }
-          })
-          .on('click.fndtn.tooltip touchstart.fndtn.tooltip touchend.fndtn.tooltip', 
-            this.settings.tooltip_class, function (e) {
-            e.preventDefault();
-            $(this).fadeOut(150);
-          });
+            .off('.tooltip')
+            .on('click.fndtn.tooltip touchstart.fndtn.tooltip touchend.fndtn.tooltip',
+                '[data-tooltip]', function (e) {
+                  var settings = $.extend({}, self.settings, self.data_options($(this)));
+                  if (!settings.disable_for_touch) {
+                    e.preventDefault();
+                    $(settings.tooltip_class).hide();
+                    self.showOrCreateTip($(this));
+                  }
+                })
+            .on('click.fndtn.tooltip touchstart.fndtn.tooltip touchend.fndtn.tooltip',
+                this.settings.tooltip_class, function (e) {
+                  e.preventDefault();
+                  $(this).fadeOut(150);
+                });
       } else {
         $(this.scope)
-          .off('.tooltip')
-          .on('mouseenter.fndtn.tooltip mouseleave.fndtn.tooltip', 
-            '[data-tooltip]', function (e) {
-            var $this = $(this);
+            .off('.tooltip')
+            .on('mouseenter.fndtn.tooltip mouseleave.fndtn.tooltip',
+                '[data-tooltip]', function (e) {
+                  var $this = $(this);
 
-            if (/enter|over/i.test(e.type)) {
-              self.showOrCreateTip($this);
-            } else if (e.type === 'mouseout' || e.type === 'mouseleave') {
-              self.hide($this);
-            }
-          });
+                  if (/enter|over/i.test(e.type)) {
+                    self.showOrCreateTip($this);
+                  } else if (e.type === 'mouseout' || e.type === 'mouseleave') {
+                    self.hide($this);
+                  }
+                });
       }
     },
 
@@ -3593,13 +3593,13 @@
         tip.removeClass('tip-override');
         if (classes && classes.indexOf('tip-top') > -1) {
           objPos(tip, (target.offset().top - tip.outerHeight()), 'auto', 'auto', left, width)
-            .removeClass('tip-override');
+              .removeClass('tip-override');
         } else if (classes && classes.indexOf('tip-left') > -1) {
           objPos(tip, (target.offset().top + (target.outerHeight() / 2) - nubHeight*2.5), 'auto', 'auto', (target.offset().left - tip.outerWidth() - nubHeight), width)
-            .removeClass('tip-override');
+              .removeClass('tip-override');
         } else if (classes && classes.indexOf('tip-right') > -1) {
           objPos(tip, (target.offset().top + (target.outerHeight() / 2) - nubHeight*2.5), 'auto', 'auto', (target.offset().left + target.outerWidth() + nubHeight), width)
-            .removeClass('tip-override');
+              .removeClass('tip-override');
         }
       }
 
@@ -3741,8 +3741,8 @@
         topbar.data('index', 0);
 
         topbar
-          .toggleClass('expanded')
-          .css('height', '');
+            .toggleClass('expanded')
+            .css('height', '');
       }
 
       if (settings.scrolltop) {
@@ -3760,7 +3760,7 @@
 
             window.scrollTo(0,0);
           } else {
-              topbar.parent().removeClass('expanded');
+            topbar.parent().removeClass('expanded');
           }
         }
       } else {
@@ -3786,69 +3786,69 @@
     events : function (bar) {
       var self = this;
       $(this.scope)
-        .off('.topbar')
-        .on('click.fndtn.topbar', '[data-topbar] .toggle-topbar', function (e) {
-          e.preventDefault();
-          self.toggle(this);
-        })
-        .on('click.fndtn.topbar', '[data-topbar] li.has-dropdown', function (e) {
-          var li = $(this),
-              target = $(e.target),
-              topbar = li.closest('[data-topbar]'),
-              settings = topbar.data('topbar-init');
-
-          if(target.data('revealId')) {
-            self.toggle();
-            return;
-          }
-
-          if (self.breakpoint()) return;
-          if (settings.is_hover && !Modernizr.touch) return;
-
-          e.stopImmediatePropagation();
-
-          if (li.hasClass('hover')) {
-            li
-              .removeClass('hover')
-              .find('li')
-              .removeClass('hover');
-
-            li.parents('li.hover')
-              .removeClass('hover');
-          } else {
-            li.addClass('hover');
-
-            if (target[0].nodeName === 'A' && target.parent().hasClass('has-dropdown')) {
-              e.preventDefault();
-            }
-          }
-        })
-        .on('click.fndtn.topbar', '[data-topbar] .has-dropdown>a', function (e) {
-          if (self.breakpoint()) {
-
+          .off('.topbar')
+          .on('click.fndtn.topbar', '[data-topbar] .toggle-topbar', function (e) {
             e.preventDefault();
+            self.toggle(this);
+          })
+          .on('click.fndtn.topbar', '[data-topbar] li.has-dropdown', function (e) {
+            var li = $(this),
+                target = $(e.target),
+                topbar = li.closest('[data-topbar]'),
+                settings = topbar.data('topbar-init');
 
-            var $this = $(this),
-                topbar = $this.closest('[data-topbar]'),
-                section = topbar.find('section, .section'),
-                dropdownHeight = $this.next('.dropdown').outerHeight(),
-                $selectedLi = $this.closest('li');
-
-            topbar.data('index', topbar.data('index') + 1);
-            $selectedLi.addClass('moved');
-
-            if (!self.rtl) {
-              section.css({left: -(100 * topbar.data('index')) + '%'});
-              section.find('>.name').css({left: 100 * topbar.data('index') + '%'});
-            } else {
-              section.css({right: -(100 * topbar.data('index')) + '%'});
-              section.find('>.name').css({right: 100 * topbar.data('index') + '%'});
+            if(target.data('revealId')) {
+              self.toggle();
+              return;
             }
 
-            topbar.css('height', $this.siblings('ul').outerHeight(true) + topbar.data('height'));
-          }
-        });
-      
+            if (self.breakpoint()) return;
+            if (settings.is_hover && !Modernizr.touch) return;
+
+            e.stopImmediatePropagation();
+
+            if (li.hasClass('hover')) {
+              li
+                  .removeClass('hover')
+                  .find('li')
+                  .removeClass('hover');
+
+              li.parents('li.hover')
+                  .removeClass('hover');
+            } else {
+              li.addClass('hover');
+
+              if (target[0].nodeName === 'A' && target.parent().hasClass('has-dropdown')) {
+                e.preventDefault();
+              }
+            }
+          })
+          .on('click.fndtn.topbar', '[data-topbar] .has-dropdown>a', function (e) {
+            if (self.breakpoint()) {
+
+              e.preventDefault();
+
+              var $this = $(this),
+                  topbar = $this.closest('[data-topbar]'),
+                  section = topbar.find('section, .section'),
+                  dropdownHeight = $this.next('.dropdown').outerHeight(),
+                  $selectedLi = $this.closest('li');
+
+              topbar.data('index', topbar.data('index') + 1);
+              $selectedLi.addClass('moved');
+
+              if (!self.rtl) {
+                section.css({left: -(100 * topbar.data('index')) + '%'});
+                section.find('>.name').css({left: 100 * topbar.data('index') + '%'});
+              } else {
+                section.css({right: -(100 * topbar.data('index')) + '%'});
+                section.find('>.name').css({right: 100 * topbar.data('index') + '%'});
+              }
+
+              topbar.css('height', $this.siblings('ul').outerHeight(true) + topbar.data('height'));
+            }
+          });
+
       $(window).off('.topbar').on('resize.fndtn.topbar', self.throttle(function () {
         self.resize.call(self);
       }, 50)).trigger('resize');
@@ -3908,14 +3908,14 @@
         if (!self.breakpoint()) {
           var doToggle = topbar.hasClass('expanded');
           topbar
-            .css('height', '')
-            .removeClass('expanded')
-            .find('li')
-            .removeClass('hover');
+              .css('height', '')
+              .removeClass('expanded')
+              .find('li')
+              .removeClass('hover');
 
-            if(doToggle) {
-              self.toggle(topbar);
-            }
+          if(doToggle) {
+            self.toggle(topbar);
+          }
         }
 
         if(stickyContainer.length > 0) {
@@ -4060,107 +4060,107 @@
 
 window.Modernizr = (function( window, document, undefined ) {
 
-    var version = '2.7.1',
+  var version = '2.7.1',
 
-    Modernizr = {},
+      Modernizr = {},
 
-    /*>>cssclasses*/
-    // option for enabling the HTML classes to be added
-    enableClasses = true,
-    /*>>cssclasses*/
+  /*>>cssclasses*/
+  // option for enabling the HTML classes to be added
+      enableClasses = true,
+  /*>>cssclasses*/
 
-    docElement = document.documentElement,
+      docElement = document.documentElement,
 
-    /**
-     * Create our "modernizr" element that we do most feature tests on.
-     */
-    mod = 'modernizr',
-    modElem = document.createElement(mod),
-    mStyle = modElem.style,
+      /**
+       * Create our "modernizr" element that we do most feature tests on.
+       */
+      mod = 'modernizr',
+      modElem = document.createElement(mod),
+      mStyle = modElem.style,
 
-    /**
-     * Create the input element for various Web Forms feature tests.
-     */
-    inputElem /*>>inputelem*/ = document.createElement('input') /*>>inputelem*/ ,
+      /**
+       * Create the input element for various Web Forms feature tests.
+       */
+      inputElem /*>>inputelem*/ = document.createElement('input') /*>>inputelem*/ ,
 
-    /*>>smile*/
-    smile = ':)',
-    /*>>smile*/
+  /*>>smile*/
+      smile = ':)',
+  /*>>smile*/
 
-    toString = {}.toString,
+      toString = {}.toString,
 
-    // TODO :: make the prefixes more granular
-    /*>>prefixes*/
-    // List of property values to set for css tests. See ticket #21
-    prefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
-    /*>>prefixes*/
+  // TODO :: make the prefixes more granular
+  /*>>prefixes*/
+  // List of property values to set for css tests. See ticket #21
+      prefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
+  /*>>prefixes*/
 
-    /*>>domprefixes*/
-    // Following spec is to expose vendor-specific style properties as:
-    //   elem.style.WebkitBorderRadius
-    // and the following would be incorrect:
-    //   elem.style.webkitBorderRadius
+  /*>>domprefixes*/
+  // Following spec is to expose vendor-specific style properties as:
+  //   elem.style.WebkitBorderRadius
+  // and the following would be incorrect:
+  //   elem.style.webkitBorderRadius
 
-    // Webkit ghosts their properties in lowercase but Opera & Moz do not.
-    // Microsoft uses a lowercase `ms` instead of the correct `Ms` in IE8+
-    //   erik.eae.net/archives/2008/03/10/21.48.10/
+  // Webkit ghosts their properties in lowercase but Opera & Moz do not.
+  // Microsoft uses a lowercase `ms` instead of the correct `Ms` in IE8+
+  //   erik.eae.net/archives/2008/03/10/21.48.10/
 
-    // More here: github.com/Modernizr/Modernizr/issues/issue/21
-    omPrefixes = 'Webkit Moz O ms',
+  // More here: github.com/Modernizr/Modernizr/issues/issue/21
+      omPrefixes = 'Webkit Moz O ms',
 
-    cssomPrefixes = omPrefixes.split(' '),
+      cssomPrefixes = omPrefixes.split(' '),
 
-    domPrefixes = omPrefixes.toLowerCase().split(' '),
-    /*>>domprefixes*/
+      domPrefixes = omPrefixes.toLowerCase().split(' '),
+  /*>>domprefixes*/
 
-    /*>>ns*/
-    ns = {'svg': 'http://www.w3.org/2000/svg'},
-    /*>>ns*/
+  /*>>ns*/
+      ns = {'svg': 'http://www.w3.org/2000/svg'},
+  /*>>ns*/
 
-    tests = {},
-    inputs = {},
-    attrs = {},
+      tests = {},
+      inputs = {},
+      attrs = {},
 
-    classes = [],
+      classes = [],
 
-    slice = classes.slice,
+      slice = classes.slice,
 
-    featureName, // used in testing loop
+      featureName, // used in testing loop
 
 
-    /*>>teststyles*/
-    // Inject element with style element and some CSS rules
-    injectElementWithStyles = function( rule, callback, nodes, testnames ) {
+  /*>>teststyles*/
+  // Inject element with style element and some CSS rules
+      injectElementWithStyles = function( rule, callback, nodes, testnames ) {
 
-      var style, ret, node, docOverflow,
-          div = document.createElement('div'),
-          // After page load injecting a fake body doesn't work so check if body exists
-          body = document.body,
-          // IE6 and 7 won't return offsetWidth or offsetHeight unless it's in the body element, so we fake it.
-          fakeBody = body || document.createElement('body');
+        var style, ret, node, docOverflow,
+            div = document.createElement('div'),
+        // After page load injecting a fake body doesn't work so check if body exists
+            body = document.body,
+        // IE6 and 7 won't return offsetWidth or offsetHeight unless it's in the body element, so we fake it.
+            fakeBody = body || document.createElement('body');
 
-      if ( parseInt(nodes, 10) ) {
+        if ( parseInt(nodes, 10) ) {
           // In order not to give false positives we create a node for each test
           // This also allows the method to scale for unspecified uses
           while ( nodes-- ) {
-              node = document.createElement('div');
-              node.id = testnames ? testnames[nodes] : mod + (nodes + 1);
-              div.appendChild(node);
+            node = document.createElement('div');
+            node.id = testnames ? testnames[nodes] : mod + (nodes + 1);
+            div.appendChild(node);
           }
-      }
+        }
 
-      // <style> elements in IE6-9 are considered 'NoScope' elements and therefore will be removed
-      // when injected with innerHTML. To get around this you need to prepend the 'NoScope' element
-      // with a 'scoped' element, in our case the soft-hyphen entity as it won't mess with our measurements.
-      // msdn.microsoft.com/en-us/library/ms533897%28VS.85%29.aspx
-      // Documents served as xml will throw if using &shy; so use xml friendly encoded version. See issue #277
-      style = ['&#173;','<style id="s', mod, '">', rule, '</style>'].join('');
-      div.id = mod;
-      // IE6 will false positive on some tests due to the style element inside the test div somehow interfering offsetHeight, so insert it into body or fakebody.
-      // Opera will act all quirky when injecting elements in documentElement when page is served as xml, needs fakebody too. #270
-      (body ? div : fakeBody).innerHTML += style;
-      fakeBody.appendChild(div);
-      if ( !body ) {
+        // <style> elements in IE6-9 are considered 'NoScope' elements and therefore will be removed
+        // when injected with innerHTML. To get around this you need to prepend the 'NoScope' element
+        // with a 'scoped' element, in our case the soft-hyphen entity as it won't mess with our measurements.
+        // msdn.microsoft.com/en-us/library/ms533897%28VS.85%29.aspx
+        // Documents served as xml will throw if using &shy; so use xml friendly encoded version. See issue #277
+        style = ['&#173;','<style id="s', mod, '">', rule, '</style>'].join('');
+        div.id = mod;
+        // IE6 will false positive on some tests due to the style element inside the test div somehow interfering offsetHeight, so insert it into body or fakebody.
+        // Opera will act all quirky when injecting elements in documentElement when page is served as xml, needs fakebody too. #270
+        (body ? div : fakeBody).innerHTML += style;
+        fakeBody.appendChild(div);
+        if ( !body ) {
           //avoid crashing IE8, if background image is used
           fakeBody.style.background = '';
           //Safari 5.13/5.1.4 OSX stops loading if ::-webkit-scrollbar is used and scrollbars are visible
@@ -4168,126 +4168,126 @@ window.Modernizr = (function( window, document, undefined ) {
           docOverflow = docElement.style.overflow;
           docElement.style.overflow = 'hidden';
           docElement.appendChild(fakeBody);
-      }
+        }
 
-      ret = callback(div, rule);
-      // If this is done after page load we don't want to remove the body so check if body exists
-      if ( !body ) {
+        ret = callback(div, rule);
+        // If this is done after page load we don't want to remove the body so check if body exists
+        if ( !body ) {
           fakeBody.parentNode.removeChild(fakeBody);
           docElement.style.overflow = docOverflow;
-      } else {
+        } else {
           div.parentNode.removeChild(div);
-      }
+        }
 
-      return !!ret;
+        return !!ret;
 
-    },
-    /*>>teststyles*/
+      },
+  /*>>teststyles*/
 
-    /*>>mq*/
-    // adapted from matchMedia polyfill
-    // by Scott Jehl and Paul Irish
-    // gist.github.com/786768
-    testMediaQuery = function( mq ) {
+  /*>>mq*/
+  // adapted from matchMedia polyfill
+  // by Scott Jehl and Paul Irish
+  // gist.github.com/786768
+      testMediaQuery = function( mq ) {
 
-      var matchMedia = window.matchMedia || window.msMatchMedia;
-      if ( matchMedia ) {
-        return matchMedia(mq).matches;
-      }
+        var matchMedia = window.matchMedia || window.msMatchMedia;
+        if ( matchMedia ) {
+          return matchMedia(mq).matches;
+        }
 
-      var bool;
+        var bool;
 
-      injectElementWithStyles('@media ' + mq + ' { #' + mod + ' { position: absolute; } }', function( node ) {
-        bool = (window.getComputedStyle ?
+        injectElementWithStyles('@media ' + mq + ' { #' + mod + ' { position: absolute; } }', function( node ) {
+          bool = (window.getComputedStyle ?
                   getComputedStyle(node, null) :
                   node.currentStyle)['position'] == 'absolute';
-      });
+        });
 
-      return bool;
+        return bool;
 
-     },
-     /*>>mq*/
+      },
+  /*>>mq*/
 
 
-    /*>>hasevent*/
-    //
-    // isEventSupported determines if a given element supports the given event
-    // kangax.github.com/iseventsupported/
-    //
-    // The following results are known incorrects:
-    //   Modernizr.hasEvent("webkitTransitionEnd", elem) // false negative
-    //   Modernizr.hasEvent("textInput") // in Webkit. github.com/Modernizr/Modernizr/issues/333
-    //   ...
-    isEventSupported = (function() {
+  /*>>hasevent*/
+  //
+  // isEventSupported determines if a given element supports the given event
+  // kangax.github.com/iseventsupported/
+  //
+  // The following results are known incorrects:
+  //   Modernizr.hasEvent("webkitTransitionEnd", elem) // false negative
+  //   Modernizr.hasEvent("textInput") // in Webkit. github.com/Modernizr/Modernizr/issues/333
+  //   ...
+      isEventSupported = (function() {
 
-      var TAGNAMES = {
-        'select': 'input', 'change': 'input',
-        'submit': 'form', 'reset': 'form',
-        'error': 'img', 'load': 'img', 'abort': 'img'
-      };
+        var TAGNAMES = {
+          'select': 'input', 'change': 'input',
+          'submit': 'form', 'reset': 'form',
+          'error': 'img', 'load': 'img', 'abort': 'img'
+        };
 
-      function isEventSupported( eventName, element ) {
+        function isEventSupported( eventName, element ) {
 
-        element = element || document.createElement(TAGNAMES[eventName] || 'div');
-        eventName = 'on' + eventName;
+          element = element || document.createElement(TAGNAMES[eventName] || 'div');
+          eventName = 'on' + eventName;
 
-        // When using `setAttribute`, IE skips "unload", WebKit skips "unload" and "resize", whereas `in` "catches" those
-        var isSupported = eventName in element;
+          // When using `setAttribute`, IE skips "unload", WebKit skips "unload" and "resize", whereas `in` "catches" those
+          var isSupported = eventName in element;
 
-        if ( !isSupported ) {
-          // If it has no `setAttribute` (i.e. doesn't implement Node interface), try generic element
-          if ( !element.setAttribute ) {
-            element = document.createElement('div');
-          }
-          if ( element.setAttribute && element.removeAttribute ) {
-            element.setAttribute(eventName, '');
-            isSupported = is(element[eventName], 'function');
-
-            // If property was created, "remove it" (by setting value to `undefined`)
-            if ( !is(element[eventName], 'undefined') ) {
-              element[eventName] = undefined;
+          if ( !isSupported ) {
+            // If it has no `setAttribute` (i.e. doesn't implement Node interface), try generic element
+            if ( !element.setAttribute ) {
+              element = document.createElement('div');
             }
-            element.removeAttribute(eventName);
+            if ( element.setAttribute && element.removeAttribute ) {
+              element.setAttribute(eventName, '');
+              isSupported = is(element[eventName], 'function');
+
+              // If property was created, "remove it" (by setting value to `undefined`)
+              if ( !is(element[eventName], 'undefined') ) {
+                element[eventName] = undefined;
+              }
+              element.removeAttribute(eventName);
+            }
           }
-        }
 
-        element = null;
-        return isSupported;
+          element = null;
+          return isSupported;
+        }
+        return isEventSupported;
+      })(),
+  /*>>hasevent*/
+
+  // TODO :: Add flag for hasownprop ? didn't last time
+
+  // hasOwnProperty shim by kangax needed for Safari 2.0 support
+      _hasOwnProperty = ({}).hasOwnProperty, hasOwnProp;
+
+  if ( !is(_hasOwnProperty, 'undefined') && !is(_hasOwnProperty.call, 'undefined') ) {
+    hasOwnProp = function (object, property) {
+      return _hasOwnProperty.call(object, property);
+    };
+  }
+  else {
+    hasOwnProp = function (object, property) { /* yes, this can give false positives/negatives, but most of the time we don't care about those */
+      return ((property in object) && is(object.constructor.prototype[property], 'undefined'));
+    };
+  }
+
+  // Adapted from ES5-shim https://github.com/kriskowal/es5-shim/blob/master/es5-shim.js
+  // es5.github.com/#x15.3.4.5
+
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function bind(that) {
+
+      var target = this;
+
+      if (typeof target != "function") {
+        throw new TypeError();
       }
-      return isEventSupported;
-    })(),
-    /*>>hasevent*/
 
-    // TODO :: Add flag for hasownprop ? didn't last time
-
-    // hasOwnProperty shim by kangax needed for Safari 2.0 support
-    _hasOwnProperty = ({}).hasOwnProperty, hasOwnProp;
-
-    if ( !is(_hasOwnProperty, 'undefined') && !is(_hasOwnProperty.call, 'undefined') ) {
-      hasOwnProp = function (object, property) {
-        return _hasOwnProperty.call(object, property);
-      };
-    }
-    else {
-      hasOwnProp = function (object, property) { /* yes, this can give false positives/negatives, but most of the time we don't care about those */
-        return ((property in object) && is(object.constructor.prototype[property], 'undefined'));
-      };
-    }
-
-    // Adapted from ES5-shim https://github.com/kriskowal/es5-shim/blob/master/es5-shim.js
-    // es5.github.com/#x15.3.4.5
-
-    if (!Function.prototype.bind) {
-      Function.prototype.bind = function bind(that) {
-
-        var target = this;
-
-        if (typeof target != "function") {
-            throw new TypeError();
-        }
-
-        var args = slice.call(arguments, 1),
-            bound = function () {
+      var args = slice.call(arguments, 1),
+          bound = function () {
 
             if (this instanceof bound) {
 
@@ -4300,7 +4300,7 @@ window.Modernizr = (function( window, document, undefined ) {
                   args.concat(slice.call(arguments))
               );
               if (Object(result) === result) {
-                  return result;
+                return result;
               }
               return self;
 
@@ -4313,1131 +4313,1131 @@ window.Modernizr = (function( window, document, undefined ) {
 
             }
 
-        };
+          };
 
-        return bound;
-      };
+      return bound;
+    };
+  }
+
+  /**
+   * setCss applies given styles to the Modernizr DOM node.
+   */
+  function setCss( str ) {
+    mStyle.cssText = str;
+  }
+
+  /**
+   * setCssAll extrapolates all vendor-specific css strings.
+   */
+  function setCssAll( str1, str2 ) {
+    return setCss(prefixes.join(str1 + ';') + ( str2 || '' ));
+  }
+
+  /**
+   * is returns a boolean for if typeof obj is exactly type.
+   */
+  function is( obj, type ) {
+    return typeof obj === type;
+  }
+
+  /**
+   * contains returns a boolean for if substr is found within str.
+   */
+  function contains( str, substr ) {
+    return !!~('' + str).indexOf(substr);
+  }
+
+  /*>>testprop*/
+
+  // testProps is a generic CSS / DOM property test.
+
+  // In testing support for a given CSS property, it's legit to test:
+  //    `elem.style[styleName] !== undefined`
+  // If the property is supported it will return an empty string,
+  // if unsupported it will return undefined.
+
+  // We'll take advantage of this quick test and skip setting a style
+  // on our modernizr element, but instead just testing undefined vs
+  // empty string.
+
+  // Because the testing of the CSS property names (with "-", as
+  // opposed to the camelCase DOM properties) is non-portable and
+  // non-standard but works in WebKit and IE (but not Gecko or Opera),
+  // we explicitly reject properties with dashes so that authors
+  // developing in WebKit or IE first don't end up with
+  // browser-specific content by accident.
+
+  function testProps( props, prefixed ) {
+    for ( var i in props ) {
+      var prop = props[i];
+      if ( !contains(prop, "-") && mStyle[prop] !== undefined ) {
+        return prefixed == 'pfx' ? prop : true;
+      }
     }
+    return false;
+  }
+  /*>>testprop*/
 
-    /**
-     * setCss applies given styles to the Modernizr DOM node.
-     */
-    function setCss( str ) {
-        mStyle.cssText = str;
-    }
+  // TODO :: add testDOMProps
+  /**
+   * testDOMProps is a generic DOM property test; if a browser supports
+   *   a certain property, it won't return undefined for it.
+   */
+  function testDOMProps( props, obj, elem ) {
+    for ( var i in props ) {
+      var item = obj[props[i]];
+      if ( item !== undefined) {
 
-    /**
-     * setCssAll extrapolates all vendor-specific css strings.
-     */
-    function setCssAll( str1, str2 ) {
-        return setCss(prefixes.join(str1 + ';') + ( str2 || '' ));
-    }
+        // return the property name as a string
+        if (elem === false) return props[i];
 
-    /**
-     * is returns a boolean for if typeof obj is exactly type.
-     */
-    function is( obj, type ) {
-        return typeof obj === type;
-    }
-
-    /**
-     * contains returns a boolean for if substr is found within str.
-     */
-    function contains( str, substr ) {
-        return !!~('' + str).indexOf(substr);
-    }
-
-    /*>>testprop*/
-
-    // testProps is a generic CSS / DOM property test.
-
-    // In testing support for a given CSS property, it's legit to test:
-    //    `elem.style[styleName] !== undefined`
-    // If the property is supported it will return an empty string,
-    // if unsupported it will return undefined.
-
-    // We'll take advantage of this quick test and skip setting a style
-    // on our modernizr element, but instead just testing undefined vs
-    // empty string.
-
-    // Because the testing of the CSS property names (with "-", as
-    // opposed to the camelCase DOM properties) is non-portable and
-    // non-standard but works in WebKit and IE (but not Gecko or Opera),
-    // we explicitly reject properties with dashes so that authors
-    // developing in WebKit or IE first don't end up with
-    // browser-specific content by accident.
-
-    function testProps( props, prefixed ) {
-        for ( var i in props ) {
-            var prop = props[i];
-            if ( !contains(prop, "-") && mStyle[prop] !== undefined ) {
-                return prefixed == 'pfx' ? prop : true;
-            }
+        // let's bind a function
+        if (is(item, 'function')){
+          // default to autobind unless override
+          return item.bind(elem || obj);
         }
-        return false;
+
+        // return the unbound function or obj or value
+        return item;
+      }
     }
-    /*>>testprop*/
+    return false;
+  }
 
-    // TODO :: add testDOMProps
-    /**
-     * testDOMProps is a generic DOM property test; if a browser supports
-     *   a certain property, it won't return undefined for it.
-     */
-    function testDOMProps( props, obj, elem ) {
-        for ( var i in props ) {
-            var item = obj[props[i]];
-            if ( item !== undefined) {
+  /*>>testallprops*/
+  /**
+   * testPropsAll tests a list of DOM properties we want to check against.
+   *   We specify literally ALL possible (known and/or likely) properties on
+   *   the element including the non-vendor prefixed one, for forward-
+   *   compatibility.
+   */
+  function testPropsAll( prop, prefixed, elem ) {
 
-                // return the property name as a string
-                if (elem === false) return props[i];
+    var ucProp  = prop.charAt(0).toUpperCase() + prop.slice(1),
+        props   = (prop + ' ' + cssomPrefixes.join(ucProp + ' ') + ucProp).split(' ');
 
-                // let's bind a function
-                if (is(item, 'function')){
-                  // default to autobind unless override
-                  return item.bind(elem || obj);
-                }
+    // did they call .prefixed('boxSizing') or are we just testing a prop?
+    if(is(prefixed, "string") || is(prefixed, "undefined")) {
+      return testProps(props, prefixed);
 
-                // return the unbound function or obj or value
-                return item;
-            }
-        }
-        return false;
+      // otherwise, they called .prefixed('requestAnimationFrame', window[, elem])
+    } else {
+      props = (prop + ' ' + (domPrefixes).join(ucProp + ' ') + ucProp).split(' ');
+      return testDOMProps(props, prefixed, elem);
     }
-
-    /*>>testallprops*/
-    /**
-     * testPropsAll tests a list of DOM properties we want to check against.
-     *   We specify literally ALL possible (known and/or likely) properties on
-     *   the element including the non-vendor prefixed one, for forward-
-     *   compatibility.
-     */
-    function testPropsAll( prop, prefixed, elem ) {
-
-        var ucProp  = prop.charAt(0).toUpperCase() + prop.slice(1),
-            props   = (prop + ' ' + cssomPrefixes.join(ucProp + ' ') + ucProp).split(' ');
-
-        // did they call .prefixed('boxSizing') or are we just testing a prop?
-        if(is(prefixed, "string") || is(prefixed, "undefined")) {
-          return testProps(props, prefixed);
-
-        // otherwise, they called .prefixed('requestAnimationFrame', window[, elem])
-        } else {
-          props = (prop + ' ' + (domPrefixes).join(ucProp + ' ') + ucProp).split(' ');
-          return testDOMProps(props, prefixed, elem);
-        }
-    }
-    /*>>testallprops*/
+  }
+  /*>>testallprops*/
 
 
-    /**
-     * Tests
-     * -----
-     */
+  /**
+   * Tests
+   * -----
+   */
 
     // The *new* flexbox
     // dev.w3.org/csswg/css3-flexbox
 
-    tests['flexbox'] = function() {
-      return testPropsAll('flexWrap');
-    };
-
-    // The *old* flexbox
-    // www.w3.org/TR/2009/WD-css3-flexbox-20090723/
-
-    tests['flexboxlegacy'] = function() {
-        return testPropsAll('boxDirection');
-    };
-
-    // On the S60 and BB Storm, getContext exists, but always returns undefined
-    // so we actually have to call getContext() to verify
-    // github.com/Modernizr/Modernizr/issues/issue/97/
-
-    tests['canvas'] = function() {
-        var elem = document.createElement('canvas');
-        return !!(elem.getContext && elem.getContext('2d'));
-    };
-
-    tests['canvastext'] = function() {
-        return !!(Modernizr['canvas'] && is(document.createElement('canvas').getContext('2d').fillText, 'function'));
-    };
-
-    // webk.it/70117 is tracking a legit WebGL feature detect proposal
-
-    // We do a soft detect which may false positive in order to avoid
-    // an expensive context creation: bugzil.la/732441
-
-    tests['webgl'] = function() {
-        return !!window.WebGLRenderingContext;
-    };
-
-    /*
-     * The Modernizr.touch test only indicates if the browser supports
-     *    touch events, which does not necessarily reflect a touchscreen
-     *    device, as evidenced by tablets running Windows 7 or, alas,
-     *    the Palm Pre / WebOS (touch) phones.
-     *
-     * Additionally, Chrome (desktop) used to lie about its support on this,
-     *    but that has since been rectified: crbug.com/36415
-     *
-     * We also test for Firefox 4 Multitouch Support.
-     *
-     * For more info, see: modernizr.github.com/Modernizr/touch.html
-     */
-
-    tests['touch'] = function() {
-        var bool;
-
-        if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
-          bool = true;
-        } else {
-          injectElementWithStyles(['@media (',prefixes.join('touch-enabled),('),mod,')','{#modernizr{top:9px;position:absolute}}'].join(''), function( node ) {
-            bool = node.offsetTop === 9;
-          });
-        }
-
-        return bool;
-    };
-
-
-    // geolocation is often considered a trivial feature detect...
-    // Turns out, it's quite tricky to get right:
-    //
-    // Using !!navigator.geolocation does two things we don't want. It:
-    //   1. Leaks memory in IE9: github.com/Modernizr/Modernizr/issues/513
-    //   2. Disables page caching in WebKit: webk.it/43956
-    //
-    // Meanwhile, in Firefox < 8, an about:config setting could expose
-    // a false positive that would throw an exception: bugzil.la/688158
-
-    tests['geolocation'] = function() {
-        return 'geolocation' in navigator;
-    };
-
-
-    tests['postmessage'] = function() {
-      return !!window.postMessage;
-    };
-
-
-    // Chrome incognito mode used to throw an exception when using openDatabase
-    // It doesn't anymore.
-    tests['websqldatabase'] = function() {
-      return !!window.openDatabase;
-    };
-
-    // Vendors had inconsistent prefixing with the experimental Indexed DB:
-    // - Webkit's implementation is accessible through webkitIndexedDB
-    // - Firefox shipped moz_indexedDB before FF4b9, but since then has been mozIndexedDB
-    // For speed, we don't test the legacy (and beta-only) indexedDB
-    tests['indexedDB'] = function() {
-      return !!testPropsAll("indexedDB", window);
-    };
-
-    // documentMode logic from YUI to filter out IE8 Compat Mode
-    //   which false positives.
-    tests['hashchange'] = function() {
-      return isEventSupported('hashchange', window) && (document.documentMode === undefined || document.documentMode > 7);
-    };
-
-    // Per 1.6:
-    // This used to be Modernizr.historymanagement but the longer
-    // name has been deprecated in favor of a shorter and property-matching one.
-    // The old API is still available in 1.6, but as of 2.0 will throw a warning,
-    // and in the first release thereafter disappear entirely.
-    tests['history'] = function() {
-      return !!(window.history && history.pushState);
-    };
-
-    tests['draganddrop'] = function() {
-        var div = document.createElement('div');
-        return ('draggable' in div) || ('ondragstart' in div && 'ondrop' in div);
-    };
-
-    // FF3.6 was EOL'ed on 4/24/12, but the ESR version of FF10
-    // will be supported until FF19 (2/12/13), at which time, ESR becomes FF17.
-    // FF10 still uses prefixes, so check for it until then.
-    // for more ESR info, see: mozilla.org/en-US/firefox/organizations/faq/
-    tests['websockets'] = function() {
-        return 'WebSocket' in window || 'MozWebSocket' in window;
-    };
-
-
-    // css-tricks.com/rgba-browser-support/
-    tests['rgba'] = function() {
-        // Set an rgba() color and check the returned value
-
-        setCss('background-color:rgba(150,255,150,.5)');
-
-        return contains(mStyle.backgroundColor, 'rgba');
-    };
-
-    tests['hsla'] = function() {
-        // Same as rgba(), in fact, browsers re-map hsla() to rgba() internally,
-        //   except IE9 who retains it as hsla
-
-        setCss('background-color:hsla(120,40%,100%,.5)');
-
-        return contains(mStyle.backgroundColor, 'rgba') || contains(mStyle.backgroundColor, 'hsla');
-    };
-
-    tests['multiplebgs'] = function() {
-        // Setting multiple images AND a color on the background shorthand property
-        //  and then querying the style.background property value for the number of
-        //  occurrences of "url(" is a reliable method for detecting ACTUAL support for this!
-
-        setCss('background:url(https://),url(https://),red url(https://)');
-
-        // If the UA supports multiple backgrounds, there should be three occurrences
-        //   of the string "url(" in the return value for elemStyle.background
-
-        return (/(url\s*\(.*?){3}/).test(mStyle.background);
-    };
-
-
-
-    // this will false positive in Opera Mini
-    //   github.com/Modernizr/Modernizr/issues/396
-
-    tests['backgroundsize'] = function() {
-        return testPropsAll('backgroundSize');
-    };
-
-    tests['borderimage'] = function() {
-        return testPropsAll('borderImage');
-    };
-
-
-    // Super comprehensive table about all the unique implementations of
-    // border-radius: muddledramblings.com/table-of-css3-border-radius-compliance
-
-    tests['borderradius'] = function() {
-        return testPropsAll('borderRadius');
-    };
-
-    // WebOS unfortunately false positives on this test.
-    tests['boxshadow'] = function() {
-        return testPropsAll('boxShadow');
-    };
-
-    // FF3.0 will false positive on this test
-    tests['textshadow'] = function() {
-        return document.createElement('div').style.textShadow === '';
-    };
-
-
-    tests['opacity'] = function() {
-        // Browsers that actually have CSS Opacity implemented have done so
-        //  according to spec, which means their return values are within the
-        //  range of [0.0,1.0] - including the leading zero.
-
-        setCssAll('opacity:.55');
-
-        // The non-literal . in this regex is intentional:
-        //   German Chrome returns this value as 0,55
-        // github.com/Modernizr/Modernizr/issues/#issue/59/comment/516632
-        return (/^0.55$/).test(mStyle.opacity);
-    };
-
-
-    // Note, Android < 4 will pass this test, but can only animate
-    //   a single property at a time
-    //   daneden.me/2011/12/putting-up-with-androids-bullshit/
-    tests['cssanimations'] = function() {
-        return testPropsAll('animationName');
-    };
-
-
-    tests['csscolumns'] = function() {
-        return testPropsAll('columnCount');
-    };
-
-
-    tests['cssgradients'] = function() {
-        /**
-         * For CSS Gradients syntax, please see:
-         * webkit.org/blog/175/introducing-css-gradients/
-         * developer.mozilla.org/en/CSS/-moz-linear-gradient
-         * developer.mozilla.org/en/CSS/-moz-radial-gradient
-         * dev.w3.org/csswg/css3-images/#gradients-
-         */
-
-        var str1 = 'background-image:',
-            str2 = 'gradient(linear,left top,right bottom,from(#9f9),to(white));',
-            str3 = 'linear-gradient(left top,#9f9, white);';
-
-        setCss(
-             // legacy webkit syntax (FIXME: remove when syntax not in use anymore)
-              (str1 + '-webkit- '.split(' ').join(str2 + str1) +
-             // standard syntax             // trailing 'background-image:'
-              prefixes.join(str3 + str1)).slice(0, -str1.length)
-        );
-
-        return contains(mStyle.backgroundImage, 'gradient');
-    };
-
-
-    tests['cssreflections'] = function() {
-        return testPropsAll('boxReflect');
-    };
-
-
-    tests['csstransforms'] = function() {
-        return !!testPropsAll('transform');
-    };
-
-
-    tests['csstransforms3d'] = function() {
-
-        var ret = !!testPropsAll('perspective');
-
-        // Webkit's 3D transforms are passed off to the browser's own graphics renderer.
-        //   It works fine in Safari on Leopard and Snow Leopard, but not in Chrome in
-        //   some conditions. As a result, Webkit typically recognizes the syntax but
-        //   will sometimes throw a false positive, thus we must do a more thorough check:
-        if ( ret && 'webkitPerspective' in docElement.style ) {
-
-          // Webkit allows this media query to succeed only if the feature is enabled.
-          // `@media (transform-3d),(-webkit-transform-3d){ ... }`
-          injectElementWithStyles('@media (transform-3d),(-webkit-transform-3d){#modernizr{left:9px;position:absolute;height:3px;}}', function( node, rule ) {
-            ret = node.offsetLeft === 9 && node.offsetHeight === 3;
-          });
-        }
-        return ret;
-    };
-
-
-    tests['csstransitions'] = function() {
-        return testPropsAll('transition');
-    };
-
-
-    /*>>fontface*/
-    // @font-face detection routine by Diego Perini
-    // javascript.nwbox.com/CSSSupport/
-
-    // false positives:
-    //   WebOS github.com/Modernizr/Modernizr/issues/342
-    //   WP7   github.com/Modernizr/Modernizr/issues/538
-    tests['fontface'] = function() {
-        var bool;
-
-        injectElementWithStyles('@font-face {font-family:"font";src:url("https://")}', function( node, rule ) {
-          var style = document.getElementById('smodernizr'),
-              sheet = style.sheet || style.styleSheet,
-              cssText = sheet ? (sheet.cssRules && sheet.cssRules[0] ? sheet.cssRules[0].cssText : sheet.cssText || '') : '';
-
-          bool = /src/i.test(cssText) && cssText.indexOf(rule.split(' ')[0]) === 0;
-        });
-
-        return bool;
-    };
-    /*>>fontface*/
-
-    // CSS generated content detection
-    tests['generatedcontent'] = function() {
-        var bool;
-
-        injectElementWithStyles(['#',mod,'{font:0/0 a}#',mod,':after{content:"',smile,'";visibility:hidden;font:3px/1 a}'].join(''), function( node ) {
-          bool = node.offsetHeight >= 3;
-        });
-
-        return bool;
-    };
-
-
-
-    // These tests evaluate support of the video/audio elements, as well as
-    // testing what types of content they support.
-    //
-    // We're using the Boolean constructor here, so that we can extend the value
-    // e.g.  Modernizr.video     // true
-    //       Modernizr.video.ogg // 'probably'
-    //
-    // Codec values from : github.com/NielsLeenheer/html5test/blob/9106a8/index.html#L845
-    //                     thx to NielsLeenheer and zcorpan
-
-    // Note: in some older browsers, "no" was a return value instead of empty string.
-    //   It was live in FF3.5.0 and 3.5.1, but fixed in 3.5.2
-    //   It was also live in Safari 4.0.0 - 4.0.4, but fixed in 4.0.5
-
-    tests['video'] = function() {
-        var elem = document.createElement('video'),
-            bool = false;
-
-        // IE9 Running on Windows Server SKU can cause an exception to be thrown, bug #224
-        try {
-            if ( bool = !!elem.canPlayType ) {
-                bool      = new Boolean(bool);
-                bool.ogg  = elem.canPlayType('video/ogg; codecs="theora"')      .replace(/^no$/,'');
-
-                // Without QuickTime, this value will be `undefined`. github.com/Modernizr/Modernizr/issues/546
-                bool.h264 = elem.canPlayType('video/mp4; codecs="avc1.42E01E"') .replace(/^no$/,'');
-
-                bool.webm = elem.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/,'');
-            }
-
-        } catch(e) { }
-
-        return bool;
-    };
-
-    tests['audio'] = function() {
-        var elem = document.createElement('audio'),
-            bool = false;
-
-        try {
-            if ( bool = !!elem.canPlayType ) {
-                bool      = new Boolean(bool);
-                bool.ogg  = elem.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/,'');
-                bool.mp3  = elem.canPlayType('audio/mpeg;')               .replace(/^no$/,'');
-
-                // Mimetypes accepted:
-                //   developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements
-                //   bit.ly/iphoneoscodecs
-                bool.wav  = elem.canPlayType('audio/wav; codecs="1"')     .replace(/^no$/,'');
-                bool.m4a  = ( elem.canPlayType('audio/x-m4a;')            ||
-                              elem.canPlayType('audio/aac;'))             .replace(/^no$/,'');
-            }
-        } catch(e) { }
-
-        return bool;
-    };
-
-
-    // In FF4, if disabled, window.localStorage should === null.
-
-    // Normally, we could not test that directly and need to do a
-    //   `('localStorage' in window) && ` test first because otherwise Firefox will
-    //   throw bugzil.la/365772 if cookies are disabled
-
-    // Also in iOS5 Private Browsing mode, attempting to use localStorage.setItem
-    // will throw the exception:
-    //   QUOTA_EXCEEDED_ERRROR DOM Exception 22.
-    // Peculiarly, getItem and removeItem calls do not throw.
-
-    // Because we are forced to try/catch this, we'll go aggressive.
-
-    // Just FWIW: IE8 Compat mode supports these features completely:
-    //   www.quirksmode.org/dom/html5.html
-    // But IE8 doesn't support either with local files
-
-    tests['localstorage'] = function() {
-        try {
-            localStorage.setItem(mod, mod);
-            localStorage.removeItem(mod);
-            return true;
-        } catch(e) {
-            return false;
-        }
-    };
-
-    tests['sessionstorage'] = function() {
-        try {
-            sessionStorage.setItem(mod, mod);
-            sessionStorage.removeItem(mod);
-            return true;
-        } catch(e) {
-            return false;
-        }
-    };
-
-
-    tests['webworkers'] = function() {
-        return !!window.Worker;
-    };
-
-
-    tests['applicationcache'] = function() {
-        return !!window.applicationCache;
-    };
-
-
-    // Thanks to Erik Dahlstrom
-    tests['svg'] = function() {
-        return !!document.createElementNS && !!document.createElementNS(ns.svg, 'svg').createSVGRect;
-    };
-
-    // specifically for SVG inline in HTML, not within XHTML
-    // test page: paulirish.com/demo/inline-svg
-    tests['inlinesvg'] = function() {
-      var div = document.createElement('div');
-      div.innerHTML = '<svg/>';
-      return (div.firstChild && div.firstChild.namespaceURI) == ns.svg;
-    };
-
-    // SVG SMIL animation
-    tests['smil'] = function() {
-        return !!document.createElementNS && /SVGAnimate/.test(toString.call(document.createElementNS(ns.svg, 'animate')));
-    };
-
-    // This test is only for clip paths in SVG proper, not clip paths on HTML content
-    // demo: srufaculty.sru.edu/david.dailey/svg/newstuff/clipPath4.svg
-
-    // However read the comments to dig into applying SVG clippaths to HTML content here:
-    //   github.com/Modernizr/Modernizr/issues/213#issuecomment-1149491
-    tests['svgclippaths'] = function() {
-        return !!document.createElementNS && /SVGClipPath/.test(toString.call(document.createElementNS(ns.svg, 'clipPath')));
-    };
-
-    /*>>webforms*/
-    // input features and input types go directly onto the ret object, bypassing the tests loop.
-    // Hold this guy to execute in a moment.
-    function webforms() {
-        /*>>input*/
-        // Run through HTML5's new input attributes to see if the UA understands any.
-        // We're using f which is the <input> element created early on
-        // Mike Taylr has created a comprehensive resource for testing these attributes
-        //   when applied to all input types:
-        //   miketaylr.com/code/input-type-attr.html
-        // spec: www.whatwg.org/specs/web-apps/current-work/multipage/the-input-element.html#input-type-attr-summary
-
-        // Only input placeholder is tested while textarea's placeholder is not.
-        // Currently Safari 4 and Opera 11 have support only for the input placeholder
-        // Both tests are available in feature-detects/forms-placeholder.js
-        Modernizr['input'] = (function( props ) {
-            for ( var i = 0, len = props.length; i < len; i++ ) {
-                attrs[ props[i] ] = !!(props[i] in inputElem);
-            }
-            if (attrs.list){
-              // safari false positive's on datalist: webk.it/74252
-              // see also github.com/Modernizr/Modernizr/issues/146
-              attrs.list = !!(document.createElement('datalist') && window.HTMLDataListElement);
-            }
-            return attrs;
-        })('autocomplete autofocus list placeholder max min multiple pattern required step'.split(' '));
-        /*>>input*/
-
-        /*>>inputtypes*/
-        // Run through HTML5's new input types to see if the UA understands any.
-        //   This is put behind the tests runloop because it doesn't return a
-        //   true/false like all the other tests; instead, it returns an object
-        //   containing each input type with its corresponding true/false value
-
-        // Big thanks to @miketaylr for the html5 forms expertise. miketaylr.com/
-        Modernizr['inputtypes'] = (function(props) {
-
-            for ( var i = 0, bool, inputElemType, defaultView, len = props.length; i < len; i++ ) {
-
-                inputElem.setAttribute('type', inputElemType = props[i]);
-                bool = inputElem.type !== 'text';
-
-                // We first check to see if the type we give it sticks..
-                // If the type does, we feed it a textual value, which shouldn't be valid.
-                // If the value doesn't stick, we know there's input sanitization which infers a custom UI
-                if ( bool ) {
-
-                    inputElem.value         = smile;
-                    inputElem.style.cssText = 'position:absolute;visibility:hidden;';
-
-                    if ( /^range$/.test(inputElemType) && inputElem.style.WebkitAppearance !== undefined ) {
-
-                      docElement.appendChild(inputElem);
-                      defaultView = document.defaultView;
-
-                      // Safari 2-4 allows the smiley as a value, despite making a slider
-                      bool =  defaultView.getComputedStyle &&
-                              defaultView.getComputedStyle(inputElem, null).WebkitAppearance !== 'textfield' &&
-                              // Mobile android web browser has false positive, so must
-                              // check the height to see if the widget is actually there.
-                              (inputElem.offsetHeight !== 0);
-
-                      docElement.removeChild(inputElem);
-
-                    } else if ( /^(search|tel)$/.test(inputElemType) ){
-                      // Spec doesn't define any special parsing or detectable UI
-                      //   behaviors so we pass these through as true
-
-                      // Interestingly, opera fails the earlier test, so it doesn't
-                      //  even make it here.
-
-                    } else if ( /^(url|email)$/.test(inputElemType) ) {
-                      // Real url and email support comes with prebaked validation.
-                      bool = inputElem.checkValidity && inputElem.checkValidity() === false;
-
-                    } else {
-                      // If the upgraded input compontent rejects the :) text, we got a winner
-                      bool = inputElem.value != smile;
-                    }
-                }
-
-                inputs[ props[i] ] = !!bool;
-            }
-            return inputs;
-        })('search tel url email datetime date month week time datetime-local number range color'.split(' '));
-        /*>>inputtypes*/
-    }
-    /*>>webforms*/
-
-
-    // End of test definitions
-    // -----------------------
-
-
-
-    // Run through all tests and detect their support in the current UA.
-    // todo: hypothetically we could be doing an array of tests and use a basic loop here.
-    for ( var feature in tests ) {
-        if ( hasOwnProp(tests, feature) ) {
-            // run the test, throw the return value into the Modernizr,
-            //   then based on that boolean, define an appropriate className
-            //   and push it into an array of classes we'll join later.
-            featureName  = feature.toLowerCase();
-            Modernizr[featureName] = tests[feature]();
-
-            classes.push((Modernizr[featureName] ? '' : 'no-') + featureName);
-        }
+  tests['flexbox'] = function() {
+    return testPropsAll('flexWrap');
+  };
+
+  // The *old* flexbox
+  // www.w3.org/TR/2009/WD-css3-flexbox-20090723/
+
+  tests['flexboxlegacy'] = function() {
+    return testPropsAll('boxDirection');
+  };
+
+  // On the S60 and BB Storm, getContext exists, but always returns undefined
+  // so we actually have to call getContext() to verify
+  // github.com/Modernizr/Modernizr/issues/issue/97/
+
+  tests['canvas'] = function() {
+    var elem = document.createElement('canvas');
+    return !!(elem.getContext && elem.getContext('2d'));
+  };
+
+  tests['canvastext'] = function() {
+    return !!(Modernizr['canvas'] && is(document.createElement('canvas').getContext('2d').fillText, 'function'));
+  };
+
+  // webk.it/70117 is tracking a legit WebGL feature detect proposal
+
+  // We do a soft detect which may false positive in order to avoid
+  // an expensive context creation: bugzil.la/732441
+
+  tests['webgl'] = function() {
+    return !!window.WebGLRenderingContext;
+  };
+
+  /*
+   * The Modernizr.touch test only indicates if the browser supports
+   *    touch events, which does not necessarily reflect a touchscreen
+   *    device, as evidenced by tablets running Windows 7 or, alas,
+   *    the Palm Pre / WebOS (touch) phones.
+   *
+   * Additionally, Chrome (desktop) used to lie about its support on this,
+   *    but that has since been rectified: crbug.com/36415
+   *
+   * We also test for Firefox 4 Multitouch Support.
+   *
+   * For more info, see: modernizr.github.com/Modernizr/touch.html
+   */
+
+  tests['touch'] = function() {
+    var bool;
+
+    if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+      bool = true;
+    } else {
+      injectElementWithStyles(['@media (',prefixes.join('touch-enabled),('),mod,')','{#modernizr{top:9px;position:absolute}}'].join(''), function( node ) {
+        bool = node.offsetTop === 9;
+      });
     }
 
-    /*>>webforms*/
-    // input tests need to run.
-    Modernizr.input || webforms();
-    /*>>webforms*/
+    return bool;
+  };
 
 
+  // geolocation is often considered a trivial feature detect...
+  // Turns out, it's quite tricky to get right:
+  //
+  // Using !!navigator.geolocation does two things we don't want. It:
+  //   1. Leaks memory in IE9: github.com/Modernizr/Modernizr/issues/513
+  //   2. Disables page caching in WebKit: webk.it/43956
+  //
+  // Meanwhile, in Firefox < 8, an about:config setting could expose
+  // a false positive that would throw an exception: bugzil.la/688158
+
+  tests['geolocation'] = function() {
+    return 'geolocation' in navigator;
+  };
+
+
+  tests['postmessage'] = function() {
+    return !!window.postMessage;
+  };
+
+
+  // Chrome incognito mode used to throw an exception when using openDatabase
+  // It doesn't anymore.
+  tests['websqldatabase'] = function() {
+    return !!window.openDatabase;
+  };
+
+  // Vendors had inconsistent prefixing with the experimental Indexed DB:
+  // - Webkit's implementation is accessible through webkitIndexedDB
+  // - Firefox shipped moz_indexedDB before FF4b9, but since then has been mozIndexedDB
+  // For speed, we don't test the legacy (and beta-only) indexedDB
+  tests['indexedDB'] = function() {
+    return !!testPropsAll("indexedDB", window);
+  };
+
+  // documentMode logic from YUI to filter out IE8 Compat Mode
+  //   which false positives.
+  tests['hashchange'] = function() {
+    return isEventSupported('hashchange', window) && (document.documentMode === undefined || document.documentMode > 7);
+  };
+
+  // Per 1.6:
+  // This used to be Modernizr.historymanagement but the longer
+  // name has been deprecated in favor of a shorter and property-matching one.
+  // The old API is still available in 1.6, but as of 2.0 will throw a warning,
+  // and in the first release thereafter disappear entirely.
+  tests['history'] = function() {
+    return !!(window.history && history.pushState);
+  };
+
+  tests['draganddrop'] = function() {
+    var div = document.createElement('div');
+    return ('draggable' in div) || ('ondragstart' in div && 'ondrop' in div);
+  };
+
+  // FF3.6 was EOL'ed on 4/24/12, but the ESR version of FF10
+  // will be supported until FF19 (2/12/13), at which time, ESR becomes FF17.
+  // FF10 still uses prefixes, so check for it until then.
+  // for more ESR info, see: mozilla.org/en-US/firefox/organizations/faq/
+  tests['websockets'] = function() {
+    return 'WebSocket' in window || 'MozWebSocket' in window;
+  };
+
+
+  // css-tricks.com/rgba-browser-support/
+  tests['rgba'] = function() {
+    // Set an rgba() color and check the returned value
+
+    setCss('background-color:rgba(150,255,150,.5)');
+
+    return contains(mStyle.backgroundColor, 'rgba');
+  };
+
+  tests['hsla'] = function() {
+    // Same as rgba(), in fact, browsers re-map hsla() to rgba() internally,
+    //   except IE9 who retains it as hsla
+
+    setCss('background-color:hsla(120,40%,100%,.5)');
+
+    return contains(mStyle.backgroundColor, 'rgba') || contains(mStyle.backgroundColor, 'hsla');
+  };
+
+  tests['multiplebgs'] = function() {
+    // Setting multiple images AND a color on the background shorthand property
+    //  and then querying the style.background property value for the number of
+    //  occurrences of "url(" is a reliable method for detecting ACTUAL support for this!
+
+    setCss('background:url(https://),url(https://),red url(https://)');
+
+    // If the UA supports multiple backgrounds, there should be three occurrences
+    //   of the string "url(" in the return value for elemStyle.background
+
+    return (/(url\s*\(.*?){3}/).test(mStyle.background);
+  };
+
+
+
+  // this will false positive in Opera Mini
+  //   github.com/Modernizr/Modernizr/issues/396
+
+  tests['backgroundsize'] = function() {
+    return testPropsAll('backgroundSize');
+  };
+
+  tests['borderimage'] = function() {
+    return testPropsAll('borderImage');
+  };
+
+
+  // Super comprehensive table about all the unique implementations of
+  // border-radius: muddledramblings.com/table-of-css3-border-radius-compliance
+
+  tests['borderradius'] = function() {
+    return testPropsAll('borderRadius');
+  };
+
+  // WebOS unfortunately false positives on this test.
+  tests['boxshadow'] = function() {
+    return testPropsAll('boxShadow');
+  };
+
+  // FF3.0 will false positive on this test
+  tests['textshadow'] = function() {
+    return document.createElement('div').style.textShadow === '';
+  };
+
+
+  tests['opacity'] = function() {
+    // Browsers that actually have CSS Opacity implemented have done so
+    //  according to spec, which means their return values are within the
+    //  range of [0.0,1.0] - including the leading zero.
+
+    setCssAll('opacity:.55');
+
+    // The non-literal . in this regex is intentional:
+    //   German Chrome returns this value as 0,55
+    // github.com/Modernizr/Modernizr/issues/#issue/59/comment/516632
+    return (/^0.55$/).test(mStyle.opacity);
+  };
+
+
+  // Note, Android < 4 will pass this test, but can only animate
+  //   a single property at a time
+  //   daneden.me/2011/12/putting-up-with-androids-bullshit/
+  tests['cssanimations'] = function() {
+    return testPropsAll('animationName');
+  };
+
+
+  tests['csscolumns'] = function() {
+    return testPropsAll('columnCount');
+  };
+
+
+  tests['cssgradients'] = function() {
     /**
-     * addTest allows the user to define their own feature tests
-     * the result will be added onto the Modernizr object,
-     * as well as an appropriate className set on the html element
-     *
-     * @param feature - String naming the feature
-     * @param test - Function returning true if feature is supported, false if not
+     * For CSS Gradients syntax, please see:
+     * webkit.org/blog/175/introducing-css-gradients/
+     * developer.mozilla.org/en/CSS/-moz-linear-gradient
+     * developer.mozilla.org/en/CSS/-moz-radial-gradient
+     * dev.w3.org/csswg/css3-images/#gradients-
      */
-     Modernizr.addTest = function ( feature, test ) {
-       if ( typeof feature == 'object' ) {
-         for ( var key in feature ) {
-           if ( hasOwnProp( feature, key ) ) {
-             Modernizr.addTest( key, feature[ key ] );
-           }
-         }
-       } else {
 
-         feature = feature.toLowerCase();
+    var str1 = 'background-image:',
+        str2 = 'gradient(linear,left top,right bottom,from(#9f9),to(white));',
+        str3 = 'linear-gradient(left top,#9f9, white);';
 
-         if ( Modernizr[feature] !== undefined ) {
-           // we're going to quit if you're trying to overwrite an existing test
-           // if we were to allow it, we'd do this:
-           //   var re = new RegExp("\\b(no-)?" + feature + "\\b");
-           //   docElement.className = docElement.className.replace( re, '' );
-           // but, no rly, stuff 'em.
-           return Modernizr;
-         }
+    setCss(
+        // legacy webkit syntax (FIXME: remove when syntax not in use anymore)
+        (str1 + '-webkit- '.split(' ').join(str2 + str1) +
+          // standard syntax             // trailing 'background-image:'
+        prefixes.join(str3 + str1)).slice(0, -str1.length)
+    );
 
-         test = typeof test == 'function' ? test() : test;
-
-         if (typeof enableClasses !== "undefined" && enableClasses) {
-           docElement.className += ' ' + (test ? '' : 'no-') + feature;
-         }
-         Modernizr[feature] = test;
-
-       }
-
-       return Modernizr; // allow chaining.
-     };
+    return contains(mStyle.backgroundImage, 'gradient');
+  };
 
 
-    // Reset modElem.cssText to nothing to reduce memory footprint.
-    setCss('');
-    modElem = inputElem = null;
+  tests['cssreflections'] = function() {
+    return testPropsAll('boxReflect');
+  };
 
-    /*>>shiv*/
-    /**
-     * @preserve HTML5 Shiv prev3.7.1 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
-     */
-    ;(function(window, document) {
-        /*jshint evil:true */
-        /** version */
-        var version = '3.7.0';
 
-        /** Preset options */
-        var options = window.html5 || {};
+  tests['csstransforms'] = function() {
+    return !!testPropsAll('transform');
+  };
 
-        /** Used to skip problem elements */
-        var reSkip = /^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i;
 
-        /** Not all elements can be cloned in IE **/
-        var saveClones = /^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i;
+  tests['csstransforms3d'] = function() {
 
-        /** Detect whether the browser supports default html5 styles */
-        var supportsHtml5Styles;
+    var ret = !!testPropsAll('perspective');
 
-        /** Name of the expando, to work with multiple documents or to re-shiv one document */
-        var expando = '_html5shiv';
+    // Webkit's 3D transforms are passed off to the browser's own graphics renderer.
+    //   It works fine in Safari on Leopard and Snow Leopard, but not in Chrome in
+    //   some conditions. As a result, Webkit typically recognizes the syntax but
+    //   will sometimes throw a false positive, thus we must do a more thorough check:
+    if ( ret && 'webkitPerspective' in docElement.style ) {
 
-        /** The id for the the documents expando */
-        var expanID = 0;
+      // Webkit allows this media query to succeed only if the feature is enabled.
+      // `@media (transform-3d),(-webkit-transform-3d){ ... }`
+      injectElementWithStyles('@media (transform-3d),(-webkit-transform-3d){#modernizr{left:9px;position:absolute;height:3px;}}', function( node, rule ) {
+        ret = node.offsetLeft === 9 && node.offsetHeight === 3;
+      });
+    }
+    return ret;
+  };
 
-        /** Cached data for each document */
-        var expandoData = {};
 
-        /** Detect whether the browser supports unknown elements */
-        var supportsUnknownElements;
+  tests['csstransitions'] = function() {
+    return testPropsAll('transition');
+  };
 
-        (function() {
-          try {
-            var a = document.createElement('a');
-            a.innerHTML = '<xyz></xyz>';
-            //if the hidden property is implemented we can assume, that the browser supports basic HTML5 Styles
-            supportsHtml5Styles = ('hidden' in a);
 
-            supportsUnknownElements = a.childNodes.length == 1 || (function() {
+  /*>>fontface*/
+  // @font-face detection routine by Diego Perini
+  // javascript.nwbox.com/CSSSupport/
+
+  // false positives:
+  //   WebOS github.com/Modernizr/Modernizr/issues/342
+  //   WP7   github.com/Modernizr/Modernizr/issues/538
+  tests['fontface'] = function() {
+    var bool;
+
+    injectElementWithStyles('@font-face {font-family:"font";src:url("https://")}', function( node, rule ) {
+      var style = document.getElementById('smodernizr'),
+          sheet = style.sheet || style.styleSheet,
+          cssText = sheet ? (sheet.cssRules && sheet.cssRules[0] ? sheet.cssRules[0].cssText : sheet.cssText || '') : '';
+
+      bool = /src/i.test(cssText) && cssText.indexOf(rule.split(' ')[0]) === 0;
+    });
+
+    return bool;
+  };
+  /*>>fontface*/
+
+  // CSS generated content detection
+  tests['generatedcontent'] = function() {
+    var bool;
+
+    injectElementWithStyles(['#',mod,'{font:0/0 a}#',mod,':after{content:"',smile,'";visibility:hidden;font:3px/1 a}'].join(''), function( node ) {
+      bool = node.offsetHeight >= 3;
+    });
+
+    return bool;
+  };
+
+
+
+  // These tests evaluate support of the video/audio elements, as well as
+  // testing what types of content they support.
+  //
+  // We're using the Boolean constructor here, so that we can extend the value
+  // e.g.  Modernizr.video     // true
+  //       Modernizr.video.ogg // 'probably'
+  //
+  // Codec values from : github.com/NielsLeenheer/html5test/blob/9106a8/index.html#L845
+  //                     thx to NielsLeenheer and zcorpan
+
+  // Note: in some older browsers, "no" was a return value instead of empty string.
+  //   It was live in FF3.5.0 and 3.5.1, but fixed in 3.5.2
+  //   It was also live in Safari 4.0.0 - 4.0.4, but fixed in 4.0.5
+
+  tests['video'] = function() {
+    var elem = document.createElement('video'),
+        bool = false;
+
+    // IE9 Running on Windows Server SKU can cause an exception to be thrown, bug #224
+    try {
+      if ( bool = !!elem.canPlayType ) {
+        bool      = new Boolean(bool);
+        bool.ogg  = elem.canPlayType('video/ogg; codecs="theora"')      .replace(/^no$/,'');
+
+        // Without QuickTime, this value will be `undefined`. github.com/Modernizr/Modernizr/issues/546
+        bool.h264 = elem.canPlayType('video/mp4; codecs="avc1.42E01E"') .replace(/^no$/,'');
+
+        bool.webm = elem.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/,'');
+      }
+
+    } catch(e) { }
+
+    return bool;
+  };
+
+  tests['audio'] = function() {
+    var elem = document.createElement('audio'),
+        bool = false;
+
+    try {
+      if ( bool = !!elem.canPlayType ) {
+        bool      = new Boolean(bool);
+        bool.ogg  = elem.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/,'');
+        bool.mp3  = elem.canPlayType('audio/mpeg;')               .replace(/^no$/,'');
+
+        // Mimetypes accepted:
+        //   developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements
+        //   bit.ly/iphoneoscodecs
+        bool.wav  = elem.canPlayType('audio/wav; codecs="1"')     .replace(/^no$/,'');
+        bool.m4a  = ( elem.canPlayType('audio/x-m4a;')            ||
+        elem.canPlayType('audio/aac;'))             .replace(/^no$/,'');
+      }
+    } catch(e) { }
+
+    return bool;
+  };
+
+
+  // In FF4, if disabled, window.localStorage should === null.
+
+  // Normally, we could not test that directly and need to do a
+  //   `('localStorage' in window) && ` test first because otherwise Firefox will
+  //   throw bugzil.la/365772 if cookies are disabled
+
+  // Also in iOS5 Private Browsing mode, attempting to use localStorage.setItem
+  // will throw the exception:
+  //   QUOTA_EXCEEDED_ERRROR DOM Exception 22.
+  // Peculiarly, getItem and removeItem calls do not throw.
+
+  // Because we are forced to try/catch this, we'll go aggressive.
+
+  // Just FWIW: IE8 Compat mode supports these features completely:
+  //   www.quirksmode.org/dom/html5.html
+  // But IE8 doesn't support either with local files
+
+  tests['localstorage'] = function() {
+    try {
+      localStorage.setItem(mod, mod);
+      localStorage.removeItem(mod);
+      return true;
+    } catch(e) {
+      return false;
+    }
+  };
+
+  tests['sessionstorage'] = function() {
+    try {
+      sessionStorage.setItem(mod, mod);
+      sessionStorage.removeItem(mod);
+      return true;
+    } catch(e) {
+      return false;
+    }
+  };
+
+
+  tests['webworkers'] = function() {
+    return !!window.Worker;
+  };
+
+
+  tests['applicationcache'] = function() {
+    return !!window.applicationCache;
+  };
+
+
+  // Thanks to Erik Dahlstrom
+  tests['svg'] = function() {
+    return !!document.createElementNS && !!document.createElementNS(ns.svg, 'svg').createSVGRect;
+  };
+
+  // specifically for SVG inline in HTML, not within XHTML
+  // test page: paulirish.com/demo/inline-svg
+  tests['inlinesvg'] = function() {
+    var div = document.createElement('div');
+    div.innerHTML = '<svg/>';
+    return (div.firstChild && div.firstChild.namespaceURI) == ns.svg;
+  };
+
+  // SVG SMIL animation
+  tests['smil'] = function() {
+    return !!document.createElementNS && /SVGAnimate/.test(toString.call(document.createElementNS(ns.svg, 'animate')));
+  };
+
+  // This test is only for clip paths in SVG proper, not clip paths on HTML content
+  // demo: srufaculty.sru.edu/david.dailey/svg/newstuff/clipPath4.svg
+
+  // However read the comments to dig into applying SVG clippaths to HTML content here:
+  //   github.com/Modernizr/Modernizr/issues/213#issuecomment-1149491
+  tests['svgclippaths'] = function() {
+    return !!document.createElementNS && /SVGClipPath/.test(toString.call(document.createElementNS(ns.svg, 'clipPath')));
+  };
+
+  /*>>webforms*/
+  // input features and input types go directly onto the ret object, bypassing the tests loop.
+  // Hold this guy to execute in a moment.
+  function webforms() {
+    /*>>input*/
+    // Run through HTML5's new input attributes to see if the UA understands any.
+    // We're using f which is the <input> element created early on
+    // Mike Taylr has created a comprehensive resource for testing these attributes
+    //   when applied to all input types:
+    //   miketaylr.com/code/input-type-attr.html
+    // spec: www.whatwg.org/specs/web-apps/current-work/multipage/the-input-element.html#input-type-attr-summary
+
+    // Only input placeholder is tested while textarea's placeholder is not.
+    // Currently Safari 4 and Opera 11 have support only for the input placeholder
+    // Both tests are available in feature-detects/forms-placeholder.js
+    Modernizr['input'] = (function( props ) {
+      for ( var i = 0, len = props.length; i < len; i++ ) {
+        attrs[ props[i] ] = !!(props[i] in inputElem);
+      }
+      if (attrs.list){
+        // safari false positive's on datalist: webk.it/74252
+        // see also github.com/Modernizr/Modernizr/issues/146
+        attrs.list = !!(document.createElement('datalist') && window.HTMLDataListElement);
+      }
+      return attrs;
+    })('autocomplete autofocus list placeholder max min multiple pattern required step'.split(' '));
+    /*>>input*/
+
+    /*>>inputtypes*/
+    // Run through HTML5's new input types to see if the UA understands any.
+    //   This is put behind the tests runloop because it doesn't return a
+    //   true/false like all the other tests; instead, it returns an object
+    //   containing each input type with its corresponding true/false value
+
+    // Big thanks to @miketaylr for the html5 forms expertise. miketaylr.com/
+    Modernizr['inputtypes'] = (function(props) {
+
+      for ( var i = 0, bool, inputElemType, defaultView, len = props.length; i < len; i++ ) {
+
+        inputElem.setAttribute('type', inputElemType = props[i]);
+        bool = inputElem.type !== 'text';
+
+        // We first check to see if the type we give it sticks..
+        // If the type does, we feed it a textual value, which shouldn't be valid.
+        // If the value doesn't stick, we know there's input sanitization which infers a custom UI
+        if ( bool ) {
+
+          inputElem.value         = smile;
+          inputElem.style.cssText = 'position:absolute;visibility:hidden;';
+
+          if ( /^range$/.test(inputElemType) && inputElem.style.WebkitAppearance !== undefined ) {
+
+            docElement.appendChild(inputElem);
+            defaultView = document.defaultView;
+
+            // Safari 2-4 allows the smiley as a value, despite making a slider
+            bool =  defaultView.getComputedStyle &&
+                defaultView.getComputedStyle(inputElem, null).WebkitAppearance !== 'textfield' &&
+                  // Mobile android web browser has false positive, so must
+                  // check the height to see if the widget is actually there.
+                (inputElem.offsetHeight !== 0);
+
+            docElement.removeChild(inputElem);
+
+          } else if ( /^(search|tel)$/.test(inputElemType) ){
+            // Spec doesn't define any special parsing or detectable UI
+            //   behaviors so we pass these through as true
+
+            // Interestingly, opera fails the earlier test, so it doesn't
+            //  even make it here.
+
+          } else if ( /^(url|email)$/.test(inputElemType) ) {
+            // Real url and email support comes with prebaked validation.
+            bool = inputElem.checkValidity && inputElem.checkValidity() === false;
+
+          } else {
+            // If the upgraded input compontent rejects the :) text, we got a winner
+            bool = inputElem.value != smile;
+          }
+        }
+
+        inputs[ props[i] ] = !!bool;
+      }
+      return inputs;
+    })('search tel url email datetime date month week time datetime-local number range color'.split(' '));
+    /*>>inputtypes*/
+  }
+  /*>>webforms*/
+
+
+  // End of test definitions
+  // -----------------------
+
+
+
+  // Run through all tests and detect their support in the current UA.
+  // todo: hypothetically we could be doing an array of tests and use a basic loop here.
+  for ( var feature in tests ) {
+    if ( hasOwnProp(tests, feature) ) {
+      // run the test, throw the return value into the Modernizr,
+      //   then based on that boolean, define an appropriate className
+      //   and push it into an array of classes we'll join later.
+      featureName  = feature.toLowerCase();
+      Modernizr[featureName] = tests[feature]();
+
+      classes.push((Modernizr[featureName] ? '' : 'no-') + featureName);
+    }
+  }
+
+  /*>>webforms*/
+  // input tests need to run.
+  Modernizr.input || webforms();
+  /*>>webforms*/
+
+
+  /**
+   * addTest allows the user to define their own feature tests
+   * the result will be added onto the Modernizr object,
+   * as well as an appropriate className set on the html element
+   *
+   * @param feature - String naming the feature
+   * @param test - Function returning true if feature is supported, false if not
+   */
+  Modernizr.addTest = function ( feature, test ) {
+    if ( typeof feature == 'object' ) {
+      for ( var key in feature ) {
+        if ( hasOwnProp( feature, key ) ) {
+          Modernizr.addTest( key, feature[ key ] );
+        }
+      }
+    } else {
+
+      feature = feature.toLowerCase();
+
+      if ( Modernizr[feature] !== undefined ) {
+        // we're going to quit if you're trying to overwrite an existing test
+        // if we were to allow it, we'd do this:
+        //   var re = new RegExp("\\b(no-)?" + feature + "\\b");
+        //   docElement.className = docElement.className.replace( re, '' );
+        // but, no rly, stuff 'em.
+        return Modernizr;
+      }
+
+      test = typeof test == 'function' ? test() : test;
+
+      if (typeof enableClasses !== "undefined" && enableClasses) {
+        docElement.className += ' ' + (test ? '' : 'no-') + feature;
+      }
+      Modernizr[feature] = test;
+
+    }
+
+    return Modernizr; // allow chaining.
+  };
+
+
+  // Reset modElem.cssText to nothing to reduce memory footprint.
+  setCss('');
+  modElem = inputElem = null;
+
+  /*>>shiv*/
+  /**
+   * @preserve HTML5 Shiv prev3.7.1 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
+   */
+  ;(function(window, document) {
+    /*jshint evil:true */
+    /** version */
+    var version = '3.7.0';
+
+    /** Preset options */
+    var options = window.html5 || {};
+
+    /** Used to skip problem elements */
+    var reSkip = /^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i;
+
+    /** Not all elements can be cloned in IE **/
+    var saveClones = /^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i;
+
+    /** Detect whether the browser supports default html5 styles */
+    var supportsHtml5Styles;
+
+    /** Name of the expando, to work with multiple documents or to re-shiv one document */
+    var expando = '_html5shiv';
+
+    /** The id for the the documents expando */
+    var expanID = 0;
+
+    /** Cached data for each document */
+    var expandoData = {};
+
+    /** Detect whether the browser supports unknown elements */
+    var supportsUnknownElements;
+
+    (function() {
+      try {
+        var a = document.createElement('a');
+        a.innerHTML = '<xyz></xyz>';
+        //if the hidden property is implemented we can assume, that the browser supports basic HTML5 Styles
+        supportsHtml5Styles = ('hidden' in a);
+
+        supportsUnknownElements = a.childNodes.length == 1 || (function() {
               // assign a false positive if unable to shiv
               (document.createElement)('a');
               var frag = document.createDocumentFragment();
               return (
-                typeof frag.cloneNode == 'undefined' ||
-                typeof frag.createDocumentFragment == 'undefined' ||
-                typeof frag.createElement == 'undefined'
+                  typeof frag.cloneNode == 'undefined' ||
+                  typeof frag.createDocumentFragment == 'undefined' ||
+                  typeof frag.createElement == 'undefined'
               );
             }());
-          } catch(e) {
-            // assign a false positive if detection fails => unable to shiv
-            supportsHtml5Styles = true;
-            supportsUnknownElements = true;
-          }
+      } catch(e) {
+        // assign a false positive if detection fails => unable to shiv
+        supportsHtml5Styles = true;
+        supportsUnknownElements = true;
+      }
 
-        }());
+    }());
 
-        /*--------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------*/
 
-        /**
-         * Creates a style sheet with the given CSS text and adds it to the document.
-         * @private
-         * @param {Document} ownerDocument The document.
-         * @param {String} cssText The CSS text.
-         * @returns {StyleSheet} The style element.
-         */
-        function addStyleSheet(ownerDocument, cssText) {
-          var p = ownerDocument.createElement('p'),
+    /**
+     * Creates a style sheet with the given CSS text and adds it to the document.
+     * @private
+     * @param {Document} ownerDocument The document.
+     * @param {String} cssText The CSS text.
+     * @returns {StyleSheet} The style element.
+     */
+    function addStyleSheet(ownerDocument, cssText) {
+      var p = ownerDocument.createElement('p'),
           parent = ownerDocument.getElementsByTagName('head')[0] || ownerDocument.documentElement;
 
-          p.innerHTML = 'x<style>' + cssText + '</style>';
-          return parent.insertBefore(p.lastChild, parent.firstChild);
-        }
+      p.innerHTML = 'x<style>' + cssText + '</style>';
+      return parent.insertBefore(p.lastChild, parent.firstChild);
+    }
 
-        /**
-         * Returns the value of `html5.elements` as an array.
-         * @private
-         * @returns {Array} An array of shived element node names.
-         */
-        function getElements() {
-          var elements = html5.elements;
-          return typeof elements == 'string' ? elements.split(' ') : elements;
-        }
+    /**
+     * Returns the value of `html5.elements` as an array.
+     * @private
+     * @returns {Array} An array of shived element node names.
+     */
+    function getElements() {
+      var elements = html5.elements;
+      return typeof elements == 'string' ? elements.split(' ') : elements;
+    }
 
-        /**
-         * Returns the data associated to the given document
-         * @private
-         * @param {Document} ownerDocument The document.
-         * @returns {Object} An object of data.
-         */
-        function getExpandoData(ownerDocument) {
-          var data = expandoData[ownerDocument[expando]];
-          if (!data) {
-            data = {};
-            expanID++;
-            ownerDocument[expando] = expanID;
-            expandoData[expanID] = data;
-          }
-          return data;
-        }
+    /**
+     * Returns the data associated to the given document
+     * @private
+     * @param {Document} ownerDocument The document.
+     * @returns {Object} An object of data.
+     */
+    function getExpandoData(ownerDocument) {
+      var data = expandoData[ownerDocument[expando]];
+      if (!data) {
+        data = {};
+        expanID++;
+        ownerDocument[expando] = expanID;
+        expandoData[expanID] = data;
+      }
+      return data;
+    }
 
-        /**
-         * returns a shived element for the given nodeName and document
-         * @memberOf html5
-         * @param {String} nodeName name of the element
-         * @param {Document} ownerDocument The context document.
-         * @returns {Object} The shived element.
-         */
-        function createElement(nodeName, ownerDocument, data){
-          if (!ownerDocument) {
-            ownerDocument = document;
-          }
-          if(supportsUnknownElements){
-            return ownerDocument.createElement(nodeName);
-          }
-          if (!data) {
-            data = getExpandoData(ownerDocument);
-          }
-          var node;
+    /**
+     * returns a shived element for the given nodeName and document
+     * @memberOf html5
+     * @param {String} nodeName name of the element
+     * @param {Document} ownerDocument The context document.
+     * @returns {Object} The shived element.
+     */
+    function createElement(nodeName, ownerDocument, data){
+      if (!ownerDocument) {
+        ownerDocument = document;
+      }
+      if(supportsUnknownElements){
+        return ownerDocument.createElement(nodeName);
+      }
+      if (!data) {
+        data = getExpandoData(ownerDocument);
+      }
+      var node;
 
-          if (data.cache[nodeName]) {
-            node = data.cache[nodeName].cloneNode();
-          } else if (saveClones.test(nodeName)) {
-            node = (data.cache[nodeName] = data.createElem(nodeName)).cloneNode();
-          } else {
-            node = data.createElem(nodeName);
-          }
+      if (data.cache[nodeName]) {
+        node = data.cache[nodeName].cloneNode();
+      } else if (saveClones.test(nodeName)) {
+        node = (data.cache[nodeName] = data.createElem(nodeName)).cloneNode();
+      } else {
+        node = data.createElem(nodeName);
+      }
 
-          // Avoid adding some elements to fragments in IE < 9 because
-          // * Attributes like `name` or `type` cannot be set/changed once an element
-          //   is inserted into a document/fragment
-          // * Link elements with `src` attributes that are inaccessible, as with
-          //   a 403 response, will cause the tab/window to crash
-          // * Script elements appended to fragments will execute when their `src`
-          //   or `text` property is set
-          return node.canHaveChildren && !reSkip.test(nodeName) && !node.tagUrn ? data.frag.appendChild(node) : node;
-        }
+      // Avoid adding some elements to fragments in IE < 9 because
+      // * Attributes like `name` or `type` cannot be set/changed once an element
+      //   is inserted into a document/fragment
+      // * Link elements with `src` attributes that are inaccessible, as with
+      //   a 403 response, will cause the tab/window to crash
+      // * Script elements appended to fragments will execute when their `src`
+      //   or `text` property is set
+      return node.canHaveChildren && !reSkip.test(nodeName) && !node.tagUrn ? data.frag.appendChild(node) : node;
+    }
 
-        /**
-         * returns a shived DocumentFragment for the given document
-         * @memberOf html5
-         * @param {Document} ownerDocument The context document.
-         * @returns {Object} The shived DocumentFragment.
-         */
-        function createDocumentFragment(ownerDocument, data){
-          if (!ownerDocument) {
-            ownerDocument = document;
-          }
-          if(supportsUnknownElements){
-            return ownerDocument.createDocumentFragment();
-          }
-          data = data || getExpandoData(ownerDocument);
-          var clone = data.frag.cloneNode(),
+    /**
+     * returns a shived DocumentFragment for the given document
+     * @memberOf html5
+     * @param {Document} ownerDocument The context document.
+     * @returns {Object} The shived DocumentFragment.
+     */
+    function createDocumentFragment(ownerDocument, data){
+      if (!ownerDocument) {
+        ownerDocument = document;
+      }
+      if(supportsUnknownElements){
+        return ownerDocument.createDocumentFragment();
+      }
+      data = data || getExpandoData(ownerDocument);
+      var clone = data.frag.cloneNode(),
           i = 0,
           elems = getElements(),
           l = elems.length;
-          for(;i<l;i++){
-            clone.createElement(elems[i]);
-          }
-          return clone;
+      for(;i<l;i++){
+        clone.createElement(elems[i]);
+      }
+      return clone;
+    }
+
+    /**
+     * Shivs the `createElement` and `createDocumentFragment` methods of the document.
+     * @private
+     * @param {Document|DocumentFragment} ownerDocument The document.
+     * @param {Object} data of the document.
+     */
+    function shivMethods(ownerDocument, data) {
+      if (!data.cache) {
+        data.cache = {};
+        data.createElem = ownerDocument.createElement;
+        data.createFrag = ownerDocument.createDocumentFragment;
+        data.frag = data.createFrag();
+      }
+
+
+      ownerDocument.createElement = function(nodeName) {
+        //abort shiv
+        if (!html5.shivMethods) {
+          return data.createElem(nodeName);
         }
+        return createElement(nodeName, ownerDocument, data);
+      };
 
-        /**
-         * Shivs the `createElement` and `createDocumentFragment` methods of the document.
-         * @private
-         * @param {Document|DocumentFragment} ownerDocument The document.
-         * @param {Object} data of the document.
-         */
-        function shivMethods(ownerDocument, data) {
-          if (!data.cache) {
-            data.cache = {};
-            data.createElem = ownerDocument.createElement;
-            data.createFrag = ownerDocument.createDocumentFragment;
-            data.frag = data.createFrag();
-          }
-
-
-          ownerDocument.createElement = function(nodeName) {
-            //abort shiv
-            if (!html5.shivMethods) {
-              return data.createElem(nodeName);
-            }
-            return createElement(nodeName, ownerDocument, data);
-          };
-
-          ownerDocument.createDocumentFragment = Function('h,f', 'return function(){' +
-                                                          'var n=f.cloneNode(),c=n.createElement;' +
-                                                          'h.shivMethods&&(' +
-                                                          // unroll the `createElement` calls
-                                                          getElements().join().replace(/[\w\-]+/g, function(nodeName) {
+      ownerDocument.createDocumentFragment = Function('h,f', 'return function(){' +
+          'var n=f.cloneNode(),c=n.createElement;' +
+          'h.shivMethods&&(' +
+            // unroll the `createElement` calls
+          getElements().join().replace(/[\w\-]+/g, function(nodeName) {
             data.createElem(nodeName);
             data.frag.createElement(nodeName);
             return 'c("' + nodeName + '")';
           }) +
-            ');return n}'
-                                                         )(html5, data.frag);
-        }
+          ');return n}'
+      )(html5, data.frag);
+    }
 
-        /*--------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------*/
 
-        /**
-         * Shivs the given document.
-         * @memberOf html5
-         * @param {Document} ownerDocument The document to shiv.
-         * @returns {Document} The shived document.
-         */
-        function shivDocument(ownerDocument) {
-          if (!ownerDocument) {
-            ownerDocument = document;
-          }
-          var data = getExpandoData(ownerDocument);
-
-          if (html5.shivCSS && !supportsHtml5Styles && !data.hasCSS) {
-            data.hasCSS = !!addStyleSheet(ownerDocument,
-                                          // corrects block display not defined in IE6/7/8/9
-                                          'article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}' +
-                                            // adds styling not present in IE6/7/8/9
-                                            'mark{background:#FF0;color:#000}' +
-                                            // hides non-rendered elements
-                                            'template{display:none}'
-                                         );
-          }
-          if (!supportsUnknownElements) {
-            shivMethods(ownerDocument, data);
-          }
-          return ownerDocument;
-        }
-
-        /*--------------------------------------------------------------------------*/
-
-        /**
-         * The `html5` object is exposed so that more elements can be shived and
-         * existing shiving can be detected on iframes.
-         * @type Object
-         * @example
-         *
-         * // options can be changed before the script is included
-         * html5 = { 'elements': 'mark section', 'shivCSS': false, 'shivMethods': false };
-         */
-        var html5 = {
-
-          /**
-           * An array or space separated string of node names of the elements to shiv.
-           * @memberOf html5
-           * @type Array|String
-           */
-          'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video',
-
-          /**
-           * current version of html5shiv
-           */
-          'version': version,
-
-          /**
-           * A flag to indicate that the HTML5 style sheet should be inserted.
-           * @memberOf html5
-           * @type Boolean
-           */
-          'shivCSS': (options.shivCSS !== false),
-
-          /**
-           * Is equal to true if a browser supports creating unknown/HTML5 elements
-           * @memberOf html5
-           * @type boolean
-           */
-          'supportsUnknownElements': supportsUnknownElements,
-
-          /**
-           * A flag to indicate that the document's `createElement` and `createDocumentFragment`
-           * methods should be overwritten.
-           * @memberOf html5
-           * @type Boolean
-           */
-          'shivMethods': (options.shivMethods !== false),
-
-          /**
-           * A string to describe the type of `html5` object ("default" or "default print").
-           * @memberOf html5
-           * @type String
-           */
-          'type': 'default',
-
-          // shivs the document according to the specified `html5` object options
-          'shivDocument': shivDocument,
-
-          //creates a shived element
-          createElement: createElement,
-
-          //creates a shived documentFragment
-          createDocumentFragment: createDocumentFragment
-        };
-
-        /*--------------------------------------------------------------------------*/
-
-        // expose html5
-        window.html5 = html5;
-
-        // shiv the document
-        shivDocument(document);
-
-    }(this, document));
-    /*>>shiv*/
-
-    // Assign private properties to the return object with prefix
-    Modernizr._version      = version;
-
-    // expose these for the plugin API. Look in the source for how to join() them against your input
-    /*>>prefixes*/
-    Modernizr._prefixes     = prefixes;
-    /*>>prefixes*/
-    /*>>domprefixes*/
-    Modernizr._domPrefixes  = domPrefixes;
-    Modernizr._cssomPrefixes  = cssomPrefixes;
-    /*>>domprefixes*/
-
-    /*>>mq*/
-    // Modernizr.mq tests a given media query, live against the current state of the window
-    // A few important notes:
-    //   * If a browser does not support media queries at all (eg. oldIE) the mq() will always return false
-    //   * A max-width or orientation query will be evaluated against the current state, which may change later.
-    //   * You must specify values. Eg. If you are testing support for the min-width media query use:
-    //       Modernizr.mq('(min-width:0)')
-    // usage:
-    // Modernizr.mq('only screen and (max-width:768)')
-    Modernizr.mq            = testMediaQuery;
-    /*>>mq*/
-
-    /*>>hasevent*/
-    // Modernizr.hasEvent() detects support for a given event, with an optional element to test on
-    // Modernizr.hasEvent('gesturestart', elem)
-    Modernizr.hasEvent      = isEventSupported;
-    /*>>hasevent*/
-
-    /*>>testprop*/
-    // Modernizr.testProp() investigates whether a given style property is recognized
-    // Note that the property names must be provided in the camelCase variant.
-    // Modernizr.testProp('pointerEvents')
-    Modernizr.testProp      = function(prop){
-        return testProps([prop]);
-    };
-    /*>>testprop*/
-
-    /*>>testallprops*/
-    // Modernizr.testAllProps() investigates whether a given style property,
-    //   or any of its vendor-prefixed variants, is recognized
-    // Note that the property names must be provided in the camelCase variant.
-    // Modernizr.testAllProps('boxSizing')
-    Modernizr.testAllProps  = testPropsAll;
-    /*>>testallprops*/
-
-
-    /*>>teststyles*/
-    // Modernizr.testStyles() allows you to add custom styles to the document and test an element afterwards
-    // Modernizr.testStyles('#modernizr { position:absolute }', function(elem, rule){ ... })
-    Modernizr.testStyles    = injectElementWithStyles;
-    /*>>teststyles*/
-
-
-    /*>>prefixed*/
-    // Modernizr.prefixed() returns the prefixed or nonprefixed property name variant of your input
-    // Modernizr.prefixed('boxSizing') // 'MozBoxSizing'
-
-    // Properties must be passed as dom-style camelcase, rather than `box-sizing` hypentated style.
-    // Return values will also be the camelCase variant, if you need to translate that to hypenated style use:
-    //
-    //     str.replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');
-
-    // If you're trying to ascertain which transition end event to bind to, you might do something like...
-    //
-    //     var transEndEventNames = {
-    //       'WebkitTransition' : 'webkitTransitionEnd',
-    //       'MozTransition'    : 'transitionend',
-    //       'OTransition'      : 'oTransitionEnd',
-    //       'msTransition'     : 'MSTransitionEnd',
-    //       'transition'       : 'transitionend'
-    //     },
-    //     transEndEventName = transEndEventNames[ Modernizr.prefixed('transition') ];
-
-    Modernizr.prefixed      = function(prop, obj, elem){
-      if(!obj) {
-        return testPropsAll(prop, 'pfx');
-      } else {
-        // Testing DOM property e.g. Modernizr.prefixed('requestAnimationFrame', window) // 'mozRequestAnimationFrame'
-        return testPropsAll(prop, obj, elem);
+    /**
+     * Shivs the given document.
+     * @memberOf html5
+     * @param {Document} ownerDocument The document to shiv.
+     * @returns {Document} The shived document.
+     */
+    function shivDocument(ownerDocument) {
+      if (!ownerDocument) {
+        ownerDocument = document;
       }
+      var data = getExpandoData(ownerDocument);
+
+      if (html5.shivCSS && !supportsHtml5Styles && !data.hasCSS) {
+        data.hasCSS = !!addStyleSheet(ownerDocument,
+            // corrects block display not defined in IE6/7/8/9
+            'article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}' +
+              // adds styling not present in IE6/7/8/9
+            'mark{background:#FF0;color:#000}' +
+              // hides non-rendered elements
+            'template{display:none}'
+        );
+      }
+      if (!supportsUnknownElements) {
+        shivMethods(ownerDocument, data);
+      }
+      return ownerDocument;
+    }
+
+    /*--------------------------------------------------------------------------*/
+
+    /**
+     * The `html5` object is exposed so that more elements can be shived and
+     * existing shiving can be detected on iframes.
+     * @type Object
+     * @example
+     *
+     * // options can be changed before the script is included
+     * html5 = { 'elements': 'mark section', 'shivCSS': false, 'shivMethods': false };
+     */
+    var html5 = {
+
+      /**
+       * An array or space separated string of node names of the elements to shiv.
+       * @memberOf html5
+       * @type Array|String
+       */
+      'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video',
+
+      /**
+       * current version of html5shiv
+       */
+      'version': version,
+
+      /**
+       * A flag to indicate that the HTML5 style sheet should be inserted.
+       * @memberOf html5
+       * @type Boolean
+       */
+      'shivCSS': (options.shivCSS !== false),
+
+      /**
+       * Is equal to true if a browser supports creating unknown/HTML5 elements
+       * @memberOf html5
+       * @type boolean
+       */
+      'supportsUnknownElements': supportsUnknownElements,
+
+      /**
+       * A flag to indicate that the document's `createElement` and `createDocumentFragment`
+       * methods should be overwritten.
+       * @memberOf html5
+       * @type Boolean
+       */
+      'shivMethods': (options.shivMethods !== false),
+
+      /**
+       * A string to describe the type of `html5` object ("default" or "default print").
+       * @memberOf html5
+       * @type String
+       */
+      'type': 'default',
+
+      // shivs the document according to the specified `html5` object options
+      'shivDocument': shivDocument,
+
+      //creates a shived element
+      createElement: createElement,
+
+      //creates a shived documentFragment
+      createDocumentFragment: createDocumentFragment
     };
-    /*>>prefixed*/
+
+    /*--------------------------------------------------------------------------*/
+
+    // expose html5
+    window.html5 = html5;
+
+    // shiv the document
+    shivDocument(document);
+
+  }(this, document));
+  /*>>shiv*/
+
+  // Assign private properties to the return object with prefix
+  Modernizr._version      = version;
+
+  // expose these for the plugin API. Look in the source for how to join() them against your input
+  /*>>prefixes*/
+  Modernizr._prefixes     = prefixes;
+  /*>>prefixes*/
+  /*>>domprefixes*/
+  Modernizr._domPrefixes  = domPrefixes;
+  Modernizr._cssomPrefixes  = cssomPrefixes;
+  /*>>domprefixes*/
+
+  /*>>mq*/
+  // Modernizr.mq tests a given media query, live against the current state of the window
+  // A few important notes:
+  //   * If a browser does not support media queries at all (eg. oldIE) the mq() will always return false
+  //   * A max-width or orientation query will be evaluated against the current state, which may change later.
+  //   * You must specify values. Eg. If you are testing support for the min-width media query use:
+  //       Modernizr.mq('(min-width:0)')
+  // usage:
+  // Modernizr.mq('only screen and (max-width:768)')
+  Modernizr.mq            = testMediaQuery;
+  /*>>mq*/
+
+  /*>>hasevent*/
+  // Modernizr.hasEvent() detects support for a given event, with an optional element to test on
+  // Modernizr.hasEvent('gesturestart', elem)
+  Modernizr.hasEvent      = isEventSupported;
+  /*>>hasevent*/
+
+  /*>>testprop*/
+  // Modernizr.testProp() investigates whether a given style property is recognized
+  // Note that the property names must be provided in the camelCase variant.
+  // Modernizr.testProp('pointerEvents')
+  Modernizr.testProp      = function(prop){
+    return testProps([prop]);
+  };
+  /*>>testprop*/
+
+  /*>>testallprops*/
+  // Modernizr.testAllProps() investigates whether a given style property,
+  //   or any of its vendor-prefixed variants, is recognized
+  // Note that the property names must be provided in the camelCase variant.
+  // Modernizr.testAllProps('boxSizing')
+  Modernizr.testAllProps  = testPropsAll;
+  /*>>testallprops*/
 
 
-    /*>>cssclasses*/
-    // Remove "no-js" class from <html> element, if it exists:
-    docElement.className = docElement.className.replace(/(^|\s)no-js(\s|$)/, '$1$2') +
+  /*>>teststyles*/
+  // Modernizr.testStyles() allows you to add custom styles to the document and test an element afterwards
+  // Modernizr.testStyles('#modernizr { position:absolute }', function(elem, rule){ ... })
+  Modernizr.testStyles    = injectElementWithStyles;
+  /*>>teststyles*/
 
-                            // Add the new classes to the <html> element.
-                            (enableClasses ? ' js ' + classes.join(' ') : '');
-    /*>>cssclasses*/
 
-    return Modernizr;
+  /*>>prefixed*/
+  // Modernizr.prefixed() returns the prefixed or nonprefixed property name variant of your input
+  // Modernizr.prefixed('boxSizing') // 'MozBoxSizing'
+
+  // Properties must be passed as dom-style camelcase, rather than `box-sizing` hypentated style.
+  // Return values will also be the camelCase variant, if you need to translate that to hypenated style use:
+  //
+  //     str.replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');
+
+  // If you're trying to ascertain which transition end event to bind to, you might do something like...
+  //
+  //     var transEndEventNames = {
+  //       'WebkitTransition' : 'webkitTransitionEnd',
+  //       'MozTransition'    : 'transitionend',
+  //       'OTransition'      : 'oTransitionEnd',
+  //       'msTransition'     : 'MSTransitionEnd',
+  //       'transition'       : 'transitionend'
+  //     },
+  //     transEndEventName = transEndEventNames[ Modernizr.prefixed('transition') ];
+
+  Modernizr.prefixed      = function(prop, obj, elem){
+    if(!obj) {
+      return testPropsAll(prop, 'pfx');
+    } else {
+      // Testing DOM property e.g. Modernizr.prefixed('requestAnimationFrame', window) // 'mozRequestAnimationFrame'
+      return testPropsAll(prop, obj, elem);
+    }
+  };
+  /*>>prefixed*/
+
+
+  /*>>cssclasses*/
+  // Remove "no-js" class from <html> element, if it exists:
+  docElement.className = docElement.className.replace(/(^|\s)no-js(\s|$)/, '$1$2') +
+
+        // Add the new classes to the <html> element.
+      (enableClasses ? ' js ' + classes.join(' ') : '');
+  /*>>cssclasses*/
+
+  return Modernizr;
 
 })(this, this.document);
 
@@ -5456,7 +5456,7 @@ $(document).ready(function() {
       $(xml).find('entry').each(function(i) {
         if (i > (limit - 1)) return; // stop if we have enough
         var c = $(this).find('content').text().replace(/<img\b[^>]*>/ig, '');
-        $('> ol', discussions).append('<li><h5>' + $(this).find('title').text() + '</h5><p>' + truncate(c) + ' <a href="' + $(this).find('id').text() + '">Read more&nbsp;&raquo;</p></li>'); 
+        $('> ol', discussions).append('<li><h5>' + $(this).find('title').text() + '</h5><p>' + truncate(c) + ' <a href="' + $(this).find('id').text() + '">Read more&nbsp;&raquo;</p></li>');
       });
     }
   });
@@ -5466,7 +5466,7 @@ $(document).ready(function() {
     window.open($(this).attr('action') + '?' + $(this).serialize(), '_blank', 'scrollbars=no,menubar=no,height=400,width=500,resizable=yes,toolbar=no,status=no');
     event.preventDefault();
   });
- 
+
   // substitute @2x images where available
   if (window.isRetina()) {
     console.log("loading retina images..");

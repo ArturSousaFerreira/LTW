@@ -8,8 +8,8 @@ $event = getEvent($id);
 
 if (isset($_SESSION['username'])) {
     if ($_SESSION['username'] == 'admin' || $_SESSION['username'] == $event['creator'])
-        deleteEvent($id, $_SESSION['username']);
+        deleteEvent($id);
 }
 
 header('Location: ' . './list_events.php');
-?>
+

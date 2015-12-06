@@ -4,9 +4,8 @@ include_once('users.php');
 
 session_start();
 
-$referer;
+$referer = 'index.php';
 if (isset($_COOKIE['redirect'])) $referer = $_COOKIE['redirect'];
-else $referer = 'index.php';
 
 if (isset($_POST['login_btn'])) {
     if (checkCredentials($_POST['username'], $_POST['password'])) {
@@ -28,4 +27,3 @@ else {
     echo "<h1>You shouldn't be here</h1>";
 }
 
-?>

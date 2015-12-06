@@ -3,9 +3,8 @@
 include_once('connection.php');
 include_once('users.php');
 
-$referer;
+$referer = './index.php';
 if (isset($_COOKIE['redirect'])) $referer = $_COOKIE['redirect'];
-else $referer = './index.php';
 
 if (isset($_POST['confirm_btn'])) {
     if (!registerUser($_POST['username'], $_POST['email'], $_POST['password'])) {
@@ -22,4 +21,3 @@ else {
     echo "<h1>You shouldn't be here</h1>";
 }
 
-?>

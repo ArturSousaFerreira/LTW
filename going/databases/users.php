@@ -76,4 +76,3 @@ function deleteUser($username) {
 
     return true;
 }
-?>

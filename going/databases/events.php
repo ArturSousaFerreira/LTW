@@ -75,8 +75,7 @@ function unregisterEvent($id, $user) {
 
     if (!isRegisteredInEvent($id, $user)) return false;
 
-    $a = $db->prepare('DELETE FROM event_registrations
-WHERE user = ? AND event_id = ?');
+    $a = $db->prepare('DELETE FROM event_registrations WHERE user = ? AND event_id = ?');
     $a->execute(array($user, $id));
 
     return true;
@@ -165,4 +164,4 @@ function createComment($event_id, $author, $text) {
     return true;
 }
 
-?>
+

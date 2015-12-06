@@ -1,5 +1,3 @@
-<?php
-?>
 
 <header>
     <div id="footer_pass">
@@ -40,5 +38,3 @@
         </form>
     </div>
 </header>
-</body>
-</html>

@@ -6,4 +6,3 @@ editEvent($_POST['id'], $_POST['date'], $_POST['description'], $_POST['type'], $
 
 header('Location: ' . './show_event.php?id='.$_POST['id']);
 
-?>

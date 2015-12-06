@@ -1,10 +1,7 @@
-<?php
-?>
-
 <header >
-<div id = "footer_register">
-		<script type="text/javascript" src="../javascript/regform.js"></script>
-		
+    <div id = "footer_register">
+        <script type="text/javascript" src="../javascript/regform.js"></script>
+
         <h1>Registration form</h1>
         <ul>
             <li>Username may contain only digits, upper and lowercase letters and underscores</li>
@@ -27,9 +24,6 @@
                             this.form.password,
                             this.form.confirm);">
             <input type="submit" name="cancel_btn" value="Cancel">
-		</form>
-		</div>
-		</header>
-    </body>
-</html>
-
+        </form>
+    </div>
+</header>
