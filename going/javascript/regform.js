@@ -53,10 +53,10 @@ function passform(form, old_pass, new_pass, conf) {
         form.confirm.focus();
         return false;
     }
-    var confirm_btn = document.createElement("input");
-    confirm_btn.name = "confirm_pass_btn";
-    confirm_btn.type = "hidden";
-    form.appendChild(confirm_btn);
+    var confirm_pass_btn = document.createElement("input");
+    confirm_pass_btn.name = "confirm_pass_btn";
+    confirm_pass_btn.type = "hidden";
+    form.appendChild(confirm_pass_btn);
     form.submit();
     alert("Your password has been changed.");
     return true;
@@ -68,10 +68,10 @@ function emailform(form, email) {
         form.email.focus();
         return false;
     }
-    var confirm_btn = document.createElement("input");
-    confirm_btn.name = "confirm_email_btn";
-    confirm_btn.type = "hidden";
-    form.appendChild(confirm_btn);
+    var confirm_email_btn = document.createElement("input");
+    confirm_email_btn.name = "confirm_email_btn";
+    confirm_email_btn.type = "hidden";
+    form.appendChild(confirm_email_btn);
     form.submit();
     alert("Your email has been changed.");
     return true;
