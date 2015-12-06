@@ -1,4 +1,4 @@
 <?php
-$types = array('Party', 'Concert', 'Conference', 'Sports', 'Other');
+$types = array('General party', 'Music', 'Conference', 'Sports', 'Travel', 'Other');
 echo json_encode($types);
-
+?>

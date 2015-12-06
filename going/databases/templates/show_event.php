@@ -30,7 +30,7 @@
                     </li>
                 <?php }
             } else { ?>
-                <li>No comments yet :(</li>
+                <li>This event has no comments yet, please be the first to contribute</li>
             <?php } ?>
         </ul>
 

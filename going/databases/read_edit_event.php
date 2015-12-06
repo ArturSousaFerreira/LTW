@@ -2,9 +2,7 @@
 session_start();
 
 include_once("events.php");
-
-include_once("templates/header.php");
-
+include_once("templates/nav.php");
 
 $logged = isset($_SESSION['username']);
 
@@ -20,7 +18,7 @@ $comments = getComments($id);
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="../javascript/createEventForm.js"></script>
+    <script type="text/javascript" src="../javascript/eventform.js"></script>
 
     <div id="footer_detail_event">
 

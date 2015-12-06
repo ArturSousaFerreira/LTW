@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("templates/header.php");
+include_once("templates/nav.php");
 include_once("connection.php");
 include_once("users.php");
 $users = getUsers();
@@ -14,7 +14,7 @@ $logged = isset($_SESSION['username']);
 		<h2>Informations</h2>
 		<br>
 		<?php if($user['email'] != ""){ ?>
-			<h3>Email:</h3>
+			<h3>Email</h3>
 			<br>
 			<?php echo $user['email'];}?>
 

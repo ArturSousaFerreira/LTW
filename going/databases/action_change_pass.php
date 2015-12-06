@@ -1,8 +1,7 @@
 <?php
 
-include_once('users.php');
-
 session_start();
+include_once('users.php');
 
 if (isset($_POST['confirm_pass_btn'])) {
     if (checkCredentials($_POST['username'], $_POST['old_password'])) {
@@ -16,4 +15,4 @@ else if (isset($_POST['cancel_pass_btn'])){
 else {
     echo "<h1>You shouldn't be here</h1>";
 }
-
+?>

@@ -20,4 +20,4 @@ else if(isset($_POST['cancel_btn'])) {
 else {
     echo "<h1>You shouldn't be here</h1>";
 }
-
+?>

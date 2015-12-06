@@ -1,8 +1,7 @@
 <?php
 
-include_once('users.php');
-
 session_start();
+include_once('users.php');
 
 if (isset($_POST['confirm_email_btn'])) {
     changeUserEmail($_POST['username'], $_POST['email']);
@@ -14,4 +13,4 @@ else if (isset($_POST['cancel_email_btn'])){
 else {
     echo "<h1>You shouldn't be here</h1>";
 }
-
+?>

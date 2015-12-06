@@ -1,7 +1,6 @@
 <?php
 
 include_once('users.php');
-
 session_start();
 
 $referer = 'index.php';
@@ -26,4 +25,4 @@ else if (isset($_POST['cancel_btn'])){
 else {
     echo "<h1>You shouldn't be here</h1>";
 }
-
+?>
