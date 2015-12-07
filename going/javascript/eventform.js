@@ -25,10 +25,10 @@ function createEventForm(form) {
             return false;
         }
     }
-    var btn = document.createElement("input");
-    btn.name = "btn";
-    btn.type = "hidden";
-    form.appendChild(btn);
+    var create_btn = document.createElement("input");
+    create_btn.name = "create_btn";
+    create_btn.type = "hidden";
+    form.appendChild(create_btn);
 
     form.submit();
     return true;
