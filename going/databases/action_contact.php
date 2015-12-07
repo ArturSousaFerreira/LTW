@@ -20,7 +20,7 @@ if(isset($_POST["submit"])){
 			header('Location: ' . './contact.php');
         }
         else{
-            $contact_mail = "nunomrvalente@gmail.com";
+            $contact_mail = "angela.cardoso@fe.up.pt";
             $subject = "Message from your site GOING!";
             $message = $_POST['message'];
             $headers = 'From:'. $email . "\r\n"; // Sender's Email
