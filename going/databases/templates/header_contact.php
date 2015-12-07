@@ -18,12 +18,14 @@
     </div>
 	
 	<?php
+	if (isset($_SESSION['emailSend'])) {
 		if($_SESSION['emailSend'] == 'invsend'){
-			echo "<script>alert('Invalid Sender's Email')</script>";
+			echo "<script>alert('Invalid sender's Email')</script>";
 		}
 		else if($_SESSION['emailSend'] == 'fill'){
-			echo "<script>alert('Fill All Fields..')</script>";
+			echo "<script>alert('Fill all Fields..')</script>";
 		}
 		$_SESSION['emailSend'] = '';
+	}
 	?>
 
